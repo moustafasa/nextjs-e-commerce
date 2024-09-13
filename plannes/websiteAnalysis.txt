@@ -1,0 +1,37 @@
+1-Roles 
+    -admin
+    -user
+2-pages
+    -dasbhoard
+        --users
+        --addUsers
+        --categories
+        --addCategories
+        --products
+        --addProducts
+        --orders
+
+    -nav
+        --home
+        --about
+        --contact
+        --signin/signup
+        --profile
+        --cart
+        --search
+
+    -homePage
+        --landing
+        --sales
+        --for you
+        --top rated
+        --browse by category
+    -contact
+    -cart 
+    -profile
+    -signin
+    -signup
+    -productPage
+
+
+3-colors
