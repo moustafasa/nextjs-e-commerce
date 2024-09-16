@@ -3,11 +3,11 @@
     -user
 2-pages
     -dasbhoard
-        --users
+        --users (id name email role  )
         --addUsers
-        --categories
+        --categories (id title image)
         --addCategories
-        --products
+        --products (id title category images description price discount sizes)
         --addProducts
         --orders
 
@@ -15,17 +15,15 @@
         --home
         --about
         --contact
+        --products
         --signin/signup
         --profile
-        --cart
+        --cart (id name image price quantity total)
         --search
 
     -homePage
         --landing
-        --sales
-        --for you
-        --top rated
-        --browse by category
+
     -contact
     -cart 
     -profile
@@ -35,3 +33,17 @@
 
 
 3-colors
+    --black-2-> #3C3A3A (background)
+  
+
+
+
+/////lottie animation
+     
+     <iframe src="https://lottie.host/embed/b775d9f9-b3c9-495d-b661-1b51f949dbd9/HsoY2aCmPd.json"></iframe>
+
+     or
+
+     <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script> 
+
+     <dotlottie-player src="https://lottie.host/b775d9f9-b3c9-495d-b661-1b51f949dbd9/HsoY2aCmPd.json" background="transparent" speed="1" style="width: 300px; height: 300px;" loop autoplay></dotlottie-player>

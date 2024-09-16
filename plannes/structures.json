@@ -1,0 +1,57 @@
+{
+  "users": [
+    {
+      "id": "fdjaldafda",
+      "name": "moustafa saad",
+      "email": "moustafasaad954@gmail.com",
+      "role": 0,
+      "password": "dsjalkfkdlaadfa",
+      "orders": [1]
+    }
+  ],
+  "categories": [
+    { "id": "fdjksalfdasjfda", "title": "shoes", "image": "fdjlsaldsa" }
+  ],
+  "Products": [
+    {
+      "id": "fkdlsajfdkasdas",
+      "title": "active shoes",
+      "categoryId": "fdjsaklfdadsfafds",
+      "images": [],
+      "descriptions": "jfldsafjdajkd",
+      "price": 232,
+      "discount": 0,
+      "variants": [{ "size": "xl", "stock": 3 }]
+    }
+  ],
+  "carts": [
+    {
+      "id": "1",
+      "userId": "1",
+      "products": [
+        {
+          "id": "fdjksalfdasjfda",
+          "variants": [{ "size": "xl", "qty": 3 }],
+          "price": 323
+        }
+      ]
+    }
+  ],
+
+  "orders": [
+    {
+      "id": "1",
+      "userId": "1",
+      "products": [
+        {
+          "productId": "1",
+          "price": 19.99,
+          "variants": [{ "size": "xl", "qty": 3 }]
+        }
+      ],
+      "total": 39.98,
+      "status": "pending",
+      "createdAt": "2024-09-15T12:00:00Z"
+    }
+  ]
+}
