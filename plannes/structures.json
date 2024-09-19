@@ -21,7 +21,7 @@
       "descriptions": "jfldsafjdajkd",
       "price": 232,
       "discount": 0,
-      "variants": [{ "size": "xl", "stock": 3 }]
+      "variants": [{ "id": "1", "size": "xl", "stock": 3 }]
     }
   ],
   "carts": [
@@ -46,7 +46,7 @@
         {
           "productId": "1",
           "price": 19.99,
-          "variants": [{ "size": "xl", "qty": 3 }]
+          "variants": [1]
         }
       ],
       "total": 39.98,
