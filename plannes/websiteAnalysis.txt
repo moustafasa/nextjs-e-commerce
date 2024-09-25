@@ -1,39 +1,46 @@
 1-Roles 
     -admin
     -user
+    -orderReporter
+    -writer
 2-pages
+
+    -nav
+    -homePage
+    -signin
+    -signup
     -dasbhoard
         --users (id name email role  )
         --addUsers
+        --editUser
         --categories (id title image)
         --addCategories
+        --editCategory
         --products (id title category images description price discount sizes)
         --addProducts
+        --editProduct
         --orders
 
-    -nav
-        --home
-        --about
-        --contact
-        --products
-        --signin/signup
-        --profile
-        --cart (id name image price quantity total)
-        --search
 
-    -homePage
-        --landing
-
-    -contact
+    -products
+    -productPage
     -cart 
     -profile
-    -signin
-    -signup
-    -productPage
+    -contact
+    -about
 
 
 3-colors
-    --black-2-> #3C3A3A (background)
+    "black-nav": "#303131",
+    "black-bg": "#3C3A3A",
+    "black-secondary-bg": "#414141",
+    "black-tertiery-bg": "#545353",
+    "transparent-black": "rgba(0,0,0,0.42)",
+    "blue-button": "#3C3A3A",
+    "blue-links": "#1993BE",
+    "gray-input": "#999",
+    "gray-icons": "#B3B3B3",
+    "transparent-gray-icons": "rgba(0,0,0,0.17)",
   
 
 
