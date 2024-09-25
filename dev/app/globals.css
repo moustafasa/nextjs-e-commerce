@@ -1,0 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .form-button {
+    @apply bg-blue-button py-2  px-3 capitalize rounded-lg transition-colors duration-300 hover:bg-blue-button-hover;
+  }
+  .form-input {
+    @apply px-4 py-1 rounded-lg bg-gray-input text-black focus:ring-2 focus:ring-blue-links focus:outline-none;
+  }
+}
