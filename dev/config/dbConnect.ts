@@ -10,6 +10,7 @@ async function dbConnect() {
   try {
     console.log("new connect");
     await mongoose.connect(process.env.DB_URI);
+    console.log("n connect");
     global.isMongoConnected = true;
   } catch (err) {
     throw err;

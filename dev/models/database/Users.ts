@@ -1,11 +1,5 @@
+import { roles } from "@/auth.config";
 import mongoose, { Schema, Types } from "mongoose";
-
-export const roles = {
-  ADMIN: 1000,
-  USER: 2500,
-  WRITER: 3000,
-  ORDER_REPORTER: 4000,
-} as const;
 
 export type Role = (typeof roles)[keyof typeof roles];
 

@@ -13,6 +13,7 @@ type Props = { isOpen: boolean };
 export default function ProfileMenu({ isOpen }: Props) {
   const [dark, setDark] = useState(true);
   const { data } = useSession();
+  console.log(data);
 
   return (
     <menu

@@ -6,12 +6,13 @@ import type {
 } from "@/models/zodSchemas/signupSchema";
 import type { SignInFlattenedError } from "@/models/zodSchemas/signInSchema";
 import signUpSchema from "@/models/zodSchemas/signupSchema";
-import Users, { roles } from "@/models/database/Users";
+import Users from "@/models/database/Users";
 import dbConnect from "@/config/dbConnect";
 import signInSchema from "@/models/zodSchemas/signInSchema";
 import { signIn, signOut } from "@/auth";
 import { CredentialsSignin } from "next-auth";
 import { isRedirectError } from "next/dist/client/components/redirect";
+import { roles } from "@/auth.config";
 
 export async function signUpAction(
   _prevState: SignUpFlattenedError | undefined,
@@ -24,7 +25,6 @@ export async function signUpAction(
   }
   try {
     await dbConnect();
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (_) {
     console.log(_);
     return { formErrors: ["network error"], fieldErrors: {} };
@@ -67,16 +67,12 @@ export async function signinAction(
   try {
     await signIn("credentials", formData);
   } catch (err) {
-    console.log("err");
     if (isRedirectError(err)) {
-      console.log("redirect err");
       throw err;
     }
     if (err instanceof CredentialsSignin) {
-      console.log("credentials err");
       return { fieldErrors: {}, formErrors: ["invalid credentials"] };
     }
-    console.log("other", (err as Error).cause);
     return { fieldErrors: {}, formErrors: ["network error"] };
   }
 }
