@@ -34,8 +34,9 @@ export default function Profile() {
           setIsOpen((prev) => !prev);
         }}
       >
-        <div className="rounded-full overflow-hidden w-[50px]">
+        <div className="rounded-full overflow-hidden w-[50px] h-[50px] flex items-center justify-center">
           <Image
+            className="max-w-full max-h-full object-cover"
             src={data?.user.image || profile}
             width={data?.user.image ? 55 : undefined}
             height={data?.user.image ? 55 : undefined}

@@ -6,10 +6,7 @@ export default function SignBtns() {
       <Link href="/sign-in" className="form-button ">
         sign in
       </Link>
-      <Link
-        href="/sign-up"
-        className="form-button transition-colors duration-300 hover:bg-blue-button-hover"
-      >
+      <Link href="/sign-up" className="form-button">
         sign up
       </Link>
     </div>

@@ -24,6 +24,10 @@ const config: Config = {
         "menu-transparent-gray": "rgba(179,179,179,0.17)",
         "red-error": "#FF6F61",
       },
+      spacing: {
+        "dashNav-h": "70px",
+        "sidBar-w": "240px",
+      },
     },
   },
   plugins: [],

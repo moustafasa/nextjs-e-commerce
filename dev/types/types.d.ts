@@ -5,3 +5,9 @@ interface Input {
   label: string;
   otherProps?: React.ComponentProps<"input">;
 }
+
+interface SideBarLink {
+  href: string;
+  label: string;
+  icon: React.JSX;
+}

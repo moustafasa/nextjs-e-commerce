@@ -38,7 +38,7 @@ export const authConfig = {
         ) {
           return true;
         }
-        return false;
+        return Response.redirect(new URL("/unauthorized", request.url));
       }
 
       if (request.nextUrl.pathname === "/sign-in" && auth?.user) {

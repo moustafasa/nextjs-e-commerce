@@ -1,14 +1,14 @@
 import { lazy, Suspense } from "react";
-// import LottieAnime from "../components/Home/LottieAnime";
+// import LottieAnime from "../_components/Home/LottieAnime";
 import { FaArrowRight } from "react-icons/fa6";
 import Link from "next/link";
 
-const LottieAnime = lazy(() => import("../components/Home/LottieAnime"));
+// const LottieAnime = lazy(() => import("../_components/Home/LottieAnime"));
 
 export default function Home() {
   return (
-    <div className="text-white flex gap-3 items-center mt-32 lg:mt-20  container mx-auto  justify-center">
-      <div className="max-w-[600px] w-[45%]">
+    <div className="flex-col-reverse lg:flex-row px-7 text-white flex gap-3 items-center lg:mt-20  container mx-auto  justify-center lg:px-7">
+      <div className="lg:max-w-[600px] lg:w-[45%] text-center lg:text-left">
         <h1 className="text-4xl font-bold capitalize mb-8">
           welcome to moustafa clothes shopping
         </h1>
@@ -21,15 +21,15 @@ export default function Home() {
         </p>
         <Link
           href={"/shop-now"}
-          className="flex items-center gap-3 mt-10 text-3xl ms-20"
+          className="flex items-center justify-center lg:justify-start gap-3 mt-10 text-3xl lg:ms-20"
         >
           Shop Now <FaArrowRight />
         </Link>
       </div>
-      <div className="w-[45%]">
-        <Suspense fallback={<div>loading</div>}>
+      <div className="lg:w-[45%]">
+        {/* <Suspense fallback={<div className="text-3xl">loading</div>}>
           <LottieAnime />
-        </Suspense>
+        </Suspense> */}
       </div>
     </div>
   );

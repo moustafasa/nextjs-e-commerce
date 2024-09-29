@@ -26,7 +26,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           email: string;
           picture: string;
         };
-        console.log(image);
         await dbConnect();
         const foundUser = await Users.findOne<HydratedDocument<IUser>>({
           email,
@@ -64,7 +63,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         try {
           await dbConnect();
         } catch (err) {
-          console.log("connect error");
           throw err;
         }
         const userFound: HydratedDocument<IUser> = await Users.findOne({
@@ -77,6 +75,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         );
         if (!isMatch) return null;
         return {
+          image: userFound.image,
           fullName: userFound.fullName,
           userId: userFound._id,
           email,

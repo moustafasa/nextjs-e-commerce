@@ -13,6 +13,7 @@ import { signIn, signOut } from "@/auth";
 import { CredentialsSignin } from "next-auth";
 import { isRedirectError } from "next/dist/client/components/redirect";
 import { roles } from "@/auth.config";
+import { put } from "@vercel/blob";
 
 export async function signUpAction(
   _prevState: SignUpFlattenedError | undefined,
@@ -23,10 +24,10 @@ export async function signUpAction(
   if (!result.success) {
     return result.error.flatten();
   }
+
   try {
     await dbConnect();
   } catch (_) {
-    console.log(_);
     return { formErrors: ["network error"], fieldErrors: {} };
   }
   const userFound = await Users.findOne({
@@ -38,15 +39,25 @@ export async function signUpAction(
 
   const hashedPass = await bcrypt.hash(result.data.password, 10);
   try {
+    let image;
+    if (result.data.image.size > 0) {
+      const ext = result.data.image.name.split(".").pop();
+      const { url } = await put(
+        `/profiles/${result.data.email}.${ext}`,
+        result.data.image,
+        { access: "public" }
+      );
+      image = url;
+    }
     await Users.create({
       fullName: result.data.fullName,
       email: result.data.email,
       password: hashedPass,
       role: roles.USER,
+      image,
     });
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (_err) {
-    console.log(_err);
     return { formErrors: ["there is network error"], fieldErrors: {} };
   }
 

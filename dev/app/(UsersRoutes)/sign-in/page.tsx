@@ -1,11 +1,12 @@
 "use client";
-import FormErrors from "@/app/components/Forms/FormErrors";
-import FormField from "@/app/components/Forms/FormField";
-import GoogleForm from "@/app/components/Forms/GoogleForm";
-import OrSeperator from "@/app/components/Forms/OrSeperator";
-import SubmitButton from "@/app/components/Forms/SubmitButton";
+import FormErrors from "@/app/_components/Forms/FormErrors";
+import FormField from "@/app/_components/Forms/FormField";
+import GoogleForm from "@/app/_components/Forms/GoogleForm";
+import OrSeperator from "@/app/_components/Forms/OrSeperator";
+import SubmitButton from "@/app/_components/Forms/SubmitButton";
 import { signInInputs } from "@/config/signInInputs";
 import { signinAction } from "@/lib/userActions";
+import { SignInFlattenedError } from "@/models/zodSchemas/signInSchema";
 import { useFormState } from "react-dom";
 
 export default function Page() {
@@ -24,7 +25,15 @@ export default function Page() {
           </h2>
 
           {signInInputs.map((input) => (
-            <FormField key={input.id} input={input} errors={errors} />
+            <FormField
+              key={input.id}
+              input={input}
+              errors={
+                errors?.fieldErrors[
+                  input.name as keyof SignInFlattenedError["fieldErrors"]
+                ]
+              }
+            />
           ))}
 
           <SubmitButton label="sign in" />

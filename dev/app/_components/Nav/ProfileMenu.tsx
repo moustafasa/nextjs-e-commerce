@@ -13,7 +13,6 @@ type Props = { isOpen: boolean };
 export default function ProfileMenu({ isOpen }: Props) {
   const [dark, setDark] = useState(true);
   const { data } = useSession();
-  console.log(data);
 
   return (
     <menu
@@ -24,8 +23,9 @@ export default function ProfileMenu({ isOpen }: Props) {
       )}
     >
       <li className="flex gap-2 items-start p-4 px-4 border-b-[1px]">
-        <div className="rounded-full overflow-hidden w-[55px] ">
+        <div className="rounded-full overflow-hidden w-[55px] h-[55px]">
           <Image
+            className="max-h-full max-w-full object-cover"
             src={data?.user.image || profile}
             width={data?.user.image ? 55 : undefined}
             height={data?.user.image ? 55 : undefined}
