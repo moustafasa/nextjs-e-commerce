@@ -1,11 +1,11 @@
 import { NextAuthConfig } from "next-auth";
 
-export const roles = {
-  ADMIN: 1000,
-  USER: 2500,
-  WRITER: 3000,
-  ORDER_REPORTER: 4000,
-} as const;
+export enum Role {
+  ADMIN = 1000,
+  USER = 2500,
+  WRITER = 3000,
+  ORDER_REPORTER = 4000,
+}
 
 export const authConfig = {
   pages: { signIn: "/sign-in" },
@@ -23,17 +23,17 @@ export const authConfig = {
       }
 
       if (request.nextUrl.pathname.startsWith("/dashboard")) {
-        if (auth?.user.roles.includes(roles.ADMIN)) {
+        if (auth?.user.roles.includes(Role.ADMIN)) {
           return true;
         }
         if (
-          auth?.user.roles.includes(roles.ORDER_REPORTER) &&
+          auth?.user.roles.includes(Role.ORDER_REPORTER) &&
           request.nextUrl.pathname === "/dashboard/orders"
         ) {
           return true;
         }
         if (
-          auth?.user.roles.includes(roles.WRITER) &&
+          auth?.user.roles.includes(Role.WRITER) &&
           request.nextUrl.pathname === "/dashboard/entries"
         ) {
           return true;
@@ -42,16 +42,16 @@ export const authConfig = {
       }
 
       if (request.nextUrl.pathname === "/sign-in" && auth?.user) {
-        if (auth.user.roles.includes(roles.ADMIN)) {
+        if (auth.user.roles.includes(Role.ADMIN)) {
           return Response.redirect(new URL("/dashboard", request.url));
         }
-        if (auth.user.roles.includes(roles.ORDER_REPORTER)) {
+        if (auth.user.roles.includes(Role.ORDER_REPORTER)) {
           return Response.redirect(new URL("/dashboard/orders", request.url));
         }
-        if (auth.user.roles.includes(roles.WRITER)) {
+        if (auth.user.roles.includes(Role.WRITER)) {
           return Response.redirect(new URL("/dashboard/entries", request.url));
         }
-        if (auth.user.roles.includes(roles.USER)) {
+        if (auth.user.roles.includes(Role.USER)) {
           return Response.redirect(new URL("/shop-now", request.url));
         }
       }

@@ -25,4 +25,10 @@ export const signUpInputs = [
     name: "passConfirm",
     label: "repeat password",
   },
-] satisfies Input[];
+  {
+    type: "file",
+    id: "file",
+    name: "image",
+    label: "profile",
+  },
+] satisfies AllInputs[];

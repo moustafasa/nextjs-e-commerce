@@ -1,10 +1,7 @@
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
-import Users, { IUser } from "./models/database/Users";
-import dbConnect from "./config/dbConnect";
-import bcrypt from "bcryptjs";
-import { type HydratedDocument } from "mongoose";
 import Google from "next-auth/providers/google";
+import { credentialsSignIn, googleSignIn } from "./lib/usersControllers";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [
@@ -16,6 +13,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           response_type: "code",
         },
       },
+
       async profile(profile) {
         const {
           name,
@@ -26,33 +24,13 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           email: string;
           picture: string;
         };
-        await dbConnect();
-        const foundUser = await Users.findOne<HydratedDocument<IUser>>({
-          email,
-        }).exec();
-        if (!foundUser) {
-          const newUser: HydratedDocument<IUser> = await Users.create({
-            fullName: name,
-            email,
-            image,
-          });
-          return {
-            image,
-            email,
-            fullName: newUser.fullName,
-            userId: newUser._id,
-            roles: newUser.roles,
-          };
-        }
-        return {
-          image,
-          email,
-          fullName: foundUser!.fullName,
-          userId: foundUser!._id,
-          roles: foundUser!.roles,
-        };
+
+        const auth = await googleSignIn(name, email, image);
+
+        return auth;
       },
     }),
+
     Credentials({
       credentials: { email: {}, password: {} },
       async authorize(credentials) {
@@ -60,27 +38,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           email: string;
           password: string;
         };
-        try {
-          await dbConnect();
-        } catch (err) {
-          throw err;
-        }
-        const userFound: HydratedDocument<IUser> = await Users.findOne({
-          email,
-        }).exec();
-        if (!userFound) return null;
-        const isMatch = await bcrypt.compare(
-          password,
-          userFound.password as string
-        );
-        if (!isMatch) return null;
-        return {
-          image: userFound.image,
-          fullName: userFound.fullName,
-          userId: userFound._id,
-          email,
-          roles: userFound.roles,
-        };
+        const auth = await credentialsSignIn(email, password);
+        return auth;
       },
     }),
   ],

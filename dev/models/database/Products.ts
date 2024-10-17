@@ -1,9 +1,9 @@
 import { model, models, Schema, Types } from "mongoose";
 
 export interface IProducts {
-  _id: Types.ObjectId;
+  _id: Types.ObjectId | string;
   title: string;
-  category: Types.ObjectId;
+  category: Types.ObjectId | string;
   images: string[];
   descriptions: string;
   price: number;
@@ -12,7 +12,7 @@ export interface IProducts {
 }
 
 const productSchema = new Schema<IProducts>({
-  title: { type: String, required: true },
+  title: { type: String, required: true, unique: true },
   category: { type: Schema.Types.ObjectId, required: true, ref: "Catogrie" },
   images: { type: [String], required: true },
   descriptions: { type: String, required: true },

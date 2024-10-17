@@ -4,7 +4,7 @@ import profile from "@/images/profile.png";
 import { FaAngleDown } from "react-icons/fa6";
 import ProfileMenu from "./ProfileMenu";
 import { useEffect, useState } from "react";
-import cn from "@/lib/cssConditional";
+import cn from "@/app/_utilities/cssConditional";
 import { useSession } from "next-auth/react";
 
 export default function Profile() {

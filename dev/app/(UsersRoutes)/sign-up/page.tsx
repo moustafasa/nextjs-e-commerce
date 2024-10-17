@@ -1,20 +1,19 @@
 "use client";
 import GoogleForm from "@/app/_components/Forms/GoogleForm";
-import FormField from "@/app/_components/Forms/FormField";
+import FormField from "@/app/_components/Forms/FormField/FormField";
 import { signUpInputs } from "@/config/signUpInputs";
-import { signUpAction } from "@/lib/userActions";
+import { signUpAction } from "@/lib/usersActions";
 import { useFormState } from "react-dom";
 import SubmitButton from "@/app/_components/Forms/SubmitButton";
 import FormErrors from "@/app/_components/Forms/FormErrors";
 import OrSeperator from "@/app/_components/Forms/OrSeperator";
-import FileInput from "@/app/_components/Forms/FileInput";
-import { SignUpFlattenedError } from "@/models/zodSchemas/signupSchema";
+import { SignUpFlattenedError } from "@/models/zodSchemas/User/signupSchema";
 
 export default function Page() {
   const [errors, formAction] = useFormState(signUpAction, undefined);
   return (
     <div className="px-3">
-      <div className="capitalize max-w-[700px] bg-black-tertiery-bg mt-10 mx-auto text-white p-7 rounded-lg">
+      <div className="capitalize max-w-[700px] bg-black-secondary-bg mt-10 mx-auto text-white p-7 rounded-lg shadow-lg">
         <form
           className="grid grid-cols-[1fr] sm:gap-x-6 sm:grid-cols-[auto_1fr] items-center "
           action={formAction}
@@ -35,10 +34,6 @@ export default function Page() {
               }
             ></FormField>
           ))}
-
-          <div className=" col-span-2 mb-7">
-            <FileInput errors={errors?.fieldErrors.image} />
-          </div>
 
           <SubmitButton label="sign up" />
         </form>

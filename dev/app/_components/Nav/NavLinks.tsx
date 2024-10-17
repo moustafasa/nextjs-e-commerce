@@ -1,4 +1,4 @@
-import cn from "@/lib/cssConditional";
+import cn from "@/app/_utilities/cssConditional";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 

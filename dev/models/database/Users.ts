@@ -1,10 +1,8 @@
-import { roles } from "@/auth.config";
+import { Role } from "@/auth.config";
 import mongoose, { Schema, Types } from "mongoose";
 
-export type Role = (typeof roles)[keyof typeof roles];
-
 export interface IUser {
-  _id: Types.ObjectId;
+  _id: Types.ObjectId | string;
   fullName: string;
   email: string;
   roles: Role[];
@@ -22,8 +20,10 @@ const UserSchema = new Schema<IUser>({
   },
   roles: {
     type: [Number],
-    enum: Object.values(roles),
-    default: [roles.USER],
+    enum: Object.values(Role)
+      .filter((role) => !isNaN(+role))
+      .map((role) => +role),
+    default: [Role.USER],
   },
   password: { type: String },
   image: { type: String },

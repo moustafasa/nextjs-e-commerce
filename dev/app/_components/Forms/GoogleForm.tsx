@@ -1,4 +1,4 @@
-import { googleSignIn } from "@/lib/userActions";
+import { googleSignIn } from "@/lib/usersActions";
 import React from "react";
 import { useFormStatus } from "react-dom";
 import { FcGoogle } from "react-icons/fc";

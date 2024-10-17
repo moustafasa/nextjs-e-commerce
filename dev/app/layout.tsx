@@ -1,4 +1,4 @@
-import cn from "@/lib/cssConditional";
+import cn from "@/app/_utilities/cssConditional";
 import type { Metadata } from "next";
 import { Cairo } from "next/font/google";
 import "./globals.css";

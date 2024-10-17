@@ -1,4 +1,4 @@
-import cn from "@/lib/cssConditional";
+import cn from "@/app/_utilities/cssConditional";
 
 type Props = { dark: boolean };
 

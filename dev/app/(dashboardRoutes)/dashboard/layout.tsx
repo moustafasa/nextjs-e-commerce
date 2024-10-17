@@ -1,15 +1,16 @@
 import { ReactNode } from "react";
 import DashNav from "../../_components/Nav/DashNav";
 import DashSideBar from "../../_components/dashboard/DashSideBar";
+import SideNavCollapseContextProvider from "@/app/_utilities/sideNavCollapseContext";
 
 export default function layout({ children }: { children: ReactNode }) {
   return (
-    <div className="pt-dashNav-h ps-sidBar-w text-white">
-      <DashNav />
-      <div className="flex-1 flex max-h-full">
+    <div className="pt-dashNav-h ps-sideBar-w text-white">
+      <SideNavCollapseContextProvider>
+        <DashNav />
         <DashSideBar />
-        <div className="flex-1 p-3 overflow-auto">{children}</div>
-      </div>
+      </SideNavCollapseContextProvider>
+      <div className="p-3 max-w-full">{children}</div>
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import cn from "@/lib/cssConditional";
+import cn from "@/app/_utilities/cssConditional";
 import { ClassValue } from "clsx";
 
 type Props = { className?: ClassValue };

@@ -5,8 +5,8 @@ import { BiLogOut } from "react-icons/bi";
 import Image from "next/image";
 import profile from "@/images/profile.png";
 import { useState } from "react";
-import cn from "@/lib/cssConditional";
-import { signOutAction } from "@/lib/userActions";
+import cn from "@/app/_utilities/cssConditional";
+import { signOutAction } from "@/lib/usersActions";
 import { useSession } from "next-auth/react";
 
 type Props = { isOpen: boolean };
@@ -18,7 +18,7 @@ export default function ProfileMenu({ isOpen }: Props) {
     <menu
       id="profile"
       className={cn(
-        "hidden absolute bg-menu-transparent-black sm:w-[300px] sm:right-4 rounded-lg z-50 right-0",
+        "hidden absolute bg-menu-transparent-black sm:w-[300px] sm:right-4 rounded-lg z-50 right-0 backdrop-blur-md",
         { block: isOpen }
       )}
     >
@@ -62,6 +62,9 @@ export default function ProfileMenu({ isOpen }: Props) {
           <button
             type="submit"
             className="flex gap-3 items-center capitalize hover:bg-menu-transparent-gray h-full w-full text-left p-2 rounded-lg"
+            onClick={() => {
+              console.log("done");
+            }}
           >
             <BiLogOut size={30} className="text-gray-icons" />
             <div>logout</div>

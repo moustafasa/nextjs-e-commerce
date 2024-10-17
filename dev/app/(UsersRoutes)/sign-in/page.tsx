@@ -1,12 +1,12 @@
 "use client";
 import FormErrors from "@/app/_components/Forms/FormErrors";
-import FormField from "@/app/_components/Forms/FormField";
+import FormField from "@/app/_components/Forms/FormField/FormField";
 import GoogleForm from "@/app/_components/Forms/GoogleForm";
 import OrSeperator from "@/app/_components/Forms/OrSeperator";
 import SubmitButton from "@/app/_components/Forms/SubmitButton";
 import { signInInputs } from "@/config/signInInputs";
-import { signinAction } from "@/lib/userActions";
-import { SignInFlattenedError } from "@/models/zodSchemas/signInSchema";
+import { signinAction } from "@/lib/usersActions";
+import { SignInFlattenedError } from "@/models/zodSchemas/User/signInSchema";
 import { useFormState } from "react-dom";
 
 export default function Page() {
@@ -14,7 +14,7 @@ export default function Page() {
 
   return (
     <div className="px-3">
-      <div className="capitalize max-w-[700px] bg-black-tertiery-bg mt-24 mx-auto text-white p-7 rounded-lg">
+      <div className="capitalize max-w-[700px] shadow-lg bg-black-secondary-bg mt-24 mx-auto text-white p-7 rounded-lg">
         <form
           className="grid grid-cols-[1fr] sm:gap-x-6 sm:grid-cols-[auto_1fr] items-center "
           action={formAction}

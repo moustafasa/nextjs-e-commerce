@@ -2,8 +2,8 @@ import React from "react";
 import SignBtns from "./SignBtns";
 import Profile from "./Profile";
 import { auth } from "@/auth";
-import { roles } from "@/auth.config";
 import Link from "next/link";
+import { Role } from "@/auth.config";
 
 export default async function LoginOrProfile() {
   const session = await auth();
@@ -12,9 +12,9 @@ export default async function LoginOrProfile() {
     <div className="ms-auto lg:ms-0 flex items-center gap-3">
       {session?.user.roles.find(
         (role) =>
-          role === roles.ADMIN ||
-          role === roles.ORDER_REPORTER ||
-          role === roles.WRITER
+          role === Role.ADMIN ||
+          role === Role.ORDER_REPORTER ||
+          role === Role.WRITER
       ) && (
         <Link className="form-button" href={"/dashboard"}>
           dashboard
