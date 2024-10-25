@@ -59,8 +59,8 @@ export default async function page() {
       tableName="products"
       addBtn={{
         Icon: <BiSolidAddToQueue />,
-        label: "add category",
-        href: "/dashboard/categories/add",
+        label: "add product",
+        href: "/dashboard/products/add",
       }}
     >
       <TableHeader<Product> schema={schema} />

@@ -8,7 +8,7 @@ export const addProductsInputs = [
     options: [],
   },
   {
-    type: "text",
+    type: "textarea",
     name: "descriptions",
     id: "descriptions",
     label: "description",
@@ -18,12 +18,21 @@ export const addProductsInputs = [
     name: "price",
     id: "price",
     label: "price",
+    suffex: "pounds",
   },
   {
     type: "number",
     name: "discount",
     id: "discount",
     label: "discount",
+    suffex: "pounds",
+    otherProps: { defaultValue: 0 },
   },
-  { type: "file", name: "images", id: "image", label: "images" },
+  {
+    type: "file",
+    name: "images",
+    id: "image",
+    label: "images",
+    multible: true,
+  },
 ] satisfies AllInputs[];

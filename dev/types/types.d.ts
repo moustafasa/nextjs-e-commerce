@@ -7,11 +7,17 @@ interface FormField {
 
 interface Input extends FormField {
   type: "text" | "password" | "email" | "number";
+  suffex?: string;
   otherProps?: React.ComponentProps<"input">;
 }
 
 interface FileInput extends FormField {
   type: "file";
+  multible?: boolean;
+}
+
+interface TextArea extends FormField {
+  type: "textarea";
 }
 
 interface Select extends FormField {
@@ -27,7 +33,7 @@ type FileInputOther = {
   defaultValue: string;
 };
 
-type AllInputs = Input | Select | FileInput;
+type AllInputs = Input | Select | FileInput | TextArea;
 
 interface SideBarLink {
   href: string;

@@ -3,6 +3,7 @@ import type { Props } from "./_Types";
 import SelectInput from "./FormSelect";
 import FileInput from "./FileInput";
 import cn from "@/app/_utilities/cssConditional";
+import FormTextArea from "./FormTextArea";
 
 export default function FormField<T extends AllInputs>({
   input,
@@ -15,7 +16,12 @@ export default function FormField<T extends AllInputs>({
         <FileInput input={input} {...(others as FileInputOther)} />
       ) : (
         <>
-          <label className="mb-1 sm:mb-0" htmlFor={input.id}>
+          <label
+            className={cn("mb-1 sm:mb-0", {
+              "self-start": input.type === "textarea",
+            })}
+            htmlFor={input.id}
+          >
             {input.label}
           </label>
           {input.type === "select" ? (
@@ -24,6 +30,8 @@ export default function FormField<T extends AllInputs>({
               errors={errors}
               {...(others as React.ComponentProps<"select">)}
             />
+          ) : input.type === "textarea" ? (
+            <FormTextArea input={input} errors={errors} />
           ) : (
             <FormInput
               input={input}

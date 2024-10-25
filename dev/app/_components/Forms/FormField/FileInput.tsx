@@ -55,7 +55,7 @@ export default function FileInput({
         }}
         accept=".png,.jpg,.jpeg"
         className="hidden"
-        name={input.name}
+        name={input.name + input.multible ? "[]" : ""}
         id={input.id}
         ref={fileInputRef}
       />
