@@ -5,4 +5,6 @@ export type Props<T extends AllInputs = AllInputs> = {
   ? React.ComponentProps<"select">
   : T extends FileInput
   ? FileInputOther
+  : T extends TextArea
+  ? TextAreaOther
   : React.ComponentProps<"input">);

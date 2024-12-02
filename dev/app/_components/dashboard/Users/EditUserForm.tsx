@@ -9,6 +9,7 @@ import { EditUserFlattenedError } from "@/models/zodSchemas/User/editUserSchema"
 import { ChangeEvent, useMemo, useState } from "react";
 import { useFormState } from "react-dom";
 import FormLayout from "../../Forms/FormLayout";
+import Form from "../../Forms/Form";
 
 type Props = { user: Omit<IUser, "password" | "image"> };
 
@@ -37,38 +38,36 @@ export default function EditUserForm({ user }: Props) {
     undefined
   );
   return (
-    <FormLayout
-      formAction={formAction}
-      heading="edit user"
-      errors={errors?.formErrors}
-    >
-      {editUsersInputs.map((input: Input | Select) => (
-        <FormField
-          key={input.id}
-          input={input}
-          errors={
-            errors?.fieldErrors[
-              input.name as keyof EditUserFlattenedError["fieldErrors"]
-            ]
-          }
-          value={fields[input.name] as string}
-          onChange={(
-            e: ChangeEvent<HTMLSelectElement> | ChangeEvent<HTMLInputElement>
-          ) => {
-            const value =
-              input.type === "select"
-                ? Array.from(
-                    (e.target as HTMLSelectElement).selectedOptions,
-                    (opt) => +opt.value
-                  )
-                : e.target.value;
+    <FormLayout heading="edit user" errors={errors?.formErrors}>
+      <Form formAction={formAction}>
+        {editUsersInputs.map((input: Input | Select) => (
+          <FormField
+            key={input.id}
+            input={input}
+            errors={
+              errors?.fieldErrors[
+                input.name as keyof EditUserFlattenedError["fieldErrors"]
+              ]
+            }
+            value={fields[input.name as string] as string}
+            onChange={(
+              e: ChangeEvent<HTMLSelectElement> | ChangeEvent<HTMLInputElement>
+            ) => {
+              const value =
+                input.type === "select"
+                  ? Array.from(
+                      (e.target as HTMLSelectElement).selectedOptions,
+                      (opt) => +opt.value
+                    )
+                  : e.target.value;
 
-            setFields((prev) => ({ ...prev, [input.name]: value }));
-          }}
-        />
-      ))}
+              setFields((prev) => ({ ...prev, [input.name as string]: value }));
+            }}
+          />
+        ))}
 
-      <SubmitButton label="save" disabled={!isChanged} />
+        <SubmitButton label="save" disabled={!isChanged} />
+      </Form>
     </FormLayout>
   );
 }

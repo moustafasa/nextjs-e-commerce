@@ -1,4 +1,5 @@
 import { NextAuthConfig } from "next-auth";
+import { NextResponse } from "next/server";
 
 export enum Role {
   ADMIN = 1000,
@@ -18,6 +19,7 @@ export const authConfig = {
     },
     async authorized({ request, auth }) {
       const openedPaths = ["/", "/contact", "/about", "/sign-in", "/sign-up"];
+
       if (!openedPaths.includes(request.nextUrl.pathname) && !auth?.user) {
         return false;
       }

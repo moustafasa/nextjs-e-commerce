@@ -3,10 +3,12 @@ import Logo from "../Nav/Logo";
 import Skeleton from "../skeletons/Skeleton";
 import Profile from "../Nav/Profile";
 import DashCollapseButton from "./DashCollapseButton";
+import { auth } from "@/auth";
 
-export default function DashNav() {
+export default async function DashNav() {
+  const user = await auth();
   return (
-    <header className="fixed w-full top-0 left-0 flex items-center justify-between bg-black-nav text-white capitalize pe-4 pt-2 shadow-sm  pb-2 lg:pb-2 gap-x-3 h-dashNav-h">
+    <header className="fixed w-full z-50 top-0 left-0 flex items-center justify-between bg-black-nav text-white capitalize pe-4 pt-2 shadow-sm  pb-2 lg:pb-2 gap-x-3 h-dashNav-h">
       <div className="flex sm:gap-8 ">
         <Logo />
         <DashCollapseButton />
@@ -17,7 +19,7 @@ export default function DashNav() {
           <Skeleton className={"h-[50px] w-[50px] rounded-full px-2 py-1"} />
         }
       >
-        <Profile />
+        <Profile data={user} />
       </Suspense>
     </header>
   );

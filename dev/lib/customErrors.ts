@@ -11,3 +11,16 @@ export class CategoryExistingError extends Error {
     this.name = "CategoryExistingError";
   }
 }
+export class ProductExistingError extends Error {
+  constructor(message?: string) {
+    super(message);
+    this.name = "ProductExistingError";
+  }
+}
+
+export class ImagesLengthError extends Error {
+  constructor(message?: string) {
+    super(message);
+    this.name = "ImagesLengthError";
+  }
+}

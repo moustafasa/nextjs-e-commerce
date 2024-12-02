@@ -1,6 +1,7 @@
 "use client";
-import FormErrors from "@/app/_components/Forms/FormErrors";
+import Form from "@/app/_components/Forms/Form";
 import FormField from "@/app/_components/Forms/FormField/FormField";
+import FormLayout from "@/app/_components/Forms/FormLayout";
 import GoogleForm from "@/app/_components/Forms/GoogleForm";
 import OrSeperator from "@/app/_components/Forms/OrSeperator";
 import SubmitButton from "@/app/_components/Forms/SubmitButton";
@@ -13,34 +14,23 @@ export default function Page() {
   const [errors, formAction] = useFormState(signinAction, undefined);
 
   return (
-    <div className="px-3">
-      <div className="capitalize max-w-[700px] shadow-lg bg-black-secondary-bg mt-24 mx-auto text-white p-7 rounded-lg">
-        <form
-          className="grid grid-cols-[1fr] sm:gap-x-6 sm:grid-cols-[auto_1fr] items-center "
-          action={formAction}
-        >
-          <FormErrors errors={errors?.formErrors} />
-          <h2 className=" sm:col-span-2 text-2xl font-bold text-center mb-6">
-            sign in
-          </h2>
-
-          {signInInputs.map((input) => (
-            <FormField
-              key={input.id}
-              input={input}
-              errors={
-                errors?.fieldErrors[
-                  input.name as keyof SignInFlattenedError["fieldErrors"]
-                ]
-              }
-            />
-          ))}
-
-          <SubmitButton label="sign in" />
-        </form>
-        <OrSeperator />
-        <GoogleForm label="sign in with google" />
-      </div>
-    </div>
+    <FormLayout heading="sign in" errors={errors?.formErrors}>
+      <Form formAction={formAction}>
+        {signInInputs.map((input) => (
+          <FormField
+            key={input.id}
+            input={input}
+            errors={
+              errors?.fieldErrors[
+                input.name as keyof SignInFlattenedError["fieldErrors"]
+              ]
+            }
+          />
+        ))}
+        <SubmitButton label="sign in" />
+      </Form>
+      <OrSeperator />
+      <GoogleForm label="sign in with google" />
+    </FormLayout>
   );
 }

@@ -31,7 +31,11 @@ export default function FormField<T extends AllInputs>({
               {...(others as React.ComponentProps<"select">)}
             />
           ) : input.type === "textarea" ? (
-            <FormTextArea input={input} errors={errors} />
+            <FormTextArea
+              input={input}
+              errors={errors}
+              {...(others as TextAreaOther)}
+            />
           ) : (
             <FormInput
               input={input}

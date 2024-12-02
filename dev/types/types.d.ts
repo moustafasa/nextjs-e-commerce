@@ -1,6 +1,6 @@
 interface FormField {
   type: string;
-  name: string;
+  name?: string;
   id: string;
   label: string;
 }
@@ -22,16 +22,18 @@ interface TextArea extends FormField {
 
 interface Select extends FormField {
   type: "select";
-  options: { value: string; label: string }[];
+  options: { value: string; label: string; disabled?: boolean }[];
   multiple?: boolean;
   otherProps?: React.ComponentProps<"select">;
 }
 
 type FileInputOther = {
-  onChange?: (fileUrl: string) => void;
-  value: string;
-  defaultValue: string;
+  onChange?: (ev: ChangeEvent<HTMLInputElement>) => void;
+  defaultValue?: string;
+  disabled?: boolean;
 };
+
+type TextAreaOther = { disabled?: boolean };
 
 type AllInputs = Input | Select | FileInput | TextArea;
 

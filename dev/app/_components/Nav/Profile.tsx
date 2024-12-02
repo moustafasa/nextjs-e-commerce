@@ -7,9 +7,11 @@ import { useEffect, useState } from "react";
 import cn from "@/app/_utilities/cssConditional";
 import { useSession } from "next-auth/react";
 
-export default function Profile() {
+type Props = { data: ReturnType<typeof useSession>["data"] };
+export default function Profile({ data }: Props) {
   const [isOpen, setIsOpen] = useState(false);
-  const { data } = useSession();
+  // const { data } = useSession();
+  console.log("done");
   useEffect(() => {
     const blurHandler = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
@@ -41,11 +43,12 @@ export default function Profile() {
             width={data?.user.image ? 55 : undefined}
             height={data?.user.image ? 55 : undefined}
             alt="profile"
+            priority
           />
         </div>
         <FaAngleDown />
       </button>
-      <ProfileMenu isOpen={isOpen} />
+      <ProfileMenu isOpen={isOpen} data={data} />
     </div>
   );
 }

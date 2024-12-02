@@ -8,6 +8,7 @@ import { ICategories } from "@/models/database/Categories";
 import { AddCategoryFlattenedError } from "@/models/zodSchemas/Category/addCategorySchema";
 import React, { ChangeEvent, useMemo, useState } from "react";
 import { useFormState } from "react-dom";
+import Form from "../../Forms/Form";
 
 type Props = {
   category: ICategories;
@@ -39,37 +40,35 @@ export default function EditCategoryForm({ category }: Props) {
   );
 
   return (
-    <FormLayout
-      formAction={formAction}
-      heading="edit category"
-      errors={errors?.formErrors}
-    >
-      {addCategoryInputs.map((input) => (
-        <FormField
-          key={input.id}
-          input={input}
-          errors={
-            errors?.fieldErrors[
-              input.name as keyof AddCategoryFlattenedError["fieldErrors"]
-            ]
-          }
-          defaultValue={category[input.id as keyof typeof category] as string}
-          onChange={(e: ChangeEvent<HTMLInputElement> | string) => {
-            if (
-              !Object.values(fields).some(
-                (value) => typeof value === "boolean" && !!value
-              )
-            ) {
-              if (typeof e === "string") {
-                if (e) setFields({ ...fields, [input.id]: true });
-              } else {
-                setFields({ ...fields, [input.id]: e.target.value });
-              }
+    <FormLayout heading="edit category" errors={errors?.formErrors}>
+      <Form formAction={formAction}>
+        {addCategoryInputs.map((input) => (
+          <FormField
+            key={input.id}
+            input={input}
+            errors={
+              errors?.fieldErrors[
+                input.name as keyof AddCategoryFlattenedError["fieldErrors"]
+              ]
             }
-          }}
-        />
-      ))}
-      <SubmitButton label="save" disabled={!isChanged} />
+            defaultValue={category[input.id as keyof typeof category] as string}
+            onChange={(e: ChangeEvent<HTMLInputElement>) => {
+              if (
+                !Object.values(fields).some(
+                  (value) => typeof value === "boolean" && !!value
+                )
+              ) {
+                if (e.target.files) {
+                  setFields({ ...fields, [input.id]: true });
+                } else {
+                  setFields({ ...fields, [input.id]: e.target.value });
+                }
+              }
+            }}
+          />
+        ))}
+        <SubmitButton label="save" disabled={!isChanged} />
+      </Form>
     </FormLayout>
   );
 }

@@ -9,10 +9,11 @@ const nextConfig = {
       },
     ],
   },
-  // experimental: {
-  //   esmExternals: "loose", // <-- add this
-  //   serverComponentsExternalPackages: ["mongoose"], // <-- and this
-  // },
+  experimental: {
+    esmExternals: "loose", // <-- add this
+    serverComponentsExternalPackages: ["mongoose"], // <-- and this
+  },
+  reactStrictMode: false,
 };
 
 export default nextConfig;

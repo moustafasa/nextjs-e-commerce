@@ -9,10 +9,10 @@ import cn from "@/app/_utilities/cssConditional";
 import { signOutAction } from "@/lib/usersActions";
 import { useSession } from "next-auth/react";
 
-type Props = { isOpen: boolean };
-export default function ProfileMenu({ isOpen }: Props) {
+type Props = { isOpen: boolean; data: ReturnType<typeof useSession>["data"] };
+export default function ProfileMenu({ isOpen, data }: Props) {
   const [dark, setDark] = useState(true);
-  const { data } = useSession();
+  // const { data } = useSession();
 
   return (
     <menu

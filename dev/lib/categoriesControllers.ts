@@ -69,8 +69,8 @@ export const editCategory = async (
   if (result.image.size > 0) {
     await del(category.image);
     const { url: image } = await put(
-      `categories/${category.title}${path.extname(result.image.name)}`,
-      category.image,
+      `categories/${result.image.name}${path.extname(result.image.name)}`,
+      result.image,
       { access: "public" }
     );
     category.image = image;

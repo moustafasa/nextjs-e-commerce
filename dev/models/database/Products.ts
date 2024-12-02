@@ -21,4 +21,4 @@ const productSchema = new Schema<IProducts>({
   stock: { type: Number, default: 0 },
 });
 
-export default models.Product || model<IProducts>("Product", productSchema);
+export default models?.Product || model<IProducts>("Product", productSchema);

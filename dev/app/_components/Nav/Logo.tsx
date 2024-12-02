@@ -5,7 +5,13 @@ import logo from "@/images/logo.png";
 export default function Logo() {
   return (
     <Link href={"/"} className="flex items-center text-blue-links">
-      <Image src={logo} alt="logo" className="w-[80px] " priority />
+      <Image
+        src={logo}
+        alt="logo"
+        className="w-[80px] "
+        placeholder="blur"
+        priority
+      />
       <span className="-m-3 font-bold hidden sm:block">by moustafa saad</span>
     </Link>
   );

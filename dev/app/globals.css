@@ -13,4 +13,7 @@
   .form-input {
     @apply px-4 py-1 rounded-lg bg-gray-input text-black focus:ring-2 focus:ring-blue-links focus:outline-none;
   }
+  .form-input-disabled {
+    @apply bg-black-tertiery-bg ring-black-tertiery-bg text-gray-input;
+  }
 }

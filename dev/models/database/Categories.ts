@@ -11,4 +11,4 @@ const schema = new Schema<ICategories>({
   image: { type: String },
 });
 
-export default models.Categorie || model<ICategories>("Categorie", schema);
+export default models?.Categorie || model<ICategories>("Categorie", schema);

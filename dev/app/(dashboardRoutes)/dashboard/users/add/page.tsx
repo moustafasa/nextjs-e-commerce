@@ -1,4 +1,5 @@
 "use client";
+import Form from "@/app/_components/Forms/Form";
 import FormField from "@/app/_components/Forms/FormField/FormField";
 import FormLayout from "@/app/_components/Forms/FormLayout";
 import SubmitButton from "@/app/_components/Forms/SubmitButton";
@@ -12,24 +13,22 @@ export default function Page() {
   const [errors, formAction] = useFormState(addUserAction, undefined);
 
   return (
-    <FormLayout
-      formAction={formAction}
-      heading="add user"
-      errors={errors?.formErrors}
-    >
-      {addUserInputs.map((input) => (
-        <FormField
-          key={input.id}
-          input={input}
-          errors={
-            errors?.fieldErrors[
-              input.name as keyof AddUserFlattenedError["fieldErrors"]
-            ]
-          }
-        />
-      ))}
+    <FormLayout heading="add user" errors={errors?.formErrors}>
+      <Form formAction={formAction}>
+        {addUserInputs.map((input) => (
+          <FormField
+            key={input.id}
+            input={input}
+            errors={
+              errors?.fieldErrors[
+                input.name as keyof AddUserFlattenedError["fieldErrors"]
+              ]
+            }
+          />
+        ))}
 
-      <SubmitButton label="add" />
+        <SubmitButton label="add" />
+      </Form>
     </FormLayout>
   );
 }

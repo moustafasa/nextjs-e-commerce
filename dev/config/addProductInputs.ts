@@ -1,12 +1,12 @@
 export const addProductsInputs = [
-  { type: "text", name: "title", id: "title", label: "title" },
   {
     type: "select",
     name: "category",
     id: "category",
     label: "category",
-    options: [],
+    options: [{ value: "", label: "choose", disabled: true }],
   },
+  { type: "text", name: "title", id: "title", label: "title" },
   {
     type: "textarea",
     name: "descriptions",
@@ -28,11 +28,12 @@ export const addProductsInputs = [
     suffex: "pounds",
     otherProps: { defaultValue: 0 },
   },
-  {
-    type: "file",
-    name: "images",
-    id: "image",
-    label: "images",
-    multible: true,
-  },
 ] satisfies AllInputs[];
+
+export const productsImages = {
+  type: "file",
+  name: undefined,
+  id: "image",
+  label: "images",
+  multible: true,
+} satisfies AllInputs;
