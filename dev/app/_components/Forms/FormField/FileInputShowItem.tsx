@@ -6,14 +6,13 @@ import { memo, startTransition, useEffect, useRef, useState } from "react";
 
 type Props = { file: File; deleteMethod: () => void };
 function FileInputShowItem({ file, deleteMethod }: Props) {
-  const url = useRef(URL.createObjectURL(file));
+  const localUrl = useRef(URL.createObjectURL(file));
+  const remoteUrl = useRef("");
   const signal = useRef(new AbortController());
   const id = useProductIdContext();
   const [progress, setProgress] = useState(0);
   const [, setImagesUrls] = useImagesUrls();
   const [isLoaded, setIsLoaded] = useState(false);
-
-  console.log(isLoaded, "is loaded ", file.name);
 
   useEffect(() => {
     const uploadImg = async () => {
@@ -24,7 +23,7 @@ function FileInputShowItem({ file, deleteMethod }: Props) {
           file,
           {
             access: "public",
-            handleUploadUrl: "/api/uploadProductImg", // This should be your API route for handling uploads
+            handleUploadUrl: "/api/uploadProductImg",
             onUploadProgress: async ({ loaded, total }) => {
               startTransition(() => {
                 if (total) setProgress(Math.floor((loaded * 100) / total));
@@ -34,6 +33,7 @@ function FileInputShowItem({ file, deleteMethod }: Props) {
           }
         );
         setImagesUrls((prev) => [...prev, newBlob.url]);
+        remoteUrl.current = newBlob.url;
       }
     };
     uploadImg();
@@ -44,7 +44,7 @@ function FileInputShowItem({ file, deleteMethod }: Props) {
       <div className="relative h-full ">
         <Image
           className="object-cover h-full rounded-lg"
-          src={url.current}
+          src={localUrl.current}
           alt="image"
           width={300}
           height={300}
@@ -60,9 +60,10 @@ function FileInputShowItem({ file, deleteMethod }: Props) {
             } else {
               signal.current.abort();
             }
-            setImagesUrls((prev) =>
-              prev.filter((prevImg) => prevImg !== url.current)
-            );
+            if (remoteUrl.current)
+              setImagesUrls((prev) =>
+                prev.filter((prevImg) => prevImg !== remoteUrl.current)
+              );
             deleteMethod();
           }}
         >

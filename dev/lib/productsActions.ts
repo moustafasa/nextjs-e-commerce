@@ -12,7 +12,6 @@ export const addProductsAction = async (
   formData: FormData
 ) => {
   const registeredData = Object.fromEntries(formData);
-  console.log(registeredData);
   const result = addProductSchema.safeParse({ ...registeredData });
   if (!result.success) {
     return result.error.flatten();
@@ -26,9 +25,8 @@ export const addProductsAction = async (
         fieldErrors: {},
       };
     }
-    console.log(err);
     return { formErrors: ["network error"], fieldErrors: {} };
   }
-  // revalidatePath("/dashboard/products");
-  // redirect("/dashboard/products");
+  revalidatePath("/dashboard/products");
+  redirect("/dashboard/products");
 };

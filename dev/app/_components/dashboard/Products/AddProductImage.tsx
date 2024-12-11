@@ -15,19 +15,39 @@ export default function AddProductImage({ serverErrors }: Props) {
   const handleChange = (ev: ChangeEvent<HTMLInputElement>) => {
     startTransition(() => {
       if (ev.target.files) {
-        const result = addProductImageSchema.safeParse([
-          ...(ev.target.files as FileList),
-        ]);
-        if (result.success) {
-          setFiles((prev) => [...prev, ...(ev.target.files as FileList)]);
+        if (files.length + ev.target.files.length > 4) {
+          setErrors(["each product has an limit for 4 images"]);
         } else {
-          setErrors(result.error.format()._errors);
+          setErrors([]);
+          const result = addProductImageSchema.safeParse([
+            ...(ev.target.files as FileList),
+          ]);
+
+          if (result.success) {
+            setFiles((prev) => [
+              ...prev,
+              ...result.data.filter(
+                (file) =>
+                  !files.find(
+                    (fl) =>
+                      fl.name === file.name &&
+                      fl.size === file.size &&
+                      fl.lastModified === file.lastModified
+                  )
+              ),
+            ]);
+          } else {
+            setErrors(result.error.format()._errors);
+          }
         }
       }
+      ev.target.value = "";
     });
   };
   const fileDelete = useCallback((file: File) => {
-    return () => setFiles((files) => files.filter((fl) => fl !== file));
+    return () => {
+      setFiles((files) => files.filter((fl) => fl !== file));
+    };
   }, []);
 
   return (
@@ -38,9 +58,9 @@ export default function AddProductImage({ serverErrors }: Props) {
         onChange={handleChange}
       />
       <ul className=" sm:col-span-2 mb-6 grid grid-cols-[repeat(auto-fill,minmax(100px,1fr))] gap-8">
-        {files.map((file, ind) => (
+        {files.map((file) => (
           <FileInputShowItem
-            key={ind + file.name}
+            key={file.name}
             file={file}
             deleteMethod={fileDelete(file)}
           />

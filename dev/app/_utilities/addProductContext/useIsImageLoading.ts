@@ -3,6 +3,6 @@ import { useContext } from "react";
 import { addProductContext } from "./addProductContext";
 
 export default function useIsImageLoading() {
-  const { isImageLoading } = useContext(addProductContext);
-  return isImageLoading;
+  const { loadingQueue } = useContext(addProductContext);
+  return loadingQueue;
 }

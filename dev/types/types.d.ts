@@ -31,6 +31,7 @@ type FileInputOther = {
   onChange?: (ev: ChangeEvent<HTMLInputElement>) => void;
   defaultValue?: string;
   disabled?: boolean;
+  inputRef?: ForwardedRef<HTMLInputElement>;
 };
 
 type TextAreaOther = { disabled?: boolean };

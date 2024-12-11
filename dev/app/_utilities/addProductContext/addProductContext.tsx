@@ -9,13 +9,13 @@ import {
 
 type AddProductContext = {
   id?: string;
-  isImageLoading: [boolean, Dispatch<SetStateAction<boolean>>];
+  loadingQueue: [boolean[], Dispatch<SetStateAction<boolean[]>>];
   imagesUrls: [string[], Dispatch<SetStateAction<string[]>>];
 };
 
 export const addProductContext = createContext<AddProductContext>({
   id: undefined,
-  isImageLoading: [false, () => {}],
+  loadingQueue: [[], () => {}],
   imagesUrls: [[], () => {}],
 });
 
@@ -26,10 +26,10 @@ export default function AddProductContext({
   children: ReactNode;
   id: string;
 }) {
-  const isImageLoading = useState(false);
+  const loadingQueue = useState<boolean[]>([]);
   const imagesUrls = useState<string[]>([]);
   return (
-    <addProductContext.Provider value={{ id, isImageLoading, imagesUrls }}>
+    <addProductContext.Provider value={{ id, loadingQueue, imagesUrls }}>
       {children}
     </addProductContext.Provider>
   );

@@ -63,9 +63,9 @@ export default function FileInputShowList({ files }: Props) {
 
   return (
     <ul className=" sm:col-span-2 mb-6 grid grid-cols-[repeat(auto-fill,minmax(100px,1fr))] gap-8">
-      {filesObj.map((file) => (
+      {/* {filesObj.map((file) => (
         <FileInputShowItem key={file.url} file={file} />
-      ))}
+      ))} */}
     </ul>
   );
 }
