@@ -24,7 +24,7 @@ const FormInput = ({ input, errors, ...others }: Props<Input>) => {
       />
       {input.suffex && (
         <span className={cn({ "text-gray-input": others.disabled })}>
-          pounds
+          {input.suffex}
         </span>
       )}
     </div>

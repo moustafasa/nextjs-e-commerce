@@ -69,7 +69,6 @@ export async function deleteCategoryAction(_id: string) {
   try {
     await deleteCategory(_id);
   } catch (err) {
-    console.log(err);
     throw err;
   }
   revalidatePath("/dashboard/categories");

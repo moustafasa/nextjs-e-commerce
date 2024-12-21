@@ -8,28 +8,29 @@ import {
 } from "react";
 
 type AddProductContext = {
-  id?: string;
-  loadingQueue: [boolean[], Dispatch<SetStateAction<boolean[]>>];
+  isLoading: [boolean, Dispatch<SetStateAction<boolean>>];
   imagesUrls: [string[], Dispatch<SetStateAction<string[]>>];
+  deletedImagesUrls: [string[], Dispatch<SetStateAction<string[]>>];
 };
 
 export const addProductContext = createContext<AddProductContext>({
-  id: undefined,
-  loadingQueue: [[], () => {}],
+  isLoading: [false, () => {}],
   imagesUrls: [[], () => {}],
+  deletedImagesUrls: [[], () => {}],
 });
 
 export default function AddProductContext({
   children,
-  id,
 }: {
   children: ReactNode;
-  id: string;
 }) {
-  const loadingQueue = useState<boolean[]>([]);
+  const isLoading = useState(false);
   const imagesUrls = useState<string[]>([]);
+  const deletedImagesUrls = useState<string[]>([]);
   return (
-    <addProductContext.Provider value={{ id, loadingQueue, imagesUrls }}>
+    <addProductContext.Provider
+      value={{ isLoading, imagesUrls, deletedImagesUrls }}
+    >
       {children}
     </addProductContext.Provider>
   );

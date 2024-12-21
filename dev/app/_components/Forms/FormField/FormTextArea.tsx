@@ -7,9 +7,10 @@ export default function FormTextArea({
   errors,
   input,
   disabled,
+  defaultValue,
+  onChange,
 }: Props<TextArea>) {
   const { pending } = useFormStatus();
-  console.log(disabled);
   return (
     <textarea
       className={cn(
@@ -25,6 +26,8 @@ export default function FormTextArea({
       disabled={pending || disabled}
       aria-disabled={pending}
       rows={5}
+      defaultValue={defaultValue}
+      onChange={onChange}
     ></textarea>
   );
 }

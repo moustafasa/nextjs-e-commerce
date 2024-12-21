@@ -1,21 +1,15 @@
 import { z } from "zod";
 import { baseProductSchema } from "./baseProductSchema";
-import path from "path";
 
-const addProductSchema = baseProductSchema.omit({ images: true }).extend({
-  images: z
-    .string()
-    .transform((images) => JSON.parse(images) as string[])
-    .refine(
-      (images) =>
-        images.every((img) =>
-          [".jpg", ".png", ".jpeg"].includes(path.extname(img))
-        ),
-      "only .jpg and .png files is allowed"
-    )
+const addProductSchema = baseProductSchema.extend({
+  images: baseProductSchema.shape.images
     .refine(
       (images) => images.length >= 3,
       "you should choose at least three images"
+    )
+    .refine(
+      (images) => images.length <= 4,
+      "you should choose maximum 4 images"
     ),
 });
 

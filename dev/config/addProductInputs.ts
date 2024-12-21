@@ -15,6 +15,13 @@ export const addProductsInputs = [
   },
   {
     type: "number",
+    name: "stock",
+    id: "stock",
+    label: "stock",
+    suffex: "unit",
+  },
+  {
+    type: "number",
     name: "price",
     id: "price",
     label: "price",

@@ -34,6 +34,11 @@ export const getCategories = cache(async () => {
   return categories.map((cat) => ({ ...cat, _id: cat._id.toString() }));
 });
 
+export const getCategoriesForOptions = cache(async () => {
+  const cats = await getCategories();
+  return cats.map((cat) => ({ label: cat.title, value: cat._id.toString() }));
+});
+
 export const getCategoryById = cache(async (id: string) => {
   await checkAuth(Role.ADMIN);
   if (!isValidObjectId(id)) {

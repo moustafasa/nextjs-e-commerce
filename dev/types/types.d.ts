@@ -20,21 +20,27 @@ interface TextArea extends FormField {
   type: "textarea";
 }
 
+type SelectOption = { value: string; label: string; disabled?: boolean };
+
 interface Select extends FormField {
   type: "select";
-  options: { value: string; label: string; disabled?: boolean }[];
+  options: SelectOption[];
   multiple?: boolean;
   otherProps?: React.ComponentProps<"select">;
 }
 
 type FileInputOther = {
-  onChange?: (ev: ChangeEvent<HTMLInputElement>) => void;
+  onChange?: React.ChangeEventHandler<HTMLInputElement>;
   defaultValue?: string;
   disabled?: boolean;
   inputRef?: ForwardedRef<HTMLInputElement>;
 };
 
-type TextAreaOther = { disabled?: boolean };
+type TextAreaOther = {
+  disabled?: boolean;
+  defaultValue?: string;
+  onChange?: React.ChangeEventHandler<HTMLTextAreaElement>;
+};
 
 type AllInputs = Input | Select | FileInput | TextArea;
 

@@ -18,6 +18,13 @@ export class ProductExistingError extends Error {
   }
 }
 
+export class ProductImagesBelowLimitError extends Error {
+  constructor(message?: string) {
+    super(message);
+    this.name = "ProductImagesBelowLimitError";
+  }
+}
+
 export class ImagesLengthError extends Error {
   constructor(message?: string) {
     super(message);

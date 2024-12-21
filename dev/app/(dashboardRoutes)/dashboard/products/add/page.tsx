@@ -1,13 +1,11 @@
 import AddProductsForm from "@/app/_components/dashboard/Products/AddProductsForm";
 import AddProductContext from "@/app/_utilities/addProductContext/addProductContext";
-import { getCategories } from "@/lib/categoriesControllers";
-import { randomUUID } from "crypto";
+import { getCategoriesForOptions } from "@/lib/categoriesControllers";
 
 export default async function Page() {
-  const categories = await getCategories();
-  const id = randomUUID();
+  const categories = await getCategoriesForOptions();
   return (
-    <AddProductContext id={id}>
+    <AddProductContext>
       <AddProductsForm categories={categories} />
     </AddProductContext>
   );

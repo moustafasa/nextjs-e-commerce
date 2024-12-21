@@ -9,7 +9,7 @@ type Props = {
 export default function OptionsBtn({ id, basePath, deleteAction }: Props) {
   const deleteActionWithId = deleteAction.bind(null, id);
   return (
-    <div className="flex gap-3 items-center justify-center">
+    <div className="flex gap-3 items-center justify-center px-4">
       <Link
         href={`/${basePath}/edit/${id}`}
         className="py-2 px-3 capitalize transition-colors duration-300 rounded-lg bg-green-800 hover:bg-green-900"

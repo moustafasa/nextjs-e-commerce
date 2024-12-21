@@ -3,7 +3,10 @@ import { model, models, Schema, Types } from "mongoose";
 export interface IProducts {
   _id: Types.ObjectId | string;
   title: string;
-  category: Types.ObjectId | string;
+  category:
+    | Types.ObjectId
+    | string
+    | { title: string; _id: Types.ObjectId | string };
   images: string[];
   descriptions: string;
   price: number;
@@ -12,8 +15,8 @@ export interface IProducts {
 }
 
 const productSchema = new Schema<IProducts>({
-  title: { type: String, required: true, unique: true },
-  category: { type: Schema.Types.ObjectId, required: true, ref: "Catogrie" },
+  title: { type: String, required: true },
+  category: { type: Schema.Types.ObjectId, required: true, ref: "Categorie" },
   images: { type: [String], required: true },
   descriptions: { type: String, required: true },
   price: { type: Number, required: true },

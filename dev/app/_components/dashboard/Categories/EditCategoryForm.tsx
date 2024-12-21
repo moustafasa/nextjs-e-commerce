@@ -44,14 +44,16 @@ export default function EditCategoryForm({ category }: Props) {
       <Form formAction={formAction}>
         {addCategoryInputs.map((input) => (
           <FormField
-            key={input.id}
+            key={input.name}
             input={input}
             errors={
               errors?.fieldErrors[
                 input.name as keyof AddCategoryFlattenedError["fieldErrors"]
               ]
             }
-            defaultValue={category[input.id as keyof typeof category] as string}
+            defaultValue={
+              category[input.name as keyof typeof category] as string
+            }
             onChange={(e: ChangeEvent<HTMLInputElement>) => {
               if (
                 !Object.values(fields).some(
@@ -59,9 +61,9 @@ export default function EditCategoryForm({ category }: Props) {
                 )
               ) {
                 if (e.target.files) {
-                  setFields({ ...fields, [input.id]: true });
+                  setFields({ ...fields, [input.name]: true });
                 } else {
-                  setFields({ ...fields, [input.id]: e.target.value });
+                  setFields({ ...fields, [input.name]: e.target.value });
                 }
               }
             }}

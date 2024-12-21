@@ -1,3 +1,4 @@
+import path from "path";
 import { z } from "zod";
 
 export const baseProductSchema = z.object({
@@ -6,24 +7,20 @@ export const baseProductSchema = z.object({
     .string({ required_error: "please choose category" })
     .min(1, "please choose category"),
   images: z
-    .array(z.instanceof(File), { required_error: "images is required" })
-    .refine((files) =>
-      files.every(
-        (file) => file.size < 4.5 * 1024 * 1024,
-        "max file size is 4.5MB"
-      )
-    )
+    .string()
+    .transform((images) => JSON.parse(images) as string[])
     .refine(
-      (files) =>
-        files.every((file) =>
-          ["image/png", "image/jpeg", "image/jpg"].includes(file.type)
+      (images) =>
+        images.every((img) =>
+          [".jpg", ".png", ".jpeg"].includes(path.extname(img))
         ),
-      "Only .png and .jpg files are accepted"
+      "only .jpg and .png files is allowed"
     ),
   descriptions: z
     .string()
     .min(1, "the description field is required")
     .min(20, "the description should be at least 20 characters"),
+  stock: z.coerce.number().min(1, "the price field is required"),
   price: z.coerce.number().min(1, "the price field is required"),
   discount: z.coerce.number().default(0),
 });

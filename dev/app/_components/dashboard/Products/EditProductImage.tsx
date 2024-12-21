@@ -12,15 +12,16 @@ import FileInputShowItem from "../../Forms/FormField/FileInputShowItem";
 import addProductImageSchema from "@/models/zodSchemas/Product/addProductsImageSchema";
 import useImagesUrls from "@/app/_utilities/addProductContext/useImagesUrls";
 import useIsImageLoading from "@/app/_utilities/addProductContext/useIsImageLoading";
+import RemoteImagesShowItem from "./RemoteImagesShowItem";
+import useDeletedImagesUrls from "@/app/_utilities/addProductContext/useDeletedImagesUrls";
 
-type Props = { serverErrors?: string[] };
-export default function AddProductImage({ serverErrors }: Props) {
+type Props = { serverErrors?: string[]; images?: string[] };
+export default function EditProductImage({ serverErrors, images }: Props) {
   const [files, setFiles] = useState<File[]>([]);
   const [errors, setErrors] = useState<string[]>([]);
   const [imagesUrls] = useImagesUrls();
   const [, setIsLoading] = useIsImageLoading();
-
-  console.log(imagesUrls);
+  const [deletedImages] = useDeletedImagesUrls();
 
   useEffect(() => {
     startTransition(() => {
@@ -31,7 +32,13 @@ export default function AddProductImage({ serverErrors }: Props) {
   const handleChange = (ev: ChangeEvent<HTMLInputElement>) => {
     startTransition(() => {
       if (ev.target.files) {
-        if (files.length + ev.target.files.length > 4) {
+        if (
+          (images?.length || 0) +
+            files.length +
+            ev.target.files.length -
+            deletedImages.length >
+          4
+        ) {
           setErrors(["each product has an limit for 4 images"]);
         } else {
           setErrors([]);
@@ -74,6 +81,11 @@ export default function AddProductImage({ serverErrors }: Props) {
         onChange={handleChange}
       />
       <ul className=" sm:col-span-2 mb-6 grid grid-cols-[repeat(auto-fill,minmax(100px,1fr))] gap-8">
+        {images
+          ?.filter((img) => !deletedImages.includes(img))
+          .map((img) => (
+            <RemoteImagesShowItem key={img} img={img} />
+          ))}
         {files.map((file) => (
           <FileInputShowItem
             key={file.name}
@@ -83,6 +95,11 @@ export default function AddProductImage({ serverErrors }: Props) {
         ))}
       </ul>
       <input type="hidden" name="images" value={JSON.stringify(imagesUrls)} />
+      <input
+        type="hidden"
+        name="deletedImages"
+        value={JSON.stringify(deletedImages)}
+      />
     </>
   );
 }

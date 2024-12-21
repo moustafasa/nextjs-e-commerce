@@ -1,23 +1,23 @@
-import EditCategoryForm from "@/app/_components/dashboard/Categories/EditCategoryForm";
-import { getCategoryById } from "@/lib/categoriesControllers";
+import EditProductsForm from "@/app/_components/dashboard/Products/EditProductsForm";
+import AddProductContext from "@/app/_utilities/addProductContext/addProductContext";
+import { getCategoriesForOptions } from "@/lib/categoriesControllers";
+import { getProductById } from "@/lib/productsControllers";
 import { notFound } from "next/navigation";
 
 export const dynamicParams = false;
 
 type Props = { params: { id: string } };
 export default async function Page({ params: { id } }: Props) {
-  const category = await getCategoryById(id);
-  if (!category) {
+  const product = await getProductById(id);
+  if (!product) {
     notFound();
   }
-  const convertedCategory = category.toObject();
+  const categories = await getCategoriesForOptions();
+  const convertedProduct = product.toObject();
   return (
-    <EditCategoryForm
-      category={{
-        ...convertedCategory,
-        _id: convertedCategory._id.toString() as string,
-      }}
-    />
+    <AddProductContext>
+      <EditProductsForm categories={categories} product={convertedProduct} />
+    </AddProductContext>
   );
 }
 
