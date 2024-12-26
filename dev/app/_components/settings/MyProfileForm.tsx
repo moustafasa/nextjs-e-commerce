@@ -5,8 +5,8 @@ import useSettingsLayoutErrors from "@/app/_utilities/SettingsLayoutErrorsContex
 import { PersonalInfoInputs, ProfileImgInput } from "@/config/SettingsInputs";
 import { changeMyProfileAction } from "@/lib/SettingsActions";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { useFormState } from "react-dom";
 import MyProfileFormModal from "./MyProfileFormModal";
+import { useFormState } from "react-dom";
 
 type Props = {
   img: string | undefined;
