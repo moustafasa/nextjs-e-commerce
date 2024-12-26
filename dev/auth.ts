@@ -44,13 +44,14 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     }),
   ],
   callbacks: {
-    jwt({ token, user }) {
+    jwt({ token, user, account }) {
       if (user) {
         token.image = user.image as string | undefined;
         token.fullName = user.fullName;
         token.userId = user.userId;
         token.email = user.email as string;
         token.roles = user.roles;
+        token.provider = account?.provider || "credentials";
       }
       return token;
     },
@@ -60,6 +61,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       session.user.userId = token.userId;
       session.user.email = token.email;
       session.user.roles = token.roles;
+      session.provider = token.provider;
       return session;
     },
   },

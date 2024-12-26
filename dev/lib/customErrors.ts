@@ -31,3 +31,9 @@ export class ImagesLengthError extends Error {
     this.name = "ImagesLengthError";
   }
 }
+export class SettingsPasswordInCorrect extends Error {
+  constructor(message?: string) {
+    super(message);
+    this.name = "SettingsPasswordInCorrect";
+  }
+}

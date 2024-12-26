@@ -142,6 +142,13 @@ export const signUp = async (result: SignUpSchemaType) => {
   });
 };
 
+export const comparePasswords = async (
+  password: string,
+  hashedPassword: string
+) => {
+  return await bcrypt.compare(password, hashedPassword as string);
+};
+
 export const credentialsSignIn = async (email: string, password: string) => {
   await dbConnect();
 
@@ -150,7 +157,7 @@ export const credentialsSignIn = async (email: string, password: string) => {
   }).exec();
 
   if (!userFound) return null;
-  const isMatch = await bcrypt.compare(password, userFound.password as string);
+  const isMatch = comparePasswords(password, userFound.password as string);
 
   if (!isMatch) return null;
 
@@ -187,7 +194,7 @@ export const googleSignIn = async (
     };
   }
   return {
-    image,
+    image: foundUser?.image || image,
     email,
     fullName: foundUser!.fullName,
     userId: foundUser!._id,

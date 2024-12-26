@@ -5,7 +5,6 @@ import { NextResponse } from "next/server";
 
 export const POST = auth(async (request) => {
   if (!request.auth) {
-    console.log("auth");
     return new Response(undefined, { status: 403 });
   }
   if (
@@ -29,14 +28,11 @@ export const POST = auth(async (request) => {
             tokenPayload: clientPayload,
           };
         },
-      onUploadCompleted: async ({ blob, tokenPayload }) => {
-        console.log("blob upload completed", blob, tokenPayload);
-      },
+      onUploadCompleted: async () => {},
     });
 
     return NextResponse.json(jsonResponse);
   } catch (error) {
-    console.log("error");
     return NextResponse.json(
       { error: (error as Error).message },
       { status: 400 } // The webhook will retry 5 times waiting for a 200

@@ -75,7 +75,6 @@ export const editProductAction = async (
         },
       };
     }
-    console.log(err);
     return { formErrors: ["network error"], fieldErrors: {} };
   }
   revalidatePath("/dashboard/products");
@@ -90,7 +89,6 @@ export async function deleteProductAction(_id: string) {
   try {
     await deleteProduct(_id);
   } catch (err) {
-    console.log(err);
     throw err;
   }
   revalidatePath("/dashboard/products");
@@ -108,7 +106,6 @@ export async function addToStockAction(
   try {
     await addToStock(result.data);
   } catch (err) {
-    console.log(err);
     throw err;
   }
   revalidatePath("/dashboard/products");

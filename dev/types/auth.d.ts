@@ -1,6 +1,7 @@
 import { Role } from "@/auth.config";
 import { Types } from "mongoose";
-import { DefaultSession } from "next-auth";
+import { Account, DefaultSession } from "next-auth";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars
 import { JWT } from "next-auth/jwt";
 
 declare module "next-auth" {
@@ -9,6 +10,7 @@ declare module "next-auth" {
     userId: Types.ObjectId | string;
     email: string;
     roles: Role[];
+    image?: string;
   }
   interface Session {
     user: {
@@ -16,7 +18,12 @@ declare module "next-auth" {
       userId: Types.ObjectId | string;
       email: string;
       roles: Role[];
+      image?: string;
     } & DefaultSession["user"];
+    provider: Account["provider"] | "credentials";
+  }
+  interface Account {
+    provider: "google" | undefined;
   }
 }
 
@@ -27,5 +34,6 @@ declare module "next-auth/jwt" {
     userId: Types.ObjectId | string;
     email: string;
     roles: Role[];
+    provider: Account["provider"] | "credentials";
   }
 }

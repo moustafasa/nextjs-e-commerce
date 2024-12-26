@@ -62,9 +62,7 @@ export default function ProfileMenu({ isOpen, data }: Props) {
           <button
             type="submit"
             className="flex gap-3 items-center capitalize hover:bg-menu-transparent-gray h-full w-full text-left p-2 rounded-lg"
-            onClick={() => {
-              console.log("done");
-            }}
+            onClick={() => {}}
           >
             <BiLogOut size={30} className="text-gray-icons" />
             <div>logout</div>

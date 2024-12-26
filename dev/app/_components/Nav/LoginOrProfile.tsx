@@ -20,7 +20,7 @@ export default async function LoginOrProfile() {
           dashboard
         </Link>
       )}
-      {session?.user ? <Profile /> : <SignBtns />}
+      {session?.user ? <Profile data={session} /> : <SignBtns />}
     </div>
   );
 }

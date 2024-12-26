@@ -11,7 +11,6 @@ type Props = { data: ReturnType<typeof useSession>["data"] };
 export default function Profile({ data }: Props) {
   const [isOpen, setIsOpen] = useState(false);
   // const { data } = useSession();
-  console.log("done");
   useEffect(() => {
     const blurHandler = (e: MouseEvent) => {
       const target = e.target as HTMLElement;

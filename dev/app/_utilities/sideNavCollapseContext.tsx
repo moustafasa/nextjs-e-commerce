@@ -20,7 +20,6 @@ export default function SideNavCollapseContextProvider({
   children: ReactNode;
 }) {
   const [collapse, setCollapse] = useState(false);
-  console.log(collapse);
 
   return (
     <sideNavCollapseContext.Provider value={[collapse, setCollapse]}>

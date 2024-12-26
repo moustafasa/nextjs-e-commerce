@@ -1,3 +1,4 @@
+"use client";
 import FormInput from "./FormInput";
 import type { Props } from "./_Types";
 import SelectInput from "./FormSelect";

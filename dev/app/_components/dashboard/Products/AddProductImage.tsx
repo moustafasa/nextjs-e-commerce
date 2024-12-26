@@ -20,8 +20,6 @@ export default function AddProductImage({ serverErrors }: Props) {
   const [imagesUrls] = useImagesUrls();
   const [, setIsLoading] = useIsImageLoading();
 
-  console.log(imagesUrls);
-
   useEffect(() => {
     startTransition(() => {
       setIsLoading(files.length !== imagesUrls.length);
