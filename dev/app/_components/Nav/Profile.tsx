@@ -5,12 +5,11 @@ import { FaAngleDown } from "react-icons/fa6";
 import ProfileMenu from "./ProfileMenu";
 import { useEffect, useState } from "react";
 import cn from "@/app/_utilities/cssConditional";
-import { useSession } from "next-auth/react";
+import type { Session } from "next-auth";
 
-type Props = { data: ReturnType<typeof useSession>["data"] };
+type Props = { data: Session };
 export default function Profile({ data }: Props) {
   const [isOpen, setIsOpen] = useState(false);
-  // const { data } = useSession();
   useEffect(() => {
     const blurHandler = (e: MouseEvent) => {
       const target = e.target as HTMLElement;

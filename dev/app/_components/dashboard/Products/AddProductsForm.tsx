@@ -1,11 +1,11 @@
+import { useActionState } from "react";
 "use client";
 import FormField from "@/app/_components/Forms/FormField/FormField";
 import FormLayout from "@/app/_components/Forms/FormLayout";
-import SubmitButton from "@/app/_components/Forms/SubmitButton";
+import FormButton from "@/app/_components/Forms/FormButton";
 import { addProductsInputs } from "@/config/addProductInputs";
 import { addProductsAction } from "@/lib/productsActions";
 import { AddProductFlattenedError } from "@/models/zodSchemas/Product/addProductsSchema";
-import { useFormState } from "react-dom";
 import Form from "../../Forms/Form";
 import AddProductImage from "./AddProductImage";
 import useIsImageLoading from "@/app/_utilities/addProductContext/useIsImageLoading";
@@ -14,7 +14,7 @@ type Props = {
   categories: SelectOption[];
 };
 export default function AddProductsForm({ categories }: Props) {
-  const [errors, formAction] = useFormState(addProductsAction, undefined);
+  const [errors, formAction] = useActionState(addProductsAction, undefined);
   const [isImageLoading] = useIsImageLoading();
 
   return (
@@ -43,7 +43,7 @@ export default function AddProductsForm({ categories }: Props) {
           />
         ))}
         <AddProductImage serverErrors={errors?.fieldErrors.images} />
-        <SubmitButton label="add" disabled={isImageLoading} />
+        <FormButton label="add" disabled={isImageLoading} />
       </Form>
     </FormLayout>
   );

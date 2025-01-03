@@ -1,8 +1,12 @@
 import { Role } from "@/auth.config";
 import { z, ZodSchema } from "zod";
 
-export const passConfRefinement = <T extends ZodSchema>(schema: T) => {
-  return schema.refine((data) => data.password === data.passConfirm, {
+export const passConfRefinement = <T extends ZodSchema>(
+  schema: T,
+  pass = "password",
+  passConfirm = "passConfirm"
+) => {
+  return schema.refine((data) => data[pass] === data[passConfirm], {
     message: "repeated password should be identical with password",
     path: ["passConfirm"],
   });

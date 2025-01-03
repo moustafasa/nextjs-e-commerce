@@ -5,7 +5,7 @@ import SideNavCollapseContextProvider from "@/app/_utilities/sideNavCollapseCont
 
 export default function layout({ children }: { children: ReactNode }) {
   return (
-    <div className="pt-dashNav-h ps-sideBar-w text-white">
+    <div className="pt-dashNav-h ps-dash-side-bar-w text-white">
       <SideNavCollapseContextProvider>
         <DashNav />
         <DashSideBar />

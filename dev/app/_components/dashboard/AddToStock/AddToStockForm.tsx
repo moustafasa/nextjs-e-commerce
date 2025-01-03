@@ -2,13 +2,12 @@
 import Form from "@/app/_components/Forms/Form";
 import FormField from "@/app/_components/Forms/FormField/FormField";
 import FormLayout from "@/app/_components/Forms/FormLayout";
-import SubmitButton from "@/app/_components/Forms/SubmitButton";
+import FormButton from "@/app/_components/Forms/FormButton";
 import { addStockInputs } from "@/config/addStockInputs";
 import { addToStockAction } from "@/lib/productsActions";
 import { AddToStockFlattenedError } from "@/models/zodSchemas/Product/addToStockSchema";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { ChangeEvent, useState } from "react";
-import { useFormState } from "react-dom";
+import { ChangeEvent, useState, useActionState } from "react";
 
 type Props = { categories: SelectOption[]; products: SelectOption[] };
 const AddToStockForm = ({ categories, products }: Props) => {
@@ -16,7 +15,7 @@ const AddToStockForm = ({ categories, products }: Props) => {
   const pathname = usePathname();
   const router = useRouter();
   const [product, setProduct] = useState("");
-  const [errors, formAction] = useFormState(addToStockAction, undefined);
+  const [errors, formAction] = useActionState(addToStockAction, undefined);
   return (
     <FormLayout heading="add to stock" errors={errors?.formErrors}>
       <Form formAction={formAction}>
@@ -57,7 +56,7 @@ const AddToStockForm = ({ categories, products }: Props) => {
             disabled={input.name === "stock" && !product}
           />
         ))}
-        <SubmitButton label="add" />
+        <FormButton label="add" />
       </Form>
     </FormLayout>
   );

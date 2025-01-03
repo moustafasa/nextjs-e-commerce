@@ -6,5 +6,12 @@ export const ChangePasswordSchema = passConfRefinement(
     oldPassword: baseUserSchema.shape.password,
     newPassword: baseUserSchema.shape.password,
     passConfirm: baseUserSchema.shape.passConfirm,
-  })
+  }),
+  "newPassword",
+  "passConfirm"
 );
+
+export type ChangePasswordSchemaType = z.infer<typeof ChangePasswordSchema>;
+export type ChangePasswordFlattenedError = z.inferFlattenedErrors<
+  typeof ChangePasswordSchema
+>;

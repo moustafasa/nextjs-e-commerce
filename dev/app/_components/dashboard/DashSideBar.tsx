@@ -9,13 +9,13 @@ export default function DashSideBar() {
 
   useLayoutEffect(() => {
     const root = document.documentElement;
-    root.style.setProperty("--sideBar-w", collapse ? "50px" : "240px");
+    root.style.setProperty("--dash-side-bar-w", collapse ? "50px" : "240px");
   }, [collapse]);
 
   return (
     <div
       className={cn(
-        "fixed left-0 bg-black-nav w-sideBar-w h-[calc(100vh-theme('spacing.dashNav-h'))] top-dashNav-h"
+        "fixed left-0 bg-black-nav w-dash-side-bar-w h-[calc(100vh-theme('spacing.dashNav-h'))] top-dashNav-h"
       )}
     >
       <h2

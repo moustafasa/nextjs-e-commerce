@@ -5,7 +5,7 @@ import { FcGoogle } from "react-icons/fc";
 
 type Props = { label: string };
 
-const SubmitButton = ({ label }: Props) => {
+const FormButton = ({ label }: Props) => {
   const { pending } = useFormStatus();
 
   return (
@@ -23,7 +23,7 @@ const SubmitButton = ({ label }: Props) => {
 export default function GoogleForm({ label }: Props) {
   return (
     <form action={googleSignIn}>
-      <SubmitButton label={label} />
+      <FormButton label={label} />
     </form>
   );
 }

@@ -1,13 +1,12 @@
 "use client";
 import FormField from "@/app/_components/Forms/FormField/FormField";
-import SubmitButton from "@/app/_components/Forms/SubmitButton";
+import FormButton from "@/app/_components/Forms/FormButton";
 import { Role } from "@/auth.config";
 import { editUsersInputs } from "@/config/editUsersInputs";
 import { editUserAction } from "@/lib/usersActions";
 import { IUser } from "@/models/database/Users";
 import { EditUserFlattenedError } from "@/models/zodSchemas/User/editUserSchema";
-import { ChangeEvent, useMemo, useState } from "react";
-import { useFormState } from "react-dom";
+import { ChangeEvent, useMemo, useState, useActionState } from "react";
 import FormLayout from "../../Forms/FormLayout";
 import Form from "../../Forms/Form";
 
@@ -33,7 +32,7 @@ export default function EditUserForm({ user }: Props) {
     [user, fields]
   );
 
-  const [errors, formAction] = useFormState(
+  const [errors, formAction] = useActionState(
     editUserAction.bind(null, user._id as string),
     undefined
   );
@@ -66,7 +65,7 @@ export default function EditUserForm({ user }: Props) {
           />
         ))}
 
-        <SubmitButton label="save" disabled={!isChanged} />
+        <FormButton label="save" disabled={!isChanged} />
       </Form>
     </FormLayout>
   );

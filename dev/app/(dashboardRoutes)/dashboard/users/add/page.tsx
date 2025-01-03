@@ -2,15 +2,14 @@
 import Form from "@/app/_components/Forms/Form";
 import FormField from "@/app/_components/Forms/FormField/FormField";
 import FormLayout from "@/app/_components/Forms/FormLayout";
-import SubmitButton from "@/app/_components/Forms/SubmitButton";
+import FormButton from "@/app/_components/Forms/FormButton";
 import { addUserInputs } from "@/config/addUsersInputs";
 import { addUserAction } from "@/lib/usersActions";
 import { AddUserFlattenedError } from "@/models/zodSchemas/User/addUserSchema";
-import React from "react";
-import { useFormState } from "react-dom";
+import React, { useActionState } from "react";
 
 export default function Page() {
-  const [errors, formAction] = useFormState(addUserAction, undefined);
+  const [errors, formAction] = useActionState(addUserAction, undefined);
 
   return (
     <FormLayout heading="add user" errors={errors?.formErrors}>
@@ -27,7 +26,7 @@ export default function Page() {
           />
         ))}
 
-        <SubmitButton label="add" />
+        <FormButton label="add" />
       </Form>
     </FormLayout>
   );

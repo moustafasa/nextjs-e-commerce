@@ -1,7 +1,8 @@
 import Modal from "@/app/_components/Modal/Modal";
 import FormField from "../Forms/FormField/FormField";
-import SubmitButton from "../Forms/SubmitButton";
+import FormButton from "../Forms/FormButton";
 import { useState } from "react";
+import { useFormStatus } from "react-dom";
 
 type Props = {
   isModalOpen: boolean;
@@ -15,10 +16,15 @@ export default function MyProfileFormModal({
   errors,
 }: Props) {
   const [password, setPassword] = useState("");
+  const { pending } = useFormStatus();
 
   return (
     <Modal
-      onClose={onClose}
+      onClose={() => {
+        if (!pending) {
+          onClose();
+        }
+      }}
       isOpen={isModalOpen}
       title="write your password to save changes"
     >
@@ -34,7 +40,7 @@ export default function MyProfileFormModal({
           defaultValue={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <SubmitButton label="save" disabled={!password} />
+        <FormButton label="save" disabled={!password} />
       </div>
     </Modal>
   );

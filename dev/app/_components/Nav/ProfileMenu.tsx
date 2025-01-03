@@ -7,12 +7,11 @@ import profile from "@/images/profile.png";
 import { useState } from "react";
 import cn from "@/app/_utilities/cssConditional";
 import { signOutAction } from "@/lib/usersActions";
-import { useSession } from "next-auth/react";
+import type { Session } from "next-auth";
 
-type Props = { isOpen: boolean; data: ReturnType<typeof useSession>["data"] };
+type Props = { isOpen: boolean; data: Session };
 export default function ProfileMenu({ isOpen, data }: Props) {
   const [dark, setDark] = useState(true);
-  // const { data } = useSession();
 
   return (
     <menu

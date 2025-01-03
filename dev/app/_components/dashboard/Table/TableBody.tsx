@@ -21,7 +21,7 @@ export default async function TableBody<BodyData>({
         >
           <td className="p-3">{index + 1}</td>
           {schema.map((td) => (
-            <td key={td.id as string}>
+            <td className="p-1" key={td.id as string}>
               {td.getData ? td.getData(row[td.id]) : (row[td.id] as ReactNode)}
             </td>
           ))}

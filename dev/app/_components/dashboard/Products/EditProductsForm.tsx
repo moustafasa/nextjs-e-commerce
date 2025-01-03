@@ -1,25 +1,24 @@
 "use client";
 import FormField from "@/app/_components/Forms/FormField/FormField";
 import FormLayout from "@/app/_components/Forms/FormLayout";
-import SubmitButton from "@/app/_components/Forms/SubmitButton";
+import FormButton from "@/app/_components/Forms/FormButton";
 import { addProductsInputs } from "@/config/addProductInputs";
 import { editProductAction } from "@/lib/productsActions";
 import { AddProductFlattenedError } from "@/models/zodSchemas/Product/addProductsSchema";
-import { useFormState } from "react-dom";
 import Form from "../../Forms/Form";
 import useIsImageLoading from "@/app/_utilities/addProductContext/useIsImageLoading";
 import { IProducts } from "@/models/database/Products";
 import EditProductImage from "./EditProductImage";
 import useDeletedImagesUrls from "@/app/_utilities/addProductContext/useDeletedImagesUrls";
 import useImagesUrls from "@/app/_utilities/addProductContext/useImagesUrls";
-import { ChangeEvent, useMemo, useState } from "react";
+import { ChangeEvent, useMemo, useState, useActionState } from "react";
 
 type Props = {
   categories: SelectOption[];
   product: IProducts;
 };
 export default function EditProductsForm({ categories, product }: Props) {
-  const [errors, formAction] = useFormState(
+  const [errors, formAction] = useActionState(
     editProductAction.bind(undefined, product._id.toString()),
     undefined
   );
@@ -80,7 +79,7 @@ export default function EditProductsForm({ categories, product }: Props) {
           serverErrors={errors?.fieldErrors.images}
           images={product.images}
         />
-        <SubmitButton label="save" disabled={isImageLoading || !isChanged} />
+        <FormButton label="save" disabled={isImageLoading || !isChanged} />
       </Form>
     </FormLayout>
   );

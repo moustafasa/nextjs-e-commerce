@@ -1,13 +1,12 @@
 "use client";
 import FormField from "@/app/_components/Forms/FormField/FormField";
 import FormLayout from "@/app/_components/Forms/FormLayout";
-import SubmitButton from "@/app/_components/Forms/SubmitButton";
+import FormButton from "@/app/_components/Forms/FormButton";
 import { addCategoryInputs } from "@/config/addCategoryInputs";
 import { editCategoryAction } from "@/lib/categoriesActions";
 import { ICategories } from "@/models/database/Categories";
 import { AddCategoryFlattenedError } from "@/models/zodSchemas/Category/addCategorySchema";
-import React, { ChangeEvent, useMemo, useState } from "react";
-import { useFormState } from "react-dom";
+import React, { ChangeEvent, useMemo, useState, useActionState } from "react";
 import Form from "../../Forms/Form";
 
 type Props = {
@@ -15,7 +14,7 @@ type Props = {
 };
 
 export default function EditCategoryForm({ category }: Props) {
-  const [errors, formAction] = useFormState(
+  const [errors, formAction] = useActionState(
     editCategoryAction.bind(undefined, category._id as string),
     undefined
   );
@@ -69,7 +68,7 @@ export default function EditCategoryForm({ category }: Props) {
             }}
           />
         ))}
-        <SubmitButton label="save" disabled={!isChanged} />
+        <FormButton label="save" disabled={!isChanged} />
       </Form>
     </FormLayout>
   );

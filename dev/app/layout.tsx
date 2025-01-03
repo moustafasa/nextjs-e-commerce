@@ -2,7 +2,7 @@ import cn from "@/app/_utilities/cssConditional";
 import type { Metadata } from "next";
 import { Cairo } from "next/font/google";
 import "./globals.css";
-import { SessionProvider } from "next-auth/react";
+import AuthProvider from "./_components/AuthProvider";
 
 const cairo = Cairo({ subsets: ["latin"] });
 
@@ -19,7 +19,7 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={cn(cairo.className, "bg-black-bg")}>
-        <SessionProvider>{children}</SessionProvider>
+        <AuthProvider>{children}</AuthProvider>
       </body>
     </html>
   );

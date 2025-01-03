@@ -3,7 +3,7 @@ import Credentials from "next-auth/providers/credentials";
 import Google from "next-auth/providers/google";
 import { credentialsSignIn, googleSignIn } from "./lib/usersControllers";
 
-export const { handlers, signIn, signOut, auth } = NextAuth({
+export const { handlers, signIn, signOut, auth, unstable_update } = NextAuth({
   providers: [
     Google({
       authorization: {
@@ -44,7 +44,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     }),
   ],
   callbacks: {
-    jwt({ token, user, account }) {
+    jwt({ token, user, account, trigger, session }) {
       if (user) {
         token.image = user.image as string | undefined;
         token.fullName = user.fullName;
@@ -52,6 +52,17 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         token.email = user.email as string;
         token.roles = user.roles;
         token.provider = account?.provider || "credentials";
+      }
+      if (trigger === "update") {
+        if (session.user.image) {
+          token.image = session.user.image;
+        }
+        if (session.user.fullName) {
+          token.fullName = session.user.fullName;
+        }
+        if (session.user.email) {
+          token.email = session.user.email;
+        }
       }
       return token;
     },

@@ -4,9 +4,9 @@ import FormField from "@/app/_components/Forms/FormField/FormField";
 import useSettingsLayoutErrors from "@/app/_utilities/SettingsLayoutErrorsContext/useSettingsLayoutErrors";
 import { PersonalInfoInputs, ProfileImgInput } from "@/config/SettingsInputs";
 import { changeMyProfileAction } from "@/lib/SettingsActions";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState, useActionState } from "react";
 import MyProfileFormModal from "./MyProfileFormModal";
-import { useFormState } from "react-dom";
+import FormButton from "../Forms/FormButton";
 
 type Props = {
   img: string | undefined;
@@ -20,7 +20,7 @@ export default function MyProfileForm({
   email,
   provider,
 }: Props) {
-  const [errors, formAction] = useFormState(changeMyProfileAction, undefined);
+  const [errors, formAction] = useActionState(changeMyProfileAction, undefined);
   const [fields, setFields] = useState({ fullName, email, img: false });
   const [, setErrors] = useSettingsLayoutErrors();
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -56,7 +56,13 @@ export default function MyProfileForm({
   }, [errors, setErrors]);
 
   return (
-    <Form formAction={formAction}>
+    <Form
+      formAction={(formData) => {
+        formAction(formData);
+        if (!errors) setFields((prev) => ({ ...prev, img: false }));
+        if (isModalOpen) setIsModalOpen(false);
+      }}
+    >
       <FormField
         input={ProfileImgInput}
         errors={errors?.fieldErrors.image}
@@ -95,16 +101,16 @@ export default function MyProfileForm({
           errors={errors?.fieldErrors.password}
         />
       )}
-      <button
+
+      <FormButton
         type={provider === "google" ? "submit" : "button"}
-        className="sm:col-span-2 form-button mx-10 mt-6 sm:mt-2 disabled:pointer-events-none disabled:bg-blue-button-disabled"
+        label="save"
         disabled={!isChanged}
         onClick={() => {
           if (provider !== "google") setIsModalOpen(true);
         }}
-      >
-        save
-      </button>
+        showLoading={provider === "google"}
+      />
     </Form>
   );
 }

@@ -1,13 +1,13 @@
-import { auth, signIn } from "@/auth";
+import { auth, unstable_update } from "@/auth";
 import dbConnect from "@/config/dbConnect";
 import Users from "@/models/database/Users";
 import { MyProfileSchemaType } from "@/models/zodSchemas/Settings/MyProfileSchema";
-import { del, put } from "@vercel/blob";
+import { copy, del, put } from "@vercel/blob";
 import { redirect } from "next/navigation";
 import path from "path";
-import { comparePasswords } from "./usersControllers";
+import { comparePasswords, hashPassword } from "./usersControllers";
 import { SettingsPasswordInCorrect, UserExistingError } from "./customErrors";
-import { getToken } from "next-auth/jwt";
+import { ChangePasswordSchemaType } from "@/models/zodSchemas/Settings/ChangePasswordSchema";
 
 export const changeMyProfile = async (result: MyProfileSchemaType) => {
   await dbConnect();
@@ -16,6 +16,7 @@ export const changeMyProfile = async (result: MyProfileSchemaType) => {
     return redirect("/sign-in");
   }
   const user = await Users.findById(session.user.userId).exec();
+  const updatedSession: Partial<typeof session.user> = {};
 
   if (session.provider === "credentials") {
     const isMatch = await comparePasswords(
@@ -30,6 +31,8 @@ export const changeMyProfile = async (result: MyProfileSchemaType) => {
 
   if (user.fullName !== result.fullName) {
     user.fullName = result.fullName;
+    updatedSession.fullName = result.fullName;
+    session.user.fullName = result.fullName;
   }
 
   if (user.email !== result.email && session.provider === "credentials") {
@@ -41,26 +44,56 @@ export const changeMyProfile = async (result: MyProfileSchemaType) => {
     }
 
     user.email = result.email;
+
+    if (result.image.size < 0) {
+      const ext = path.extname(user.image);
+      const newImage = await copy(
+        `${user.image}`,
+        `/profiles/${result.email}.${ext}`,
+        {
+          access: "public",
+        }
+      );
+      await del(user.image);
+      user.image = newImage.url;
+    }
+    updatedSession.email = result.email;
   }
   if (result.image.size > 0) {
-    await del(`/profiles/${user.image}`);
+    await del(`${user.image}`);
     const ext = path.extname(result.image.name);
     const { url: imageURl } = await put(
-      `/profiles/${result.email}.${ext}`,
+      `/profiles/${user.email}.${ext}`,
       result.image,
       { access: "public" }
     );
     user.image = imageURl;
+    updatedSession.image = imageURl;
   }
   await user.save();
+  await unstable_update({ user: updatedSession });
+};
 
-  await signIn(
-    session.provider,
-    session.provider === "credentials"
-      ? {
-          email: user.email,
-          password: result.password,
-        }
-      : undefined
+export const changePassword = async (result: ChangePasswordSchemaType) => {
+  await dbConnect();
+  const session = await auth();
+  if (!session?.user) {
+    return redirect("/sign-in");
+  }
+  const user = await Users.findById(session.user.userId).exec();
+
+  const isMatch = await comparePasswords(
+    result.oldPassword as string,
+    user.password
   );
+
+  if (!isMatch) {
+    throw new SettingsPasswordInCorrect();
+  }
+
+  const hashedPass = await hashPassword(result.newPassword);
+
+  user.password = hashedPass;
+
+  await user.save();
 };

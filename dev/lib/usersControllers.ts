@@ -100,9 +100,13 @@ export const checkUserFound = async (email: string) => {
   return !!userFound;
 };
 
+export const hashPassword = async (password: string) => {
+  return await bcrypt.hash(password, 10);
+};
+
 export const addUser = async (result: AddUserSchemaType) => {
   let hashedPass: string | undefined = undefined;
-  if (result.password) hashedPass = await bcrypt.hash(result.password, 10);
+  if (result.password) hashedPass = await hashPassword(result.password);
   const userFound = await checkUserFound(result.email);
 
   if (userFound) {
@@ -122,7 +126,7 @@ export const signUp = async (result: SignUpSchemaType) => {
     throw new UserExistingError();
   }
 
-  const hashedPass = await bcrypt.hash(result.password, 10);
+  const hashedPass = await hashPassword(result.password);
   let image;
   if (result.image.size > 0) {
     const ext = path.extname(result.image.name);
@@ -157,7 +161,10 @@ export const credentialsSignIn = async (email: string, password: string) => {
   }).exec();
 
   if (!userFound) return null;
-  const isMatch = comparePasswords(password, userFound.password as string);
+  const isMatch = await comparePasswords(
+    password,
+    userFound.password as string
+  );
 
   if (!isMatch) return null;
 

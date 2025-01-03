@@ -27,7 +27,9 @@ const config: Config = {
       },
       spacing: {
         "dashNav-h": "70px",
-        "sideBar-w": "var(--sideBar-w)",
+        "dash-side-bar-w": "var(--dash-side-bar-w)",
+        "shop-now-side-nav-w": "240px",
+        "nav-h": "var(--nav-h)",
       },
     },
   },

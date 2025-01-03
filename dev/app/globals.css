@@ -3,7 +3,9 @@
 @tailwind utilities;
 
 :root {
-  --sideBar-w: 240px;
+  --dash-side-bar-w: 240px;
+  --nav-h: 80px;
+  @apply md:max-lg:[--nav-h:123px];
 }
 
 @layer utilities {

@@ -1,17 +1,17 @@
+import { useActionState } from "react";
 "use client";
 import GoogleForm from "@/app/_components/Forms/GoogleForm";
 import FormField from "@/app/_components/Forms/FormField/FormField";
 import { signUpInputs } from "@/config/signUpInputs";
 import { signUpAction } from "@/lib/usersActions";
-import { useFormState } from "react-dom";
-import SubmitButton from "@/app/_components/Forms/SubmitButton";
+import FormButton from "@/app/_components/Forms/FormButton";
 import OrSeperator from "@/app/_components/Forms/OrSeperator";
 import { SignUpFlattenedError } from "@/models/zodSchemas/User/signupSchema";
 import FormLayout from "@/app/_components/Forms/FormLayout";
 import Form from "@/app/_components/Forms/Form";
 
 export default function Page() {
-  const [errors, formAction] = useFormState(signUpAction, undefined);
+  const [errors, formAction] = useActionState(signUpAction, undefined);
   return (
     <FormLayout heading="sign up" errors={errors?.formErrors}>
       <Form formAction={formAction}>
@@ -27,7 +27,7 @@ export default function Page() {
           ></FormField>
         ))}
 
-        <SubmitButton label="sign up" />
+        <FormButton label="sign up" />
       </Form>
 
       <OrSeperator />
