@@ -8,13 +8,11 @@ export default async function CategorySideNav() {
       <h2 className="text-2xl font-bold capitalize mt-7 mb-2 md:ps-2 ps-3">
         categories
       </h2>
-      <form>
-        <ul className="ps-5 flex md:flex-col md:gap-2 max-md:flex-wrap max-md:gap-4">
-          {categories.map((category) => (
-            <CategoryFilterITem key={category._id} category={category} />
-          ))}
-        </ul>
-      </form>
+      <ul className="ps-5 flex md:flex-col md:gap-2 max-md:flex-wrap max-md:gap-4">
+        {categories.map((category) => (
+          <CategoryFilterITem key={category._id} category={category} />
+        ))}
+      </ul>
     </div>
   );
 }

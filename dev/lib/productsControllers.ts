@@ -60,7 +60,7 @@ export const getProducts = cache(async () => {
   return products.map((prod) => ({ ...prod, _id: prod._id.toString() }));
 });
 
-export const getProductsWithCategory = cache(async (category?: string) => {
+export const getProductsWithCategory = cache(async (category?: string[]) => {
   await checkAuth(Role.ADMIN);
   await dbConnect();
   const filter = category ? { category } : {};

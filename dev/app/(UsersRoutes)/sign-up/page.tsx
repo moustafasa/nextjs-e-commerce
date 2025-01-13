@@ -1,5 +1,5 @@
-import { useActionState } from "react";
 "use client";
+import { useActionState } from "react";
 import GoogleForm from "@/app/_components/Forms/GoogleForm";
 import FormField from "@/app/_components/Forms/FormField/FormField";
 import { signUpInputs } from "@/config/signUpInputs";

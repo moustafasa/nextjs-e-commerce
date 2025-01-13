@@ -8,7 +8,6 @@ import signUpSchema from "@/models/zodSchemas/User/signupSchema";
 import signInSchema from "@/models/zodSchemas/User/signInSchema";
 import { signIn, signOut } from "@/auth";
 import { CredentialsSignin } from "next-auth";
-import { isRedirectError } from "next/dist/client/components/redirect";
 import addUserSchema, {
   type AddUserFlattenedError,
 } from "@/models/zodSchemas/User/addUserSchema";
@@ -19,6 +18,7 @@ import editUserSchema, {
 } from "@/models/zodSchemas/User/editUserSchema";
 import { addUser, deleteUser, editUser, signUp } from "./usersControllers";
 import { UserExistingError } from "./customErrors";
+import { isRedirectError } from "next/dist/client/components/redirect-error";
 
 export async function signUpAction(
   _prevState: SignUpFlattenedError | undefined,

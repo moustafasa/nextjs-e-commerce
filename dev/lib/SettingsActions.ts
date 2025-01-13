@@ -9,7 +9,7 @@ import {
   MyProfileSchema,
 } from "@/models/zodSchemas/Settings/MyProfileSchema";
 import { changeMyProfile, changePassword } from "./SettingsController";
-import { isRedirectError } from "next/dist/client/components/redirect";
+import { isRedirectError } from "next/dist/client/components/redirect-error";
 import { SettingsPasswordInCorrect, UserExistingError } from "./customErrors";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
@@ -21,7 +21,6 @@ export const changeMyProfileAction = async (
   const registeredData = Object.fromEntries(formData);
   const result = MyProfileSchema.safeParse(registeredData);
   if (!result.success) {
-    console.log(result.error.flatten());
     return result.error.flatten();
   }
   try {
