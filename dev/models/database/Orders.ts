@@ -1,4 +1,6 @@
 import { model, models, Schema, Types } from "mongoose";
+import Users from "./Users";
+import Products from "./Products";
 
 export const orderStatus = {
   IDLE: "idle",
@@ -8,18 +10,18 @@ export const orderStatus = {
 
 export type OrderStatus = (typeof orderStatus)[keyof typeof orderStatus];
 
+export interface IOrdersProducts {
+  _id: Types.ObjectId;
+  product: Types.ObjectId;
+  qty: number;
+}
+
 export interface IOrders {
   _id: Types.ObjectId;
   userId: Types.ObjectId;
-  products: [
-    {
-      _id: Types.ObjectId;
-      product: Types.ObjectId;
-      qty: number;
-    }
-  ];
+  products: IOrdersProducts[];
   status: OrderStatus;
-  createdAt: string;
+  createdAt: Date;
 }
 
 const ordersSchema = new Schema<IOrders>(
@@ -43,5 +45,10 @@ const ordersSchema = new Schema<IOrders>(
   },
   { timestamps: true }
 );
+
+// eslint-disable-next-line no-unused-expressions, @typescript-eslint/no-unused-expressions
+Users;
+// eslint-disable-next-line no-unused-expressions, @typescript-eslint/no-unused-expressions
+Products;
 
 export default models.Order || model<IOrders>("Order", ordersSchema);

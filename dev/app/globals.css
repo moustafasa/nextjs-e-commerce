@@ -12,8 +12,7 @@
   .rippon-before {
     clip-path: polygon(0% 100%, 25px 0, calc(100% - 20px) 0, 100% 100%);
   }
-  .rippon-after {
-  }
+
   .form-button {
     @apply bg-blue-button py-2  px-3 capitalize rounded-lg transition-colors duration-300 hover:bg-blue-button-hover whitespace-nowrap flex-shrink-0;
   }

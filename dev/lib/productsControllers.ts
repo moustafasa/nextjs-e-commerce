@@ -53,6 +53,7 @@ export const addProduct = async (result: AddProductSchemaType) => {
 export const getProducts = cache(async () => {
   await checkAuth(Role.ADMIN);
   await dbConnect();
+
   const products = await Products.find({})
     .populate("category", "title")
     .lean<IProducts[]>()
@@ -60,13 +61,35 @@ export const getProducts = cache(async () => {
   return products.map((prod) => ({ ...prod, _id: prod._id.toString() }));
 });
 
-export const getProductsWithCategory = cache(async (category?: string[]) => {
-  await checkAuth(Role.ADMIN);
-  await dbConnect();
-  const filter = category ? { category } : {};
-  const products = await Products.find(filter).lean<IProducts[]>().exec();
-  return products;
-});
+const PRODUCTS_LIMIT = 3 as const;
+
+export const getProductsWithCategory = cache(
+  async (category?: string | string[], page: number = 1) => {
+    await checkAuth(Role.ADMIN);
+    await dbConnect();
+    const filter = category ? { category } : {};
+    const products = await Products.find(filter)
+      .skip(PRODUCTS_LIMIT * (page - 1))
+      .limit(PRODUCTS_LIMIT)
+      .lean<IProducts[]>()
+      .exec();
+    return products;
+  }
+);
+
+export const getProductsWithCategoryTotal = cache(
+  async (category?: string | string[]) => {
+    await checkAuth(Role.ADMIN);
+    await dbConnect();
+    const filter = category ? { category } : {};
+    const totalProducts = await Products.countDocuments(filter);
+    return {
+      totalProducts,
+      totalPages: Math.ceil(totalProducts / PRODUCTS_LIMIT),
+      limit: PRODUCTS_LIMIT,
+    };
+  }
+);
 
 export const getProductsForOptions = cache(async (category?: string) => {
   await checkAuth(Role.ADMIN);
@@ -93,6 +116,23 @@ export const getProductById = cache(async (id: string) => {
   const product = await Products.findById<HydratedDocument<IProducts>>(
     id
   ).exec();
+
+  return product;
+});
+export const getProductByIdWithPopulation = cache(async (id: string) => {
+  await checkAuth(Role.ADMIN);
+  if (!isValidObjectId(id)) {
+    return null;
+  }
+
+  await dbConnect();
+
+  const product = await Products.findById<HydratedDocument<IProducts>>(id)
+    .populate<IProducts & { category: { id: string; title: string } }>(
+      "category",
+      "title"
+    )
+    .exec();
 
   return product;
 });

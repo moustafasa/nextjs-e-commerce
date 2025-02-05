@@ -4,12 +4,14 @@ import Profile from "./Profile";
 import { auth } from "@/auth";
 import Link from "next/link";
 import { Role } from "@/auth.config";
+import CartIconShow from "./CartIconShow";
 
 export default async function LoginOrProfile() {
   const session = await auth();
 
   return (
     <div className="ms-auto lg:ms-0 flex items-center gap-3">
+      {session?.user && <CartIconShow />}
       {session?.user.roles.find(
         (role) =>
           role === Role.ADMIN ||

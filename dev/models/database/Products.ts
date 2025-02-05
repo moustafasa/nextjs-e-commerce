@@ -1,4 +1,5 @@
 import { model, models, Schema, Types } from "mongoose";
+import Categories from "./Categories";
 
 export interface IProducts {
   _id: Types.ObjectId | string;
@@ -23,5 +24,8 @@ const productSchema = new Schema<IProducts>({
   discount: { type: Number, default: 0 },
   stock: { type: Number, default: 0 },
 });
+
+// eslint-disable-next-line no-unused-expressions, @typescript-eslint/no-unused-expressions
+Categories;
 
 export default models?.Product || model<IProducts>("Product", productSchema);

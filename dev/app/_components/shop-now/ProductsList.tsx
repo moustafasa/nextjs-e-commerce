@@ -2,36 +2,47 @@ import { getProductsWithCategory } from "@/lib/productsControllers";
 import Image from "next/image";
 import ProductRippon from "./ProductRippon";
 import ProductOverLay from "./ProductOverLay";
+import AddToCartModal from "./AddToCartModal";
+import AddToCartModalContextProvider from "@/app/_utilities/AddToCartModalContext";
 
 type Props = {
-  searchParams: Promise<{ category?: string[] }>;
+  searchParams: Promise<{ category?: string | string[]; page?: number }>;
 };
 export default async function ProductsList({ searchParams }: Props) {
   const params = await searchParams;
-  const products = await getProductsWithCategory(params.category);
+
+  const products = await getProductsWithCategory(params.category, params.page);
   return products.map((product) => (
-    <li
-      key={product._id.toString()}
-      className="flex flex-col items-center p-4 gap-3 group border-gray-input border-[1px] rounded-lg relative cursor-pointer "
-    >
-      {product.discount ? (
-        <ProductRippon
-          discountPercent={Math.round((product.discount / product.price) * 100)}
+    <li key={product._id.toString()}>
+      <AddToCartModalContextProvider>
+        <div className="flex flex-col items-center p-4 gap-3 group border-gray-input border-[1px] rounded-lg relative cursor-pointer ">
+          {product.discount ? (
+            <ProductRippon
+              discountPercent={Math.round(
+                (product.discount / product.price) * 100
+              )}
+            />
+          ) : null}
+          <div className="">
+            <Image
+              className="aspect-square"
+              src={product.images[0]}
+              alt={product.title}
+              width={200}
+              height={200}
+            />
+          </div>
+          <h2 className="capitalize text-xl group-hover:invisible  ">
+            {product.title}
+          </h2>
+          <ProductOverLay product={{ ...product }} />
+        </div>
+        <AddToCartModal
+          title={product.title}
+          img={product.images[0]}
+          productId={product._id.toString()}
         />
-      ) : null}
-      <div className="">
-        <Image
-          className="aspect-square"
-          src={product.images[0]}
-          alt={product.title}
-          width={200}
-          height={200}
-        />
-      </div>
-      <h2 className="capitalize text-xl group-hover:invisible  ">
-        {product.title}
-      </h2>
-      <ProductOverLay product={product} />
+      </AddToCartModalContextProvider>
     </li>
   ));
 }

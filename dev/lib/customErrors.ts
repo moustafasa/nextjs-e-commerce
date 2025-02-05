@@ -37,3 +37,9 @@ export class SettingsPasswordInCorrect extends Error {
     this.name = "SettingsPasswordInCorrect";
   }
 }
+export class OutOfStockError extends Error {
+  constructor(message?: string) {
+    super(message);
+    this.name = "OutOfStockError";
+  }
+}

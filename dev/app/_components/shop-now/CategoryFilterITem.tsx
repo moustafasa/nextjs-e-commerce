@@ -37,6 +37,7 @@ export default function CategoryFilterITem({ category }: Props) {
             checked={checked}
             onChange={(e) => {
               startTransition(() => {
+                newSearchParams.delete("page");
                 if (e.currentTarget.checked) {
                   setChecked(true);
                   newSearchParams.append("category", category._id.toString());

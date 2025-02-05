@@ -1,6 +1,7 @@
 import FormErrors from "@/app/_components/Forms/FormErrors";
 import cn from "@/app/_utilities/cssConditional";
 import { ReactNode } from "react";
+import PageHeader from "../PageHeader";
 
 type Props = {
   errors?: string[];
@@ -25,13 +26,7 @@ export default function FormLayout({
         style={{ maxWidth }}
       >
         <FormErrors errors={errors} />
-        {heading && (
-          <h2 className="text-2xl font-bold text-center mb-9">
-            <span className="relative before:absolute before:w-[60%] before:h-[1px] before:bg-white before:bottom-0 before:left-[20%]">
-              {heading}
-            </span>
-          </h2>
-        )}
+        {heading && <PageHeader title={heading} />}
         {children}
       </div>
     </div>

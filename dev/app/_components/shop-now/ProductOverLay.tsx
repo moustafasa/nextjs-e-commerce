@@ -1,11 +1,12 @@
-import cn from "@/app/_utilities/cssConditional";
 import { IProducts } from "@/models/database/Products";
 import Link from "next/link";
+import QuickAddToCartButton from "./QuickAddToCartButton";
+import PriceWithDiscount from "./PriceWithDiscount";
 
 type Props = { product: IProducts };
 export default function ProductOverLay({ product }: Props) {
   return (
-    <div className="absolute capitalize flex flex-col gap-3 backdrop-blur-sm invisible  justify-around p-4 bg-black-secondary-bg/70 inset-0   group-hover:visible transition-all duration-300 rounded-lg">
+    <div className="absolute capitalize flex flex-col gap-3 backdrop-blur-sm invisible  justify-around p-4 bg-black-secondary-bg/70 inset-0 group-hover:visible transition-all duration-300 rounded-lg">
       <div className="space-y-5 -translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
         <h2 className="text-center text-lg">
           <span className="relative before:absolute before:w-[60%] before:h-[1px] before:bg-white before:bottom-0 before:left-[20%]">
@@ -25,25 +26,9 @@ export default function ProductOverLay({ product }: Props) {
         </div>
       </div>
       <div className="group-hover:translate-y-0 transition-transform duration-300 translate-y-4">
-        <span className="block ">
-          price :{" "}
-          <span
-            className={cn("me-1 font-bold text-lg text-white", {
-              "text-red-error-hover": product.discount && product.discount > 0,
-            })}
-          >
-            &pound; {product.price - (product.discount || 0)}
-          </span>{" "}
-          {product.discount && product.discount > 0 ? (
-            <span className="line-through text-slate-300">
-              &pound; {product.price}
-            </span>
-          ) : null}
-        </span>
+        <PriceWithDiscount price={product.price} discount={product.discount} />
         <div className="flex gap-3 mt-3 items-center justify-center">
-          <form>
-            <button className="form-button">add to cart</button>
-          </form>
+          <QuickAddToCartButton />
           <Link
             className="form-button"
             href={`/shop-now/${product._id.toString()}`}

@@ -2,7 +2,7 @@ interface FormField {
   type: string;
   name?: string;
   id: string;
-  label: string;
+  label?: string;
 }
 
 interface Input extends FormField {
@@ -53,5 +53,5 @@ interface SideBarLink {
 type TableSchema<data> = {
   id: keyof data;
   label?: string;
-  getData?: (data: data[keyof data]) => React.ReactNode;
+  getData?: (data: data[keyof data], row: data) => React.ReactNode;
 };

@@ -8,7 +8,7 @@ export default function SelectInput({
 }: Props<Select>) {
   return (
     <select
-      className={cn("block w-full form-input ring-1 ring-gray-input ", {
+      className={cn("block w-full  form-input ring-1 ring-gray-input ", {
         "ring-red-error focus:ring-red-error": !!errors,
         "form-input-disabled": other.disabled,
       })}
