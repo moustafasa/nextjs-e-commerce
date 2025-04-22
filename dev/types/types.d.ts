@@ -54,4 +54,5 @@ type TableSchema<data> = {
   id: keyof data;
   label?: string;
   getData?: (data: data[keyof data], row: data) => React.ReactNode;
+  skeletonData?: (zebrabg?: boolean) => React.ReactNode;
 };

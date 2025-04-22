@@ -1,6 +1,6 @@
-import EditCategoryForm from "@/app/_components/dashboard/Categories/EditCategoryForm";
 import { getCategoryById } from "@/lib/categoriesControllers";
 import { notFound } from "next/navigation";
+import EditCategoryForm from "../../_components/EditCategoryForm";
 
 export const dynamicParams = false;
 

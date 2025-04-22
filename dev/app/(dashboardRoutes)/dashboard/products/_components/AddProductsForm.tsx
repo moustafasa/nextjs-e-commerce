@@ -6,9 +6,9 @@ import FormButton from "@/app/_components/Forms/FormButton";
 import { addProductsInputs } from "@/config/addProductInputs";
 import { addProductsAction } from "@/lib/productsActions";
 import { AddProductFlattenedError } from "@/models/zodSchemas/Product/addProductsSchema";
-import Form from "../../Forms/Form";
 import AddProductImage from "./AddProductImage";
 import useIsImageLoading from "@/app/_utilities/addProductContext/useIsImageLoading";
+import Form from "@/app/_components/Forms/Form";
 
 type Props = {
   categories: SelectOption[];

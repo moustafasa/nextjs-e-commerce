@@ -1,4 +1,4 @@
-import { Role } from "@/auth.config";
+import { Role } from "@/config/constants";
 import { z, ZodSchema } from "zod";
 
 export const passConfRefinement = <T extends ZodSchema>(

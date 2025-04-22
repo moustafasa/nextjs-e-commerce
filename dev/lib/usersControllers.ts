@@ -1,6 +1,5 @@
 import bcrypt from "bcryptjs";
 import { auth } from "@/auth";
-import { Role } from "@/auth.config";
 import dbConnect from "@/config/dbConnect";
 import Users, { IUser } from "@/models/database/Users";
 import { EditUserSchemaType } from "@/models/zodSchemas/User/editUserSchema";
@@ -13,6 +12,7 @@ import { SignUpSchemaType } from "@/models/zodSchemas/User/signupSchema";
 import { put } from "@vercel/blob";
 import path from "path";
 import checkAuth from "@/app/_utilities/checkAuth";
+import { Role } from "@/config/constants";
 
 export const getUsers = cache(async () => {
   const session = await auth();

@@ -7,9 +7,9 @@ import path from "path";
 import { cache } from "react";
 import { HydratedDocument, isValidObjectId } from "mongoose";
 import checkAuth from "@/app/_utilities/checkAuth";
-import { Role } from "@/auth.config";
 import { notFound } from "next/navigation";
 import { EditCategorySchemaType } from "@/models/zodSchemas/Category/editCategorySchema";
+import { Role } from "@/config/constants";
 
 export const addCategory = async (category: AddCategorySchemaType) => {
   await dbConnect();

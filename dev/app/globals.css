@@ -22,4 +22,28 @@
   .form-input-disabled {
     @apply bg-black-tertiery-bg ring-black-tertiery-bg text-gray-input;
   }
+  .sk-header {
+    @apply h-8 rounded-md;
+  }
+  .sk-text {
+    @apply h-5 rounded-md;
+  }
+  .sk-button {
+    @apply h-9 w-16 rounded-md;
+  }
+  .sk-circle {
+    @apply h-12 w-12 rounded-full;
+  }
+  .sk-ellipse {
+    @apply h-6 w-7 rounded-full;
+  }
+  .sk-input {
+    @apply h-10 w-32 rounded-md px-3 py-2;
+  }
+  .sk-check-box {
+    @apply h-6 w-6 rounded-md;
+  }
+  .sk-image {
+    @apply h-[200px] w-[200px] rounded-md;
+  }
 }

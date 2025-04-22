@@ -9,6 +9,8 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        "black-300": "#222831",
+        "black-400": "#31363F",
         "black-nav": "#303131",
         "black-bg": "#3C3A3A",
         "black-secondary-bg": "#414141",

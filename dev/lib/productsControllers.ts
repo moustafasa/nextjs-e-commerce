@@ -6,7 +6,6 @@ import { HydratedDocument, isValidObjectId } from "mongoose";
 import path from "path";
 import { cache } from "react";
 import checkAuth from "@/app/_utilities/checkAuth";
-import { Role } from "@/auth.config";
 import { notFound } from "next/navigation";
 import {
   ProductExistingError,
@@ -14,6 +13,7 @@ import {
 } from "./customErrors";
 import { EditProductSchemaType } from "@/models/zodSchemas/Product/editProductsSchema";
 import { AddToStockSchema } from "@/models/zodSchemas/Product/addToStockSchema";
+import { PRODUCTS_LIMIT, Role } from "@/config/constants";
 
 export const saveDraftedImages = async (id: string, images: string[]) => {
   const savedImagesPromises = images.map(async (img) => {
@@ -60,8 +60,6 @@ export const getProducts = cache(async () => {
     .exec();
   return products.map((prod) => ({ ...prod, _id: prod._id.toString() }));
 });
-
-const PRODUCTS_LIMIT = 3 as const;
 
 export const getProductsWithCategory = cache(
   async (category?: string | string[], page: number = 1) => {

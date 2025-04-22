@@ -1,4 +1,4 @@
-import { Role } from "@/auth.config";
+import { type Role } from "@/config/constants";
 import { Types } from "mongoose";
 import { Account, DefaultSession } from "next-auth";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars

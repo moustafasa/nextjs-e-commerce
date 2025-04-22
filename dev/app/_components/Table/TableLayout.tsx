@@ -20,7 +20,7 @@ export default function TableLayout({
   className,
 }: Props) {
   return (
-    <div className="w-full px-5 pt-20 pb-3">
+    <div className="w-full px-5 pt-10 pb-3">
       <header className="flex justify-around items-center  mb-10">
         <h2 className="capitalize text-4xl font-bold relative before:absolute before:h-[1px] before:w-[60%] before:bg-white before:bottom-[-8px] before:left-[20%]">
           {tableName}

@@ -3,8 +3,8 @@ import SignBtns from "./SignBtns";
 import Profile from "./Profile";
 import { auth } from "@/auth";
 import Link from "next/link";
-import { Role } from "@/auth.config";
 import CartIconShow from "./CartIconShow";
+import { Role } from "@/config/constants";
 
 export default async function LoginOrProfile() {
   const session = await auth();

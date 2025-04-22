@@ -1,5 +1,5 @@
 import { auth } from "@/auth";
-import { Role } from "@/auth.config";
+import { Role } from "@/config/constants";
 import { handleUpload, type HandleUploadBody } from "@vercel/blob/client";
 import { NextResponse } from "next/server";
 

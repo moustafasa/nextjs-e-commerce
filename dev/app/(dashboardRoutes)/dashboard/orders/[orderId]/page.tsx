@@ -1,0 +1,35 @@
+import ViewOrderHeader from "@/app/(dashboardRoutes)/dashboard/orders/_components/ViewOrderHeader";
+import { getOrderProducts } from "@/lib/OrderControllers";
+import { schema } from "../_config/orderProductSchema";
+import { Suspense } from "react";
+import TableBodySkeleton from "@/app/_components/skeletons/TableBodySkeleton";
+import ViewOrderHeaderSkeleton from "@/app/(dashboardRoutes)/dashboard/orders/_components/ViewOrderHeaderSkeleton";
+import TableLayout from "@/app/_components/Table/TableLayout";
+import TableHeader from "@/app/_components/Table/TableHeader";
+import TableBody from "@/app/_components/Table/TableBody";
+
+type Props = {
+  params: Promise<{ orderId: string }>;
+};
+
+export default async function page({ params }: Props) {
+  const pageParams = await params;
+
+  return (
+    <div className="mt-10 capitalize px-10">
+      <Suspense fallback={<ViewOrderHeaderSkeleton />}>
+        <ViewOrderHeader orderId={pageParams.orderId} />
+      </Suspense>
+      <TableLayout tableName="order products">
+        <TableHeader schema={schema} />
+        <Suspense fallback={<TableBodySkeleton schema={schema} />}>
+          <TableBody
+            schema={schema}
+            data={getOrderProducts(pageParams.orderId)}
+            keyIndex={"_id"}
+          />
+        </Suspense>
+      </TableLayout>
+    </div>
+  );
+}

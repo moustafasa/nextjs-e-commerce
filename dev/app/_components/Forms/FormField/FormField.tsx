@@ -9,6 +9,7 @@ import FormTextArea from "./FormTextArea";
 export default function FormField<T extends AllInputs>({
   input,
   errors,
+  noErrors,
   ...others
 }: Props<T>) {
   return (
@@ -46,18 +47,20 @@ export default function FormField<T extends AllInputs>({
           )}
         </>
       )}
-      <div
-        title={errors?.[0]}
-        className={cn(
-          "mb-4 sm:mb-6 h-6 text-sm px-3 empty:invisible overflow-hidden text-ellipsis whitespace-nowrap text-red-error",
-          {
-            "sm:col-start-2 ": input.type !== "file",
-            "sm:col-span-2 mt-1": input.type === "file",
-          }
-        )}
-      >
-        {errors?.[0] || null}
-      </div>
+      {!noErrors && (
+        <div
+          title={errors?.[0]}
+          className={cn(
+            "mb-4 sm:mb-6 h-6 text-sm px-3 empty:invisible overflow-hidden text-ellipsis whitespace-nowrap text-red-error",
+            {
+              "sm:col-start-2 ": input.type !== "file",
+              "sm:col-span-2 mt-1": input.type === "file",
+            }
+          )}
+        >
+          {errors?.[0] || null}
+        </div>
+      )}
     </>
   );
 }

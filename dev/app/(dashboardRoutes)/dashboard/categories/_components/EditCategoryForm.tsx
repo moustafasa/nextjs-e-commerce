@@ -7,7 +7,7 @@ import { editCategoryAction } from "@/lib/categoriesActions";
 import { ICategories } from "@/models/database/Categories";
 import { AddCategoryFlattenedError } from "@/models/zodSchemas/Category/addCategorySchema";
 import React, { ChangeEvent, useMemo, useState, useActionState } from "react";
-import Form from "../../Forms/Form";
+import Form from "@/app/_components/Forms/Form";
 
 type Props = {
   category: ICategories;

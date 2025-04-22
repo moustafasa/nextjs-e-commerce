@@ -1,5 +1,5 @@
 "use client";
-import FormNumberInput from "../Forms/FormField/FormNumberInput";
+import FormNumberInput from "../../../_components/Forms/FormField/FormNumberInput";
 import { useActionState } from "react";
 import { changeCartProductQtyAction } from "@/lib/CartActions";
 import Form from "next/form";
@@ -16,7 +16,7 @@ export default function ChangeProductQty({
   );
 
   return (
-    <Form action={formAction} className="m-auto w-max">
+    <Form action={formAction} className="m-auto w-max px-3">
       <FormNumberInput
         value={qty}
         max={stockNumber}

@@ -1,5 +1,6 @@
 import { getProductsWithCategoryTotal } from "@/lib/productsControllers";
 import Link from "next/link";
+import cn from "../_utilities/cssConditional";
 
 type Props = {
   searchParams: Promise<{ page?: number; category?: string | string[] }>;
@@ -34,14 +35,19 @@ export default async function Pagination({ searchParams }: Props) {
       <Link
         href={`?${previousSearchParams.toString()}`}
         scroll={false}
-        className="form-button"
+        className={cn("form-button", {
+          "pointer-events-none !bg-blue-button-disabled": pageParam === 1,
+        })}
       >
         previous
       </Link>
       <Link
         href={`?${nextSearchParams.toString()}`}
         scroll={false}
-        className="form-button"
+        className={cn("form-button", {
+          "pointer-events-none !bg-blue-button-disabled":
+            pageParam === productsMeta.totalPages,
+        })}
       >
         next
       </Link>

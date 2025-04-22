@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import DashNav from "../../_components/Nav/DashNav";
-import DashSideBar from "../../_components/dashboard/DashSideBar";
 import SideNavCollapseContextProvider from "@/app/_utilities/sideNavCollapseContext";
+import DashSideBar from "../_components/DashSideBar";
 
 export default function layout({ children }: { children: ReactNode }) {
   return (

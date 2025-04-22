@@ -1,6 +1,6 @@
 "use client";
 import { loadStripe } from "@stripe/stripe-js";
-import FormButton from "../Forms/FormButton";
+import FormButton from "../../../_components/Forms/FormButton";
 
 // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
 const stripePromise = loadStripe(

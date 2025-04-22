@@ -1,11 +1,12 @@
-import EditUserForm from "@/app/_components/dashboard/Users/EditUserForm";
 import { getUserById, getUsersIds } from "@/lib/usersControllers";
 import { notFound } from "next/navigation";
+import EditUserForm from "../../_components/EditUserForm";
 
 // export const dynamicParams = false;
 
-type Props = { params: { id: string } };
-export default async function Page({ params: { id } }: Props) {
+type Props = { params: Promise<{ id: string }> };
+export default async function Page({ params }: Props) {
+  const { id } = await params;
   const user = await getUserById(id);
   if (!user) {
     notFound();

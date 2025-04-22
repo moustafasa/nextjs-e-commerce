@@ -1,4 +1,4 @@
-import { Role } from "@/auth.config";
+import { Role } from "./constants";
 
 export const editUsersInputs = [
   { id: "fullName", label: "fullname", type: "text", name: "fullName" },

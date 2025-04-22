@@ -9,7 +9,8 @@ import { auth } from "@/auth";
 import { revalidatePath } from "next/cache";
 import { IProducts } from "@/models/database/Products";
 import dbConnect from "@/config/dbConnect";
-import Orders, { IOrders, orderStatus } from "@/models/database/Orders";
+import Orders, { IOrders } from "@/models/database/Orders";
+import { orderStatus } from "@/config/constants";
 
 export const getCart = cache(async () => {
   const session = await auth();

@@ -1,4 +1,4 @@
-import { Role } from "@/auth.config";
+import { Role } from "@/config/constants";
 import mongoose, { Schema, Types } from "mongoose";
 
 export interface IUser {

@@ -1,8 +1,8 @@
-import EditProductsForm from "@/app/_components/dashboard/Products/EditProductsForm";
 import AddProductContext from "@/app/_utilities/addProductContext/addProductContext";
 import { getCategoriesForOptions } from "@/lib/categoriesControllers";
 import { getProductById } from "@/lib/productsControllers";
 import { notFound } from "next/navigation";
+import EditProductsForm from "../../_components/EditProductsForm";
 
 export const dynamicParams = false;
 

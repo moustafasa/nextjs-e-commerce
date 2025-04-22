@@ -1,4 +1,4 @@
-import { Role } from "@/auth.config";
+import { Role } from "./constants";
 
 export const addUserInputs = [
   {

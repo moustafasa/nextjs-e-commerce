@@ -1,14 +1,7 @@
 import { model, models, Schema, Types } from "mongoose";
 import Users from "./Users";
 import Products from "./Products";
-
-export const orderStatus = {
-  IDLE: "idle",
-  SHIPPED: "shipped",
-  ARIVED: "arrived",
-} as const;
-
-export type OrderStatus = (typeof orderStatus)[keyof typeof orderStatus];
+import { orderStatus, OrderStatus } from "@/config/constants";
 
 export interface IOrdersProducts {
   _id: Types.ObjectId;

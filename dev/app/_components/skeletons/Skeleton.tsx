@@ -1,7 +1,10 @@
-import cn from "@/app/_utilities/cssConditional";
-import { ClassValue } from "clsx";
+import { cn } from "@/lib/utils";
 
-type Props = { className?: ClassValue };
-export default function Skeleton({ className }: Props) {
-  return <div className={cn("bg-gray-200 animate-pulse", className)}></div>;
+type Props = { classNames?: string };
+export default function Skeleton({ classNames }: Props) {
+  return (
+    <div
+      className={cn("animate-pulse bg-black-tertiery-bg ", classNames)}
+    ></div>
+  );
 }

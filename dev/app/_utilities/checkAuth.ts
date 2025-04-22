@@ -1,5 +1,5 @@
 import { auth } from "@/auth";
-import { Role } from "@/auth.config";
+import { type Role } from "@/config/constants";
 import { redirect } from "next/navigation";
 
 export default async function checkAuth(role: Role) {
