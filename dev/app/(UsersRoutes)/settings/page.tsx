@@ -1,4 +1,4 @@
-import MyProfileForm from "@/app/_components/settings/MyProfileForm";
+import MyProfileForm from "@/app/(UsersRoutes)/settings/_components/MyProfileForm";
 import { auth } from "@/auth";
 import { redirect } from "next/navigation";
 

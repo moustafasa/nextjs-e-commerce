@@ -1,7 +1,7 @@
 import { Suspense } from "react";
-import Logo from "../Nav/Logo";
-import Skeleton from "../skeletons/Skeleton";
-import Profile from "../Nav/Profile";
+import Logo from "../../_components/Nav/Logo";
+import Skeleton from "../../_components/skeletons/Skeleton";
+import Profile from "../../_components/Nav/Profile";
 import DashCollapseButton from "./DashCollapseButton";
 import { auth } from "@/auth";
 

@@ -1,7 +1,7 @@
 import Image from "next/image";
-import ProductRippon from "../../../_components/shop-now/ProductRippon";
 import { IProductsWithCategory } from "@/app/(UsersRoutes)/cart/_types/types";
-import PriceWithDiscount from "../../../_components/shop-now/PriceWithDiscount";
+import ProductRippon from "../../shop-now/_components/ProductRippon";
+import PriceWithDiscount from "../../shop-now/_components/PriceWithDiscount";
 
 type Props = {
   data: IProductsWithCategory;

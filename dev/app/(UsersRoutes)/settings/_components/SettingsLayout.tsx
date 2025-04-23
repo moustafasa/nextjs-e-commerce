@@ -1,6 +1,6 @@
 "use client";
 import useSettingsLayoutErrors from "@/app/_utilities/SettingsLayoutErrorsContext/useSettingsLayoutErrors";
-import FormLayout from "../Forms/FormLayout";
+import FormLayout from "../../../_components/Forms/FormLayout";
 
 type Props = { children: React.ReactNode };
 export default function SettingsLayout({ children }: Props) {

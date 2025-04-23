@@ -1,11 +1,11 @@
 "use client";
 import Image from "next/image";
-import Modal from "../Modal/Modal";
 import useAddToCartModalContext from "@/app/_utilities/useAddToCartModalContext";
-import FormNumberInput from "../Forms/FormField/FormNumberInput";
 import useAddToCartAction from "@/app/_utilities/useAddToCartAction";
 import { useEffect } from "react";
-import FormButton from "../Forms/FormButton";
+import Modal from "@/app/_components/Modal/Modal";
+import FormNumberInput from "@/app/_components/Forms/FormField/FormNumberInput";
+import FormButton from "@/app/_components/Forms/FormButton";
 
 type Props = { productId: string; img: string; title: string };
 

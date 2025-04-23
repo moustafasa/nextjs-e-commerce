@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import DashNav from "../../_components/Nav/DashNav";
+import DashNav from "../_components/DashNav";
 import SideNavCollapseContextProvider from "@/app/_utilities/sideNavCollapseContext";
 import DashSideBar from "../_components/DashSideBar";
 

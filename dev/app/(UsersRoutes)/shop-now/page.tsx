@@ -1,13 +1,14 @@
 import Pagination from "@/app/_components/Pagination";
-import { ShopNowSearchParams } from "@/app/_components/shop-now/_Types";
-import CategorySideNav from "@/app/_components/shop-now/CategorySideNav";
-import PaginationHeader from "@/app/_components/shop-now/PaginationHeader";
-import ProductsList from "@/app/_components/shop-now/ProductsList";
+
 import PaginationHeaderSk from "@/app/_components/skeletons/PaginationHeaderSk";
 import PaginationSk from "@/app/_components/skeletons/PaginationSk";
 import ProductListSk from "@/app/_components/skeletons/ProductListSk";
 import ShopNowSideNavSk from "@/app/_components/skeletons/ShopNowSideNavSk";
 import { Suspense } from "react";
+import { ShopNowSearchParams } from "./_types/_Types";
+import CategorySideNav from "./_components/CategorySideNav";
+import PaginationHeader from "./_components/PaginationHeader";
+import ProductsList from "./_components/ProductsList";
 
 export default async function page({ searchParams }: ShopNowSearchParams) {
   return (

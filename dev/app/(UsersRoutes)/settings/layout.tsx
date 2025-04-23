@@ -1,6 +1,6 @@
-import SettingsHeading from "@/app/_components/settings/SettingsHeading";
-import SettingsLayout from "@/app/_components/settings/SettingsLayout";
-import SettingsNav from "@/app/_components/settings/SettingsNav";
+import SettingsHeading from "@/app/(UsersRoutes)/settings/_components/SettingsHeading";
+import SettingsLayout from "@/app/(UsersRoutes)/settings/_components/SettingsLayout";
+import SettingsNav from "@/app/(UsersRoutes)/settings/_components/SettingsNav";
 import SettingsLayoutErrorsContext from "@/app/_utilities/SettingsLayoutErrorsContext/settingsLayoutErrorContext";
 import { type ReactNode } from "react";
 

@@ -6,7 +6,7 @@ import { PersonalInfoInputs, ProfileImgInput } from "@/config/SettingsInputs";
 import { changeMyProfileAction } from "@/lib/SettingsActions";
 import { useEffect, useMemo, useRef, useState, useActionState } from "react";
 import MyProfileFormModal from "./MyProfileFormModal";
-import FormButton from "../Forms/FormButton";
+import FormButton from "../../../_components/Forms/FormButton";
 
 type Props = {
   img: string | undefined;

@@ -12,6 +12,7 @@ export const POST = async (req: Request) => {
   try {
     event = stripe.webhooks.constructEvent(buf, sig, secret);
   } catch (err) {
+    console.log(err);
     return Response.json("webhook error: " + (err as Error).message, {
       status: 400,
     });

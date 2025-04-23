@@ -1,5 +1,5 @@
 import { getProductsWithCategoryTotal } from "@/lib/productsControllers";
-import { ShopNowSearchParams } from "./_Types";
+import { ShopNowSearchParams } from "../_types/_Types";
 
 export default async function PaginationHeader({
   searchParams,

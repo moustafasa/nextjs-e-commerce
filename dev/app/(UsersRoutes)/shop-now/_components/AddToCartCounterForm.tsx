@@ -1,5 +1,5 @@
 "use client";
-import FormNumberInput from "../Forms/FormField/FormNumberInput";
+import FormNumberInput from "@/app/_components/Forms/FormField/FormNumberInput";
 import useAddToCartAction from "@/app/_utilities/useAddToCartAction";
 
 type Props = { productId: string };

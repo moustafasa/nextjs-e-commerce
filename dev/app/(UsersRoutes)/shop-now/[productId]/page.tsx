@@ -1,9 +1,9 @@
-import AddToCartCounterForm from "@/app/_components/shop-now/AddToCartCounterForm";
-import PriceWithDiscount from "@/app/_components/shop-now/PriceWithDiscount";
-import ProductRippon from "@/app/_components/shop-now/ProductRippon";
 import { getProductByIdWithPopulation } from "@/lib/productsControllers";
 import Image from "next/image";
 import Link from "next/link";
+import ProductRippon from "../_components/ProductRippon";
+import PriceWithDiscount from "../_components/PriceWithDiscount";
+import AddToCartCounterForm from "../_components/AddToCartCounterForm";
 
 type Props = {
   params: Promise<{ productId: string }>;

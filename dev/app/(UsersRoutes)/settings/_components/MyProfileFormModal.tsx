@@ -1,6 +1,6 @@
 import Modal from "@/app/_components/Modal/Modal";
-import FormField from "../Forms/FormField/FormField";
-import FormButton from "../Forms/FormButton";
+import FormField from "../../../_components/Forms/FormField/FormField";
+import FormButton from "../../../_components/Forms/FormButton";
 import { useState } from "react";
 import { useFormStatus } from "react-dom";
 
