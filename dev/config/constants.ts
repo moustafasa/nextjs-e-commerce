@@ -6,7 +6,9 @@ export const orderStatus = {
 
 export type OrderStatus = (typeof orderStatus)[keyof typeof orderStatus];
 
-export const PRODUCTS_LIMIT = 20 as const;
+export const PRODUCTS_LIMIT = 10 as const;
+export const CATEGORIES_LIMIT = 10 as const;
+export const USERS_LIMIT = 10 as const;
 
 export enum Role {
   // eslint-disable-next-line no-unused-vars

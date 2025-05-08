@@ -28,4 +28,11 @@ const cartSchema = new Schema<ICarts>({
 
 // eslint-disable-next-line no-unused-expressions, @typescript-eslint/no-unused-expressions
 Products;
+
+// Add a compound index to ensure a user can only have one cart
+cartSchema.index({ userId: 1 }, { unique: true });
+
+// Ensure the same product can be in multiple users' carts
+// by NOT having a unique index on products.product
+
 export default models.Cart || model<ICarts>("Cart", cartSchema);

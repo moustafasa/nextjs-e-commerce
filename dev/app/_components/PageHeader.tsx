@@ -1,8 +1,10 @@
-type Props = { title: string };
-export default function PageHeader({ title }: Props) {
+import { cn } from "@/lib/utils";
+
+type Props = { title: string; className?: string };
+export default function PageHeader({ title, className }: Props) {
   return (
-    <h2 className="text-2xl capitalize font-bold text-center mb-9">
-      <span className="relative before:absolute before:w-[60%] before:h-[1px] before:bg-white before:bottom-0 before:left-[20%]">
+    <h2 className={cn(" capitalize font-bold text-center ", className)}>
+      <span className="relative before:absolute before:w-[60%] before:h-[1px] before:bg-black-bg dark:before:bg-white before:bottom-0 before:left-[20%] ">
         {title}
       </span>
     </h2>

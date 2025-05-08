@@ -10,7 +10,7 @@ export default async function LoginOrProfile() {
   const session = await auth();
 
   return (
-    <div className="ms-auto lg:ms-0 flex items-center gap-3">
+    <div className="ms-auto lg:ms-0 flex items-center gap-3 pe-4">
       {session?.user && <CartIconShow />}
       {session?.user.roles.find(
         (role) =>

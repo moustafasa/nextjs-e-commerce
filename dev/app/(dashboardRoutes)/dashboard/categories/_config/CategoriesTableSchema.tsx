@@ -25,7 +25,7 @@ export const schema = [
       <div className="flex items-center justify-center p-3">
         <Skeleton
           classNames={`w-[100px] h-[100px] rounded-lg ${
-            zepraBg && "group-even:bg-black-bg"
+            zepraBg && "dark:group-even:bg-black-bg"
           }`}
         />
       </div>

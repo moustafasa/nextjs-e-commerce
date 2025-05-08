@@ -22,14 +22,16 @@ export default async function TableBodySkeleton<BodyData>({
           <tr
             className={cn(
               "[&>td:first-child]:rounded-ss-lg [&>td:first-child]:rounded-es-lg [&>td:last-child]:rounded-se-lg [&>td:last-child]:rounded-ee-lg group",
-              { "even:bg-black-tertiery-bg": zepraBg }
+              { "dark:even:bg-black-tertiery-bg even:bg-slate-100": zepraBg }
             )}
             key={index}
           >
             {!noId && (
               <td className="p-3 ">
                 <Skeleton
-                  classNames={`sk-text  ${zepraBg && "group-even:bg-black-bg"}`}
+                  classNames={`sk-text  ${
+                    zepraBg && "dark:group-even:bg-black-bg"
+                  }`}
                 />
               </td>
             )}
@@ -39,12 +41,12 @@ export default async function TableBodySkeleton<BodyData>({
                   <div className="flex gap-3 items-center justify-center px-4">
                     <Skeleton
                       classNames={`sk-button ${
-                        zepraBg && "group-even:bg-black-bg"
+                        zepraBg && "dark:group-even:bg-black-bg"
                       }`}
                     />
                     <Skeleton
                       classNames={`sk-button ${
-                        zepraBg && "group-even:bg-black-bg"
+                        zepraBg && "dark:group-even:bg-black-bg"
                       }`}
                     />
                   </div>
@@ -53,7 +55,7 @@ export default async function TableBodySkeleton<BodyData>({
                 ) : (
                   <Skeleton
                     classNames={`sk-text min-w-20 ${
-                      zepraBg && "group-even:bg-black-bg"
+                      zepraBg && "dark:group-even:bg-black-bg"
                     }`}
                   />
                 )}

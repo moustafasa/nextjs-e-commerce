@@ -2,7 +2,7 @@ import dbConnect from "@/config/dbConnect";
 import { AddProductSchemaType } from "@/models/zodSchemas/Product/addProductsSchema";
 import { copy, del } from "@vercel/blob";
 import Products, { IProducts } from "@/models/database/Products";
-import { HydratedDocument, isValidObjectId } from "mongoose";
+import { FilterQuery, HydratedDocument, isValidObjectId } from "mongoose";
 import path from "path";
 import { cache } from "react";
 import checkAuth from "@/app/_utilities/checkAuth";
@@ -14,6 +14,7 @@ import {
 import { EditProductSchemaType } from "@/models/zodSchemas/Product/editProductsSchema";
 import { AddToStockSchema } from "@/models/zodSchemas/Product/addToStockSchema";
 import { PRODUCTS_LIMIT, Role } from "@/config/constants";
+import { getSearchRgx } from "./utils";
 
 export const saveDraftedImages = async (id: string, images: string[]) => {
   const savedImagesPromises = images.map(async (img) => {
@@ -50,11 +51,22 @@ export const addProduct = async (result: AddProductSchemaType) => {
   await newProduct.save();
 };
 
-export const getProducts = cache(async () => {
+export const getProducts = cache(async (page?: number, search?: string) => {
   await checkAuth(Role.ADMIN);
   await dbConnect();
 
-  const products = await Products.find({})
+  const query = Products.find({});
+
+  if (page) {
+    query.skip(PRODUCTS_LIMIT * (page - 1)).limit(PRODUCTS_LIMIT);
+  }
+
+  if (search) {
+    const regex = getSearchRgx(search);
+    query.where({ title: regex, descriptions: regex });
+  }
+
+  const products = await query
     .populate("category", "title")
     .lean<IProducts[]>()
     .exec();
@@ -62,10 +74,14 @@ export const getProducts = cache(async () => {
 });
 
 export const getProductsWithCategory = cache(
-  async (category?: string | string[], page: number = 1) => {
+  async (category?: string | string[], page: number = 1, search?: string) => {
     await checkAuth(Role.ADMIN);
     await dbConnect();
-    const filter = category ? { category } : {};
+    const filter: FilterQuery<IProducts> = category ? { category } : {};
+    if (search) {
+      const regex = getSearchRgx(search);
+      filter.$or = [{ title: regex }, { descriptions: regex }];
+    }
     const products = await Products.find(filter)
       .skip(PRODUCTS_LIMIT * (page - 1))
       .limit(PRODUCTS_LIMIT)
@@ -76,11 +92,16 @@ export const getProductsWithCategory = cache(
 );
 
 export const getProductsWithCategoryTotal = cache(
-  async (category?: string | string[]) => {
+  async (category?: string | string[], search?: string) => {
     await checkAuth(Role.ADMIN);
     await dbConnect();
-    const filter = category ? { category } : {};
-    const totalProducts = await Products.countDocuments(filter);
+    const filter: FilterQuery<IProducts> = category ? { category } : {};
+    if (search) {
+      const esc = search.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+      const regex = new RegExp(esc, "i");
+      filter.$or = [{ title: regex }, { descriptions: regex }];
+    }
+    const totalProducts = await Products.countDocuments(filter).exec();
     return {
       totalProducts,
       totalPages: Math.ceil(totalProducts / PRODUCTS_LIMIT),

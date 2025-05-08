@@ -33,7 +33,7 @@ export default function NavClient() {
         <FaBars />
       </button>
       <NavLinks isOpen={isOpen} />
-      <SearchBox isOpen={isOpen} />
+      <SearchBox isOpen={isOpen} isNav />
     </>
   );
 }

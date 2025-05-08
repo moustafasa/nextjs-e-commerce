@@ -20,7 +20,7 @@ export default async function page({ params, searchParams }: Props) {
   return (
     <div className="container m-auto px-10 py-16 flex justify-around items-start ">
       <div className="flex  w-[45%] gap-3">
-        <div className="border-[1px] rounded-lg block  relative text-white">
+        <div className="border-[1px] rounded-lg block  relative ">
           {product.discount ? (
             <ProductRippon
               discountPercent={Math.ceil(
@@ -56,7 +56,7 @@ export default async function page({ params, searchParams }: Props) {
           ))}
         </div>
       </div>
-      <div className="text-white w-[45%]">
+      <div className="w-[45%]">
         <div>
           <span className="capitalize text-sm">{product.category.title}</span>
           <h2 className="capitalize font-bold text-3xl">{product.title}</h2>

@@ -4,8 +4,9 @@ import EditCategoryForm from "../../_components/EditCategoryForm";
 
 export const dynamicParams = false;
 
-type Props = { params: { id: string } };
-export default async function Page({ params: { id } }: Props) {
+type Props = { params: Promise<{ id: string }> };
+export default async function Page({ params }: Props) {
+  const { id } = await params;
   const category = await getCategoryById(id);
   if (!category) {
     notFound();

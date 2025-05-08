@@ -14,7 +14,7 @@ export default function PriceWithDiscount({ price, discount }: Props) {
         {formatPrice(price - (discount || 0))}
       </span>{" "}
       {discount && discount > 0 ? (
-        <span className="line-through text-slate-300">
+        <span className="line-through dark:text-slate-300 text-gray-input">
           {formatPrice(price)}
         </span>
       ) : null}

@@ -62,6 +62,7 @@ export async function signinAction(
     if (err instanceof CredentialsSignin) {
       return { fieldErrors: {}, formErrors: ["invalid credentials"] };
     }
+    console.log(err);
     return { fieldErrors: {}, formErrors: ["network error"] };
   }
 }

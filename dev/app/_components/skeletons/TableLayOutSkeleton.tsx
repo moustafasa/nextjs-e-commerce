@@ -32,7 +32,7 @@ export default function TableLayoutSk({
                 .map((_, index) => (
                   <th
                     key={index}
-                    className="p-3 bg-black-nav  first-of-type:rounded-ss-lg first-of-type:rounded-es-lg last-of-type:rounded-se-lg last-of-type:rounded-ee-lg"
+                    className="p-3 dark:bg-black-nav bg-gray-200 first-of-type:rounded-ss-lg first-of-type:rounded-es-lg last-of-type:rounded-se-lg last-of-type:rounded-ee-lg"
                   >
                     <Skeleton classNames="sk-header" />
                   </th>

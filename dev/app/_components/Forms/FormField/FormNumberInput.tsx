@@ -50,7 +50,7 @@ export default function FormNumberInput({
       <FormInput
         errors={error ? [error] : []}
         input={{ type: "number", name: "amount", id: "amount" }}
-        className="[&::-webkit-inner-spin-button]:m-0 [&::-webkit-outer-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none !px-[30px] block text-center font-bold !text-white"
+        className="[&::-webkit-inner-spin-button]:m-0 [&::-webkit-outer-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none !px-[30px] block text-center font-bold dark:!text-white "
         pattern="[0-1]"
         value={amount}
         onChange={(e) => {

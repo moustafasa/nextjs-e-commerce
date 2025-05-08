@@ -8,7 +8,7 @@ export default async function CartIconShow() {
   return (
     <Link href={"/cart"} className="block relative">
       {!!cart && (
-        <span className="absolute text-xs -left-1 -top-1 -translate-x-1/2 -translate-y-1/2 bg-red-error-hover flex justify-center items-center rounded-full p-1 w-4 h-4">
+        <span className="absolute text-xs -left-1 -top-1 -translate-x-1/2 -translate-y-1/2 text-white bg-red-error-hover flex justify-center items-center rounded-full p-1 w-4 h-4">
           {cart}
         </span>
       )}

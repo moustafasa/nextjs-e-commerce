@@ -3,7 +3,7 @@ import { auth } from "@/auth";
 import dbConnect from "@/config/dbConnect";
 import Users, { IUser } from "@/models/database/Users";
 import { EditUserSchemaType } from "@/models/zodSchemas/User/editUserSchema";
-import { isValidObjectId, type HydratedDocument } from "mongoose";
+import { FilterQuery, isValidObjectId, type HydratedDocument } from "mongoose";
 import { notFound, redirect } from "next/navigation";
 import { cache } from "react";
 import { AddUserSchemaType } from "@/models/zodSchemas/User/addUserSchema";
@@ -12,9 +12,10 @@ import { SignUpSchemaType } from "@/models/zodSchemas/User/signupSchema";
 import { put } from "@vercel/blob";
 import path from "path";
 import checkAuth from "@/app/_utilities/checkAuth";
-import { Role } from "@/config/constants";
+import { Role, USERS_LIMIT } from "@/config/constants";
+import { getSearchRgx } from "./utils";
 
-export const getUsers = cache(async () => {
+export const getUsers = async (page: number = 1, search?: string) => {
   const session = await auth();
   if (!session?.user) {
     return redirect("/sign-in");
@@ -23,9 +24,18 @@ export const getUsers = cache(async () => {
     return redirect("/unauthorized");
   }
   await dbConnect();
-  const users = await Users.find({
+  const filter: FilterQuery<IUser> = {
     email: { $ne: session.user.email },
-  })
+  };
+
+  if (search) {
+    const regex = getSearchRgx(search);
+    filter.$or = [{ fullName: regex }, { email: regex }];
+  }
+
+  const users = await Users.find(filter)
+    .skip((page - 1) * USERS_LIMIT)
+    .limit(USERS_LIMIT)
     .lean<IUser[]>()
     .exec();
 
@@ -35,7 +45,32 @@ export const getUsers = cache(async () => {
     email: user.email,
     roles: user.roles,
   }));
-});
+};
+
+export const getUsersMeta = async (search?: string) => {
+  const session = await auth();
+  if (!session?.user) {
+    return redirect("/sign-in");
+  }
+  if (!session.user.roles.includes(Role.ADMIN)) {
+    return redirect("/unauthorized");
+  }
+  await dbConnect();
+  const filter: FilterQuery<IUser> = {
+    email: { $ne: session.user.email },
+  };
+
+  if (search) {
+    const regex = getSearchRgx(search);
+    filter.$or = [{ fullName: regex }, { email: regex }];
+  }
+  const count = await Users.countDocuments(filter).exec();
+
+  const totalPages = Math.ceil(count / USERS_LIMIT);
+  return {
+    totalPages,
+  };
+};
 
 export const getUsersIds = cache(async () => {
   await dbConnect();

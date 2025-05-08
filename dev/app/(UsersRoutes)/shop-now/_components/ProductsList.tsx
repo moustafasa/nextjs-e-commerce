@@ -6,12 +6,20 @@ import AddToCartModal from "./AddToCartModal";
 import AddToCartModalContextProvider from "@/app/_utilities/AddToCartModalContext";
 
 type Props = {
-  searchParams: Promise<{ category?: string | string[]; page?: number }>;
+  searchParams: Promise<{
+    category?: string | string[];
+    page?: string;
+    search?: string;
+  }>;
 };
 export default async function ProductsList({ searchParams }: Props) {
   const params = await searchParams;
 
-  const products = await getProductsWithCategory(params.category, params.page);
+  const products = await getProductsWithCategory(
+    params.category,
+    params.page ? +params.page : undefined,
+    params.search
+  );
   return products.map((product) => (
     <li key={product._id.toString()}>
       <AddToCartModalContextProvider>
@@ -32,7 +40,7 @@ export default async function ProductsList({ searchParams }: Props) {
               height={200}
             />
           </div>
-          <h2 className="capitalize text-xl group-hover:invisible  ">
+          <h2 className="capitalize text-xl group-hover:invisible whitespace-nowrap overflow-ellipsis max-w-full  ">
             {product.title}
           </h2>
           <ProductOverLay product={{ ...product }} />

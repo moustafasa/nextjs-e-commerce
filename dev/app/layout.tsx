@@ -3,6 +3,8 @@ import type { Metadata } from "next";
 import { Cairo } from "next/font/google";
 import "./globals.css";
 import AuthProvider from "./_components/AuthProvider";
+import HTMLComponent from "./_components/HTMLComponent";
+import Script from "next/script";
 
 const cairo = Cairo({ subsets: ["latin"] });
 
@@ -17,10 +19,15 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={cn(cairo.className, "bg-black-bg")}>
+    <HTMLComponent>
+      <body
+        className={cn(
+          cairo.className,
+          "dark:bg-black-bg bg-white dark:text-white text-black-bg"
+        )}
+      >
         <AuthProvider>{children}</AuthProvider>
       </body>
-    </html>
+    </HTMLComponent>
   );
 }

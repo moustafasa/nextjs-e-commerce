@@ -5,11 +5,12 @@ import { CategoryExistingError } from "./customErrors";
 import { del, put } from "@vercel/blob";
 import path from "path";
 import { cache } from "react";
-import { HydratedDocument, isValidObjectId } from "mongoose";
+import { FilterQuery, HydratedDocument, isValidObjectId } from "mongoose";
 import checkAuth from "@/app/_utilities/checkAuth";
 import { notFound } from "next/navigation";
 import { EditCategorySchemaType } from "@/models/zodSchemas/Category/editCategorySchema";
-import { Role } from "@/config/constants";
+import { CATEGORIES_LIMIT, Role } from "@/config/constants";
+import { getSearchRgx } from "./utils";
 
 export const addCategory = async (category: AddCategorySchemaType) => {
   await dbConnect();
@@ -27,10 +28,18 @@ export const addCategory = async (category: AddCategorySchemaType) => {
   await Categories.create({ image, title: category.title });
 };
 
-export const getCategories = cache(async () => {
+export const getCategories = cache(async (page?: number, search?: string) => {
   await checkAuth(Role.ADMIN);
   await dbConnect();
-  const categories = await Categories.find({}).lean<ICategories[]>().exec();
+  const query = Categories.find({});
+  if (page) {
+    query.skip(CATEGORIES_LIMIT * (page - 1)).limit(CATEGORIES_LIMIT);
+  }
+  if (search) {
+    const regex = getSearchRgx(search);
+    query.where({ title: regex });
+  }
+  const categories = await query.lean<ICategories[]>().exec();
   return categories.map((cat) => ({ ...cat, _id: cat._id.toString() }));
 });
 
@@ -83,6 +92,18 @@ export const editCategory = async (
 
   await category.save();
 };
+
+export const getCategoriesMetaData = cache(async (search?: string) => {
+  await dbConnect();
+  const filter: FilterQuery<ICategories> = {};
+  if (search) {
+    const regex = getSearchRgx(search);
+    filter.$or = [{ title: regex }];
+  }
+  const totalItems = await Categories.countDocuments(filter);
+  const totalPages = Math.ceil(totalItems / CATEGORIES_LIMIT);
+  return { totalPages, totalItems };
+});
 
 export const deleteCategory = async (_id: string) => {
   await dbConnect();

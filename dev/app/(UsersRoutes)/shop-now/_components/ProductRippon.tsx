@@ -15,7 +15,7 @@ export default function ProductRippon({
         }
       )}
     >
-      <span className="bg-red-error-hover w-[120px] flex items-center justify-center rippon-before capitalize font-bold ">
+      <span className="bg-red-error-hover w-[120px] flex items-center justify-center rippon-before capitalize font-bold text-white">
         up to {discountPercent}%
       </span>
     </div>

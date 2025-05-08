@@ -1,5 +1,5 @@
 import FormFieldSkeleton from "./FormFieldSk";
-import FormLayoutSkeleton from "../Forms/FormLayoutSk";
+import FormLayoutSkeleton from "./FormLayoutSk";
 
 type Props = {
   inputs: AllInputs[];

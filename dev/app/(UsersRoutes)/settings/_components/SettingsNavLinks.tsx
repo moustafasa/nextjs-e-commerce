@@ -14,8 +14,11 @@ export default function SettingsNavLinks({ session }: Props) {
       <li>
         <Link
           className={cn(
-            "hover:bg-black-tertiery-bg p-3 rounded-lg block transition-colors duration-300",
-            { "bg-black-tertiery-bg": pathname === "/settings" }
+            "dark:hover:bg-black-tertiery-bg hover:bg-slate-400 hover:text-white p-3 rounded-lg block transition-colors duration-300",
+            {
+              "dark:bg-black-tertiery-bg bg-slate-400 text-white":
+                pathname === "/settings",
+            }
           )}
           href={"/settings"}
         >
@@ -26,8 +29,11 @@ export default function SettingsNavLinks({ session }: Props) {
         <li>
           <Link
             className={cn(
-              "hover:bg-black-tertiery-bg p-3 rounded-lg block transition-colors duration-300",
-              { "bg-black-tertiery-bg": pathname === "/settings/password" }
+              "dark:hover:bg-black-tertiery-bg hover:bg-slate-400 hover:text-white p-3 rounded-lg block transition-colors duration-300",
+              {
+                "dark:bg-black-tertiery-bg bg-slate-400 text-white":
+                  pathname === "/settings/password",
+              }
             )}
             href={"/settings/password"}
           >

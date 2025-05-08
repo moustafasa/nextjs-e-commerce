@@ -4,6 +4,8 @@ import { CartSchema, IProductsWithCategory } from "../_types/types";
 import ChangeProductQty from "../_components/ChangeProductQty";
 import CartProductShow from "../_components/CartProductShow";
 import CartProductShowSk from "../_components/CartProductShowSk";
+import { FaX } from "react-icons/fa6";
+import { deleteProductFromCartAction } from "@/lib/CartActions";
 
 const schema = [
   {
@@ -43,11 +45,21 @@ const schema = [
   {
     id: "product",
     label: "options",
-    getData(data, row) {
+    getData(data) {
       return (
-        <span className="text-xl font-bold px-3">
-          {formatPrice((data as IProductsWithCategory).price * row.qty)}
-        </span>
+        <form
+          action={deleteProductFromCartAction.bind(
+            undefined,
+            (data as IProductsWithCategory)._id.toString()
+          )}
+        >
+          <button
+            className="bg-red-error p-1 rounded-full text-white"
+            title="remove product"
+          >
+            <FaX />
+          </button>
+        </form>
       );
     },
   },

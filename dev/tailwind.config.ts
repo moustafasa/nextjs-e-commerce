@@ -6,9 +6,11 @@ const config: Config = {
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
+  darkMode: ["selector", '[data-theme="dark"]'],
   theme: {
     extend: {
       colors: {
+        // dark theme
         "black-300": "#222831",
         "black-400": "#31363F",
         "black-nav": "#303131",
@@ -26,6 +28,8 @@ const config: Config = {
         "menu-transparent-gray": "rgba(179,179,179,0.40)",
         "red-error": "#FF6F61",
         "red-error-hover": "#FF4C4C",
+
+        // light theme
       },
       spacing: {
         "dashNav-h": "70px",

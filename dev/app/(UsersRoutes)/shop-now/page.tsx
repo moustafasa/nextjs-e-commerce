@@ -1,22 +1,22 @@
-import Pagination from "@/app/_components/Pagination";
-
 import PaginationHeaderSk from "@/app/_components/skeletons/PaginationHeaderSk";
-import PaginationSk from "@/app/_components/skeletons/PaginationSk";
 import ProductListSk from "@/app/_components/skeletons/ProductListSk";
-import ShopNowSideNavSk from "@/app/_components/skeletons/ShopNowSideNavSk";
 import { Suspense } from "react";
 import { ShopNowSearchParams } from "./_types/_Types";
 import CategorySideNav from "./_components/CategorySideNav";
 import PaginationHeader from "./_components/PaginationHeader";
 import ProductsList from "./_components/ProductsList";
+import CustomPagination from "@/app/_components/CustomPagination";
+import { getProductsWithCategoryTotal } from "@/lib/productsControllers";
+import CategorySideNavSk from "@/app/_components/skeletons/CategorySideNavSk";
 
 export default async function page({ searchParams }: ShopNowSearchParams) {
+  const params = await searchParams;
   return (
     <div className="md:ps-shop-now-side-nav-w">
-      <Suspense fallback={<ShopNowSideNavSk />}>
+      <Suspense fallback={<CategorySideNavSk />}>
         <CategorySideNav />
       </Suspense>
-      <div className="md:p-10 p-3  text-white">
+      <div className="md:p-10 p-3">
         <Suspense fallback={<PaginationHeaderSk />}>
           <PaginationHeader searchParams={searchParams} />
         </Suspense>
@@ -29,9 +29,16 @@ export default async function page({ searchParams }: ShopNowSearchParams) {
           </Suspense>
         </ul>
       </div>
-      <Suspense fallback={<PaginationSk />}>
+      {/* <Suspense fallback={<PaginationSk />}>
         <Pagination searchParams={searchParams} />
-      </Suspense>
+      </Suspense> */}
+      <CustomPagination
+        searchParams={searchParams}
+        getMetaData={getProductsWithCategoryTotal(
+          params?.category,
+          params?.search
+        )}
+      />
     </div>
   );
 }

@@ -23,7 +23,7 @@ export default async function TableBody<BodyData>({
         <tr
           className={cn(
             "[&>td:first-child]:rounded-ss-lg [&>td:first-child]:rounded-es-lg [&>td:last-child]:rounded-se-lg [&>td:last-child]:rounded-ee-lg",
-            { "even:bg-black-tertiery-bg": zepraBg }
+            { "dark:even:bg-black-tertiery-bg even:bg-slate-100": zepraBg }
           )}
           key={row[keyIndex] as string}
         >

@@ -1,7 +1,8 @@
 import Skeleton from "@/app/_components/skeletons/Skeleton";
 import { cn } from "@/lib/utils";
 
-export default function FormFieldSkeleton({ type }: { type: string }) {
+type Props = { type: string; bgLight?: boolean; noError?: boolean };
+export default function FormFieldSkeleton({ type, bgLight, noError }: Props) {
   return (
     <>
       {type === "file" ? (
@@ -14,26 +15,40 @@ export default function FormFieldSkeleton({ type }: { type: string }) {
         </div>
       ) : (
         <>
-          <Skeleton classNames="sk-text w-28 mb-1 sm:mb-0 " />
+          <Skeleton
+            classNames={`sk-text w-28 mb-1 sm:mb-0  ${
+              !!bgLight && "dark:bg-black-secondary-bg"
+            }`}
+          />
           {type === "textarea" ? (
             <div className="w-full">
               {/* Skeleton for the textarea */}
-              <Skeleton classNames="sk-input !w-full !h-24" />
+              <Skeleton
+                classNames={`sk-input !w-full !h-24 ${
+                  !!bgLight && "dark:bg-black-secondary-bg"
+                } `}
+              />
             </div>
           ) : (
             <div className="flex gap-3">
               {/* Skeleton for the input field */}
-              <Skeleton classNames="sk-input !w-full" />
+              <Skeleton
+                classNames={`sk-input !w-full ${
+                  !!bgLight && "dark:bg-black-secondary-bg"
+                } `}
+              />
             </div>
           )}
         </>
       )}
-      <div
-        className={cn("mb-4 sm:mb-6 h-6 px-3 invisible", {
-          "sm:col-start-2 ": type !== "file",
-          "sm:col-span-2 mt-1": type === "file",
-        })}
-      ></div>
+      {!noError && (
+        <div
+          className={cn("mb-4 sm:mb-6 h-6 px-3 invisible", {
+            "sm:col-start-2 ": type !== "file",
+            "sm:col-span-2 mt-1": type === "file",
+          })}
+        ></div>
+      )}
     </>
   );
 }

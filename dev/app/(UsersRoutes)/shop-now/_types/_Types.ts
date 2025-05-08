@@ -1,3 +1,7 @@
 export type ShopNowSearchParams = {
-  searchParams: Promise<{ category?: string | string[]; page?: number }>;
+  searchParams: Promise<{
+    category?: string | string[];
+    page?: string;
+    search?: string;
+  }>;
 };

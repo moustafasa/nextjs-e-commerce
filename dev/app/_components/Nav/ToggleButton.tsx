@@ -1,21 +1,17 @@
 import cn from "@/app/_utilities/cssConditional";
 
-type Props = { dark: boolean };
-
-export default function ToggleButton({ dark }: Props) {
+export default function ToggleButton() {
   return (
     <div
       className={cn(
-        "w-9 h-6 border-2 rounded-full relative border-gray-icons transition-all duration-1000 ",
-        { "bg-gray-icons": dark }
+        "w-9 h-6 border-2 rounded-full relative dark:border-gray-icons border-black-bg transition-all duration-1000 bg-white dark:bg-gray-icons"
       )}
     >
-      <div
+      <span
         className={cn(
-          " absolute top-[2px] left-[2px] w-4 h-4 rounded-full bg-gray-icons transition-all duration-1000",
-          { "bg-black-nav left-auto right-[2px]": dark }
+          " absolute top-[2px] left-[2px] w-4 h-4 rounded-full  bg-black-bg transition-all duration-1000 dark:bg-black-nav dark:left-auto dark:right-[2px]"
         )}
-      ></div>
+      ></span>
     </div>
   );
 }

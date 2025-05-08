@@ -25,6 +25,11 @@ const productSchema = new Schema<IProducts>({
   stock: { type: Number, default: 0 },
 });
 
+productSchema.index(
+  { title: "text", descriptions: "text" },
+  { weights: { title: 5, descriptions: 1 }, name: "ProductTextIndex" }
+);
+
 // eslint-disable-next-line no-unused-expressions, @typescript-eslint/no-unused-expressions
 Categories;
 

@@ -42,7 +42,7 @@ export const schema = [
             >
               <Skeleton
                 classNames={`w-[100px] h-[100px] rounded-lg ${
-                  zepraBg && "group-even:bg-black-bg"
+                  zepraBg && "dark:group-even:bg-black-bg"
                 }`}
               />
             </div>

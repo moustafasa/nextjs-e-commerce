@@ -2,17 +2,14 @@ import { IProducts } from "@/models/database/Products";
 import Link from "next/link";
 import QuickAddToCartButton from "./QuickAddToCartButton";
 import PriceWithDiscount from "./PriceWithDiscount";
+import PageHeader from "@/app/_components/PageHeader";
 
 type Props = { product: IProducts };
 export default function ProductOverLay({ product }: Props) {
   return (
-    <div className="absolute capitalize flex flex-col gap-3 backdrop-blur-sm invisible  justify-around p-4 bg-black-secondary-bg/70 inset-0 group-hover:visible transition-all duration-300 rounded-lg">
+    <div className="absolute capitalize flex flex-col gap-3 backdrop-blur-sm invisible  justify-around p-4 bg-slate-100/60 dark:bg-black-secondary-bg/70 inset-0 group-hover:visible transition-all duration-300 rounded-lg">
       <div className="space-y-5 -translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-        <h2 className="text-center text-lg">
-          <span className="relative before:absolute before:w-[60%] before:h-[1px] before:bg-white before:bottom-0 before:left-[20%]">
-            {product.title}
-          </span>
-        </h2>
+        <PageHeader title={product.title} className="text-lg" />
         <div className="text-sm">
           <p
             className="text-ellipsis overflow-hidden line-clamp-3 "

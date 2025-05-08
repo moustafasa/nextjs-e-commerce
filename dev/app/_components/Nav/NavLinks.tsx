@@ -10,15 +10,18 @@ export default function NavLinks({ isOpen }: Props) {
     <nav
       id="collapse"
       className={cn(
-        "gap-3 ms-9 order-4 md:flex md:order-none md:flex-row md:py-0 flex-col py-3 hidden",
+        "gap-3 md:ms-9 order-4 md:flex md:order-none flex-row md:py-0  py-3 hidden  w-full md:w-auto max-md:pb-7 max-md:justify-center max-md:px-3 bg-white dark:bg-transparent shadow-lg dark:shadow-none md:shadow-none",
         { flex: isOpen }
       )}
     >
       <Link href={"/"}>
         <span
           className={cn(
-            "transition-colors duration-300 hover:text-gray-icons relative before:absolute md:before:w-[60%] before:w-[70%] before:bg-gray-icons before:h-[1px] before:bottom-0 md:before:left-[20%] before:origin-left md:before:origin-center before:transition-transform before:scale-x-0 hover:before:scale-x-100 ",
-            { "before:scale-x-100 text-gray-icons": pathname === "/" }
+            "transition-colors duration-300 dark:hover:text-gray-icons hover:text-blue-button relative before:absolute before:w-[60%] dark:before:bg-gray-icons before:bg-blue-button before:h-[1px] before:bottom-0 before:left-[20%] before:origin-center before:transition-transform before:scale-x-0 hover:before:scale-x-100 ",
+            {
+              "before:scale-x-100 text-blue-button font-bold before:h-[2px] dark:text-gray-icons":
+                pathname === "/",
+            }
           )}
         >
           home
@@ -27,8 +30,11 @@ export default function NavLinks({ isOpen }: Props) {
       <Link href={"/shop-now"}>
         <span
           className={cn(
-            "transition-colors duration-300 hover:text-gray-icons relative before:absolute md:before:w-[60%] before:w-[70%] before:bg-gray-icons before:h-[1px] before:bottom-0 md:before:left-[20%] before:origin-left md:before:origin-center before:transition-transform before:scale-x-0 hover:before:scale-x-100 ",
-            { "before:scale-x-100 text-gray-icons": pathname === "/shop-now" }
+            "transition-colors duration-300 dark:hover:text-gray-icons hover:text-blue-button relative before:absolute before:w-[60%] dark:before:bg-gray-icons before:bg-blue-button before:h-[1px] before:bottom-0 before:left-[20%] before:origin-center before:transition-transform before:scale-x-0 hover:before:scale-x-100 ",
+            {
+              "before:scale-x-100 text-blue-button font-bold before:h-[2px] dark:text-gray-icons":
+                pathname === "/shop-now",
+            }
           )}
         >
           shop now
@@ -37,8 +43,11 @@ export default function NavLinks({ isOpen }: Props) {
       <Link href={"/about"}>
         <span
           className={cn(
-            "transition-colors duration-300 hover:text-gray-icons relative before:absolute md:before:w-[60%] before:w-[70%] before:bg-gray-icons before:h-[1px] before:bottom-0 md:before:left-[20%] before:origin-left md:before:origin-center before:transition-transform before:scale-x-0 hover:before:scale-x-100 ",
-            { "before:scale-x-100 text-gray-icons": pathname === "/about" }
+            "transition-colors duration-300 dark:hover:text-gray-icons hover:text-blue-button relative before:absolute before:w-[60%] dark:before:bg-gray-icons before:bg-blue-button before:h-[1px] before:bottom-0 before:left-[20%] before:origin-center before:transition-transform before:scale-x-0 hover:before:scale-x-100 ",
+            {
+              "before:scale-x-100 text-blue-button font-bold before:h-[2px] dark:text-gray-icons":
+                pathname === "/about",
+            }
           )}
         >
           about
@@ -47,8 +56,11 @@ export default function NavLinks({ isOpen }: Props) {
       <Link href={"/contact"}>
         <span
           className={cn(
-            "transition-colors duration-300 hover:text-gray-icons relative before:absolute md:before:w-[60%] before:w-[70%] before:bg-gray-icons before:h-[1px] before:bottom-0 md:before:left-[20%] before:origin-left md:before:origin-center before:transition-transform before:scale-x-0 hover:before:scale-x-100 ",
-            { "before:scale-x-100 text-gray-icons": pathname === "/contact" }
+            "transition-colors duration-300 dark:hover:text-gray-icons hover:text-blue-button relative before:absolute before:w-[60%] dark:before:bg-gray-icons before:bg-blue-button before:h-[1px] before:bottom-0 before:left-[20%] before:origin-center before:transition-transform before:scale-x-0 hover:before:scale-x-100 ",
+            {
+              "before:scale-x-100 text-blue-button font-bold before:h-[2px] dark:text-gray-icons":
+                pathname === "/contact",
+            }
           )}
         >
           contact

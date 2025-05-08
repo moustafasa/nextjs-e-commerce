@@ -9,24 +9,27 @@ type Props = {
   heading?: string;
   siblingForm?: ReactNode;
   maxWidth?: string;
+  className?: string;
 };
 
 export default function FormLayout({
   errors,
   children,
   heading,
+  className,
   maxWidth = "700px",
 }: Props) {
   return (
     <div className="px-3">
       <div
         className={cn(
-          `capitalize  bg-black-secondary-bg mt-20 mx-auto text-white py-10 px-14 rounded-lg shadow-lg`
+          `capitalize  dark:bg-black-secondary-bg mt-20 mx-auto bg-slate-100 py-10 px-14 rounded-lg shadow-lg`,
+          className
         )}
         style={{ maxWidth }}
       >
         <FormErrors errors={errors} />
-        {heading && <PageHeader title={heading} />}
+        {heading && <PageHeader title={heading} className="text-2xl mb-9" />}
         {children}
       </div>
     </div>

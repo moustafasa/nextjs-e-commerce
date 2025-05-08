@@ -27,8 +27,8 @@ export default function Profile({ data }: Props) {
       <button
         id="profile"
         className={cn(
-          "flex items-center gap-1 transition-colors duration-300 hover:bg-menu-transparent-black py-1 px-2 rounded-3xl",
-          { "bg-menu-transparent-black": isOpen }
+          "flex items-center gap-1 transition-colors duration-300 hover:bg-gray-300/55  dark:hover:bg-menu-transparent-black py-1 px-2 rounded-3xl",
+          { "dark:bg-menu-transparent-black bg-gray-300/55": isOpen }
         )}
         onClick={() => {
           setIsOpen((prev) => !prev);

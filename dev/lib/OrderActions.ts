@@ -2,6 +2,7 @@
 
 import { orderStatus, OrderStatus } from "@/config/constants";
 import { changeOrderStatus } from "./OrderControllers";
+import { revalidatePath } from "next/cache";
 
 export async function changeStatusAction(
   orderId: string,
@@ -18,6 +19,7 @@ export async function changeStatusAction(
 
   try {
     const newStatus = await changeOrderStatus(orderId, status as OrderStatus);
+    revalidatePath("/orders");
     return { status: newStatus };
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (err) {

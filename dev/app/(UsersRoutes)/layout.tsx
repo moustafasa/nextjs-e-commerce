@@ -6,7 +6,7 @@ type Props = {
 };
 export default async function layout({ children }: Props) {
   return (
-    <div className="pb-9 pt-nav-h text-white">
+    <div className="pb-9 pt-nav-h ">
       <Nav />
       {children}
     </div>

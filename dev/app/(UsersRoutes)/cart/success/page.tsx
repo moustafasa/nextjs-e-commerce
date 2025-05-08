@@ -14,7 +14,7 @@ export default async function page({ searchParams }: Props) {
   }
   const payedAmount = await getStripePayedAmount(params.session_id);
   return (
-    <div className="max-w-[700px] bg-black-tertiery-bg mx-auto mt-20 px-3 py-20 rounded-lg shadow-lg flex flex-col items-center justify-center gap-3">
+    <div className="max-w-[700px] bg-slate-100 dark:bg-black-tertiery-bg mx-auto mt-20 px-3 py-20 rounded-lg shadow-lg flex flex-col items-center justify-center gap-3">
       <FaCheckCircle className="text-7xl text-green-400 " />
       <p className="text-xl capitalize font-bold">
         thank you for your purchasing

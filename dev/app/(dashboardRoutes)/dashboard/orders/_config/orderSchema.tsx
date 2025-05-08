@@ -65,7 +65,9 @@ export const schema = [
       return (
         <div className="p-4 flex justify-center items-center">
           <Skeleton
-            classNames={`sk-ellipse ${zepraBg && "group-even:bg-black-bg"}`}
+            classNames={`sk-ellipse ${
+              zepraBg && "dark:group-even:bg-black-bg"
+            }`}
           />
         </div>
       );

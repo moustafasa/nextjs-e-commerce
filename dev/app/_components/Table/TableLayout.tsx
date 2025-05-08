@@ -1,6 +1,8 @@
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { ReactNode } from "react";
+import SearchBox from "../Nav/SearchBox";
+import PageHeader from "../PageHeader";
 
 type Props = {
   tableName: string;
@@ -11,6 +13,7 @@ type Props = {
   };
   children: ReactNode;
   className?: string;
+  noSearch?: boolean;
 };
 
 export default function TableLayout({
@@ -18,13 +21,17 @@ export default function TableLayout({
   addBtn,
   children,
   className,
+  noSearch,
 }: Props) {
   return (
     <div className="w-full px-5 pt-10 pb-3">
-      <header className="flex justify-around items-center  mb-10">
-        <h2 className="capitalize text-4xl font-bold relative before:absolute before:h-[1px] before:w-[60%] before:bg-white before:bottom-[-8px] before:left-[20%]">
-          {tableName}
-        </h2>
+      <header className="flex justify-around items-center gap-3 mb-10 flex-wrap">
+        <PageHeader
+          title={tableName}
+          className="text-4xl [&>span]:before:bottom-1 "
+        />
+
+        {!noSearch && <SearchBox isOpen />}
         {addBtn && (
           <Link
             href={addBtn.href}

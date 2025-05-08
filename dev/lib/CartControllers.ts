@@ -60,7 +60,7 @@ export async function addToCart(productId: string, amount: number) {
   }
 
   let foundCart = await getCart();
-
+  console.log(foundCart);
   if (!foundCart) {
     foundCart = await Carts.create<HydratedDocument<ICarts>>({
       userId: session.user.userId,
@@ -75,7 +75,6 @@ export async function addToCart(productId: string, amount: number) {
   const foundCartProduct = foundCart?.products.find(
     (prod) => prod.product.toString() === productId
   );
-
   if (foundCartProduct) {
     if (foundCartProduct.qty + amount > product.stock) {
       throw new OutOfStockError();
@@ -195,3 +194,14 @@ export const completeCartCheckout = async function (userId: string) {
   await cart.deleteOne().exec();
   revalidatePath("/cart");
 };
+
+export async function deleteProductFromCart(productId: string) {
+  const cart = await getCart();
+  if (!cart) {
+    return null;
+  }
+  cart.products = cart.products.filter(
+    (prod) => prod.product.toString() !== productId
+  );
+  await cart.save();
+}

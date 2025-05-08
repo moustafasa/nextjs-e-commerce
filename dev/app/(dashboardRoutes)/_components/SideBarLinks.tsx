@@ -14,8 +14,8 @@ export default function SideBarLinks() {
         <Link
           key={link.href}
           className={cn(
-            "hover:bg-blue-links hover:text-white text-gray-icons transition-colors duration-300 flex items-center gap-2 py-2 px-4 rounded-lg text-xl capitalize",
-            { "bg-blue-links text-white": pathname === link.href }
+            "hover:bg-blue-links hover:text-white dark:text-gray-icons text-black-bg transition-colors duration-300 flex items-center gap-2 py-2 px-4 rounded-lg text-xl capitalize text-nowrap",
+            { "bg-blue-links !text-white": pathname === link.href }
           )}
           href={link.href}
           title={collapse ? link.label : undefined}

@@ -1,5 +1,5 @@
 import CheckoutForm from "@/app/(UsersRoutes)/cart/_components/checkoutForm";
-import CartTotal from "@/app/_components/CartTotal";
+import CartTotal from "@/app/(UsersRoutes)/cart/_components/CartTotal";
 import TableBodySkeleton from "@/app/_components/skeletons/TableBodySkeleton";
 import { getCartProducts, getCartQuantity } from "@/lib/CartControllers";
 import { Suspense } from "react";
@@ -8,6 +8,7 @@ import TableHeader from "@/app/_components/Table/TableHeader";
 import TableBody from "@/app/_components/Table/TableBody";
 import schema from "./_config/Schema";
 import { CartSchema } from "./_types/types";
+import CartTotalSk from "./_components/CartTotalSk";
 
 export default async function page() {
   const numberOfCarts = await getCartQuantity();
@@ -34,7 +35,9 @@ export default async function page() {
           />
         </Suspense>
       </TableLayout>
-      <CartTotal />
+      <Suspense fallback={<CartTotalSk />}>
+        <CartTotal />
+      </Suspense>
       <CheckoutForm />
     </>
   );

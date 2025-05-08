@@ -6,11 +6,12 @@ export default async function PaginationHeader({
 }: ShopNowSearchParams) {
   const params = await searchParams;
   const { totalProducts, limit } = await getProductsWithCategoryTotal(
-    params.category
+    params.category,
+    params.search
   );
 
-  const from = ((params?.page || 1) - 1) * limit + 1;
-  const to = Math.min(limit * (params?.page || 1), totalProducts);
+  const from = ((params?.page ? +params.page : 1) - 1) * limit + 1;
+  const to = Math.min(limit * (params?.page ? +params.page : 1), totalProducts);
   return (
     <h2 className="capitalize mb-5">
       showing {from}

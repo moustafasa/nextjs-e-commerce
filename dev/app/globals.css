@@ -14,13 +14,13 @@
   }
 
   .form-button {
-    @apply bg-blue-button py-2  px-3 capitalize rounded-lg transition-colors duration-300 hover:bg-blue-button-hover whitespace-nowrap flex-shrink-0;
+    @apply bg-blue-button text-white py-2  px-3 capitalize rounded-lg transition-colors duration-300 hover:bg-blue-button-hover whitespace-nowrap flex-shrink-0;
   }
   .form-input {
-    @apply px-4 py-1 rounded-lg bg-gray-input text-black focus:ring-2 focus:ring-blue-links focus:outline-none;
+    @apply px-4 py-1 rounded-lg dark:bg-gray-input text-black focus:ring-2 focus:ring-blue-links focus:outline-none;
   }
   .form-input-disabled {
-    @apply bg-black-tertiery-bg ring-black-tertiery-bg text-gray-input;
+    @apply dark:bg-black-tertiery-bg dark:ring-black-tertiery-bg bg-gray-300 ring-gray-300 text-gray-input;
   }
   .sk-header {
     @apply h-8 rounded-md;

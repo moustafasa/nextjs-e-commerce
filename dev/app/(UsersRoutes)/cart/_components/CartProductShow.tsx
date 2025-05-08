@@ -10,7 +10,7 @@ type Props = {
 export default function CartProductShow({ data }: Props) {
   return (
     <div className="flex gap-3 py-4 ps-5 w-max">
-      <div className="relative bg-black-tertiery-bg p-3 rounded-lg shadow-lg flex-shrink-0">
+      <div className="relative dark:bg-black-tertiery-bg bg-slate-500 p-3 rounded-lg shadow-lg flex-shrink-0">
         <ProductRippon discountPercent={50} />
         <Image
           className="w-[150px] h-[150px] block flex-shrink-0 object-cover"

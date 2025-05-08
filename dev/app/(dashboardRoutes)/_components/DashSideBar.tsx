@@ -15,12 +15,15 @@ export default function DashSideBar() {
   return (
     <div
       className={cn(
-        "fixed left-0 bg-black-nav w-dash-side-bar-w h-[calc(100vh-theme('spacing.dashNav-h'))] top-dashNav-h"
+        "fixed md:left-0 bg-white dark:bg-black-nav shadow-lg  w-dash-side-bar-w h-[calc(100vh-theme('spacing.dashNav-h'))] top-dashNav-h transition-all duration-300 -left-full z-50",
+        {
+          "left-0": !collapse,
+        }
       )}
     >
       <h2
         className={cn("p-3 capitalize text-2xl", {
-          hidden: collapse,
+          "md:hidden": collapse,
         })}
       >
         pages
