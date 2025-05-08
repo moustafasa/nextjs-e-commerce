@@ -3,6 +3,7 @@ import { getCategoriesForOptions } from "@/lib/categoriesControllers";
 import { getProductById } from "@/lib/productsControllers";
 import { notFound } from "next/navigation";
 import EditProductsForm from "../../_components/EditProductsForm";
+import { getUsersIds } from "@/lib/usersControllers";
 
 export const dynamicParams = false;
 
@@ -21,8 +22,7 @@ export default async function Page({ params: { id } }: Props) {
   );
 }
 
-// export const generateStaticParams = async () => {
-//   await dbConnect();
-//   const usersIds = await getUsersIds();
-//   return usersIds.map((id) => ({ params: { id } }));
-// };
+export const generateStaticParams = async () => {
+  const usersIds = await getUsersIds();
+  return usersIds.map((id) => ({ params: { id } }));
+};
