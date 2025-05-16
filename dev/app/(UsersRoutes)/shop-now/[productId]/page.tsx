@@ -1,4 +1,7 @@
-import { getProductByIdWithPopulation } from "@/lib/productsControllers";
+import {
+  getProductByIdWithPopulation,
+  getProductsIds,
+} from "@/lib/productsControllers";
 import Image from "next/image";
 import Link from "next/link";
 import ProductRippon from "../_components/ProductRippon";
@@ -75,4 +78,9 @@ export default async function page({ params, searchParams }: Props) {
       </div>
     </div>
   );
+}
+
+export async function generateStaticParams() {
+  const productsIds = await getProductsIds();
+  return productsIds.map((id) => ({ id: id.toString() }));
 }

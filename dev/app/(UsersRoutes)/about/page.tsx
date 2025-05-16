@@ -1,4 +1,6 @@
+import { Suspense } from "react";
 import AboutPageAnime from "./_components/AboutPageAnime";
+import LottieAnimeSk from "../_components/LottieAnimeSk";
 
 export default function AboutPage() {
   return (
@@ -34,7 +36,9 @@ export default function AboutPage() {
         </div>
 
         <div className="relative h-[400px] rounded-lg overflow-hidden">
-          <AboutPageAnime />
+          <Suspense fallback={<LottieAnimeSk />}>
+            <AboutPageAnime />
+          </Suspense>
         </div>
       </div>
     </div>

@@ -1,5 +1,5 @@
 import ViewOrderHeader from "@/app/(dashboardRoutes)/dashboard/orders/_components/ViewOrderHeader";
-import { getOrderProducts } from "@/lib/OrderControllers";
+import { getOrderIds, getOrderProducts } from "@/lib/OrderControllers";
 import { schema } from "../_config/orderProductSchema";
 import { Suspense } from "react";
 import TableBodySkeleton from "@/app/_components/skeletons/TableBodySkeleton";
@@ -7,6 +7,8 @@ import ViewOrderHeaderSkeleton from "@/app/(dashboardRoutes)/dashboard/orders/_c
 import TableLayout from "@/app/_components/Table/TableLayout";
 import TableHeader from "@/app/_components/Table/TableHeader";
 import TableBody from "@/app/_components/Table/TableBody";
+
+export const dynamicParams = false;
 
 type Props = {
   params: Promise<{ orderId: string }>;
@@ -32,4 +34,9 @@ export default async function page({ params }: Props) {
       </TableLayout>
     </div>
   );
+}
+
+export async function generateStaticParams() {
+  const ordersIds = await getOrderIds();
+  return ordersIds.map((id) => ({ id: id.toString() }));
 }

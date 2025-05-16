@@ -1,7 +1,6 @@
-import { getCategoryById } from "@/lib/categoriesControllers";
+import { getCategoriesIds, getCategoryById } from "@/lib/categoriesControllers";
 import { notFound } from "next/navigation";
 import EditCategoryForm from "../../_components/EditCategoryForm";
-import { getUsersIds } from "@/lib/usersControllers";
 
 export const dynamicParams = false;
 
@@ -24,6 +23,6 @@ export default async function Page({ params }: Props) {
 }
 
 export const generateStaticParams = async () => {
-  const usersIds = await getUsersIds();
-  return usersIds.map((id) => ({ params: { id } }));
+  const categoriesIds = await getCategoriesIds();
+  return categoriesIds.map((id) => ({ id: id.toString() }));
 };

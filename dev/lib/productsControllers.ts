@@ -236,3 +236,9 @@ export const deleteProduct = async (id: string) => {
 export const deleteProductImage = async (url: string) => {
   await del(url);
 };
+
+export const getProductsIds = async () => {
+  await dbConnect();
+  const productsId = await Products.find({}).select("_id").exec();
+  return productsId;
+};

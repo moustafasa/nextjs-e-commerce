@@ -4,7 +4,6 @@ import { Cairo } from "next/font/google";
 import "./globals.css";
 import AuthProvider from "./_components/AuthProvider";
 import HTMLComponent from "./_components/HTMLComponent";
-import Script from "next/script";
 
 const cairo = Cairo({ subsets: ["latin"] });
 

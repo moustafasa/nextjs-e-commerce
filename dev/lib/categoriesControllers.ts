@@ -119,3 +119,9 @@ export const deleteCategory = async (_id: string) => {
     await category.deleteOne().exec();
   }
 };
+
+export const getCategoriesIds = async () => {
+  await dbConnect();
+  const categoriesIds = await Categories.find({}).select("_id").exec();
+  return categoriesIds;
+};

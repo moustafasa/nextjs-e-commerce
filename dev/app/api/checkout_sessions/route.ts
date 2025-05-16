@@ -4,12 +4,13 @@ import { headers } from "next/headers";
 import { NextResponse } from "next/server";
 import unSecretStripe from "stripe";
 
-export const POST = auth(async (req) => {
+export const POST = async () => {
   const headersList = await headers();
 
+  const userSession = await auth();
   const cartProducts = await getCartProducts();
 
-  if (!cartProducts || !req.auth) {
+  if (!cartProducts || !userSession) {
     return NextResponse.json("there is no cart products", { status: 500 });
   }
 
@@ -41,13 +42,15 @@ export const POST = auth(async (req) => {
       )}/cart/success?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${headersList.get("origin")}/cart`,
       customer_email:
-        req.auth?.provider === "credentials" ? undefined : req.auth.user.email,
+        userSession.provider === "credentials"
+          ? undefined
+          : userSession.user.email,
       metadata: {
-        userId: req.auth.user.userId.toString(),
+        userId: userSession.user.userId.toString(),
       },
     });
     return NextResponse.redirect(session.url as string, { status: 303 });
   } catch (err) {
     return NextResponse.json((err as Error).message, { status: 500 });
   }
-});
+};

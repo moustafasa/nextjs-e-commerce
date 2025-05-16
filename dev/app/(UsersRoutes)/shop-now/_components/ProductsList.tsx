@@ -53,4 +53,5 @@ export default async function ProductsList({ searchParams }: Props) {
       </AddToCartModalContextProvider>
     </li>
   ));
+  return <div></div>;
 }

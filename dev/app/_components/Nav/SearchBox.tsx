@@ -1,11 +1,12 @@
 "use client";
 import cn from "@/app/_utilities/cssConditional";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useRef } from "react";
+import { Suspense, useRef } from "react";
 import { FaSearch } from "react-icons/fa";
+import Skeleton from "../skeletons/Skeleton";
 
 type Props = { isOpen: boolean; isNav?: boolean };
-export default function SearchBox({ isOpen, isNav }: Props) {
+function SearchBoxWithParams({ isOpen, isNav }: Props) {
   const pathname = usePathname();
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -55,5 +56,32 @@ export default function SearchBox({ isOpen, isNav }: Props) {
         <FaSearch />
       </label>
     </div>
+  );
+}
+
+function SearchBoxSk({ isOpen, isNav }: Props) {
+  return (
+    <div
+      id="collapse"
+      className={cn(
+        " relative  bg-inherit mt-5 lg:mt-0 order-3 w-full lg:order-none  lg:w-auto lg:ps-0  bg-white dark:bg-transparent",
+        {
+          " mx-3 hidden mt-3 lg:mt-0 md:block  lg:mx-auto": isNav,
+          block: isOpen && isNav,
+        }
+      )}
+    >
+      <Skeleton
+        classNames={"sk-input md:min-w-[250px] !h-8 !w-full !rounded-full   "}
+      />
+    </div>
+  );
+}
+
+export default function searchBox({ isOpen, isNav }: Props) {
+  return (
+    <Suspense fallback={<SearchBoxSk isOpen={isOpen} isNav={isNav} />}>
+      <SearchBoxWithParams isOpen={isOpen} isNav={isNav} />
+    </Suspense>
   );
 }

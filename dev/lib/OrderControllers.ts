@@ -1,4 +1,5 @@
 import { OrderStatus } from "@/config/constants";
+import dbConnect from "@/config/dbConnect";
 import Orders, { IOrders, IOrdersProducts } from "@/models/database/Orders";
 import { IProducts } from "@/models/database/Products";
 import { HydratedDocument } from "mongoose";
@@ -6,6 +7,7 @@ import { notFound } from "next/navigation";
 import { cache } from "react";
 
 export const getPopulatedOrders = cache(async () => {
+  await dbConnect();
   const order = await Orders.find({})
     .populate<
       HydratedDocument<
@@ -20,6 +22,7 @@ export const getPopulatedOrders = cache(async () => {
   return order;
 });
 export const getPopulatedOrderById = cache(async (id: string) => {
+  await dbConnect();
   const order = await Orders.findOne<HydratedDocument<IOrders>>({ _id: id })
     .populate<{
       userId: { fullName: string };
@@ -49,6 +52,7 @@ export const getOrderProducts = cache(async (id: string) => {
 
 export const changeOrderStatus = cache(
   async (id: string, status: OrderStatus) => {
+    await dbConnect();
     const order = await Orders.findOne<HydratedDocument<IOrders>>({ _id: id });
     if (!order) return notFound();
     order.status = status;
@@ -56,3 +60,9 @@ export const changeOrderStatus = cache(
     return order.status;
   }
 );
+
+export const getOrderIds = cache(async () => {
+  await dbConnect();
+  const orderIds = Orders.find({}).select("_id").exec();
+  return orderIds;
+});

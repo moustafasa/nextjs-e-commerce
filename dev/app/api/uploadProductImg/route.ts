@@ -3,13 +3,14 @@ import { Role } from "@/config/constants";
 import { handleUpload, type HandleUploadBody } from "@vercel/blob/client";
 import { NextResponse } from "next/server";
 
-export const POST = auth(async (request) => {
-  if (!request.auth) {
+export const POST = async (request: Request) => {
+  const session = await auth();
+  if (!session) {
     return new Response(undefined, { status: 403 });
   }
   if (
-    !request.auth.user.roles.includes(Role.WRITER) &&
-    !request.auth.user.roles.includes(Role.ADMIN)
+    !session.user.roles.includes(Role.WRITER) &&
+    !session.user.roles.includes(Role.ADMIN)
   ) {
     return new Response(undefined, { status: 401 });
   }
@@ -38,4 +39,4 @@ export const POST = auth(async (request) => {
       { status: 400 } // The webhook will retry 5 times waiting for a 200
     );
   }
-});
+};

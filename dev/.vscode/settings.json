@@ -1,5 +1,7 @@
 {
-    "editor.dropIntoEditor.preferences": [],
-    "terminal.explorerKind": "integrated",
-    "terminal.integrated.defaultProfile.windows": "Git Bash"
+  "editor.dropIntoEditor.preferences": [],
+  "terminal.explorerKind": "integrated",
+  "terminal.integrated.defaultProfile.windows": "Git Bash",
+  "telemetry.feedback.enabled": false,
+  "application.experimental.rendererProfiling": false
 }

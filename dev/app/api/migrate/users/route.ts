@@ -4,6 +4,7 @@ export const GET = async () => {
   try {
     await migrateUsers();
     return new Response("Users migrated successfully", { status: 200 });
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (err) {
     return new Response("Failed to migrate users", { status: 500 });
   }

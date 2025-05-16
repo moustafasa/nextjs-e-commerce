@@ -1,14 +1,14 @@
 import AddProductContext from "@/app/_utilities/addProductContext/addProductContext";
 import { getCategoriesForOptions } from "@/lib/categoriesControllers";
-import { getProductById } from "@/lib/productsControllers";
+import { getProductById, getProductsIds } from "@/lib/productsControllers";
 import { notFound } from "next/navigation";
 import EditProductsForm from "../../_components/EditProductsForm";
-import { getUsersIds } from "@/lib/usersControllers";
 
 export const dynamicParams = false;
 
-type Props = { params: { id: string } };
-export default async function Page({ params: { id } }: Props) {
+type Props = { params: Promise<{ id: string }> };
+export default async function Page({ params }: Props) {
+  const { id } = await params;
   const product = await getProductById(id);
   if (!product) {
     notFound();
@@ -23,6 +23,6 @@ export default async function Page({ params: { id } }: Props) {
 }
 
 export const generateStaticParams = async () => {
-  const usersIds = await getUsersIds();
-  return usersIds.map((id) => ({ params: { id } }));
+  const productsIds = await getProductsIds();
+  return productsIds.map((id) => ({ id: id.toString() }));
 };
