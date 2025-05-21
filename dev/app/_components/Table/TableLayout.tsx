@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils";
+import cn from "@/app/_utilities/cssConditional";
 import Link from "next/link";
 import { ReactNode } from "react";
 import SearchBox from "../Nav/SearchBox";

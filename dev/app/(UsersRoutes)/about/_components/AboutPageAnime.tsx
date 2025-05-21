@@ -8,8 +8,8 @@ export default function AboutPageAnime() {
       speed={1}
       loop
       autoplay
-      height={500}
-      width={500}
+      height={300}
+      width={300}
       className="h-full w-full object-cover"
     ></DotLottieReact>
   );

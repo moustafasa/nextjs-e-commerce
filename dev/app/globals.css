@@ -43,6 +43,9 @@
   .sk-check-box {
     @apply h-6 w-6 rounded-md;
   }
+  .sk-icon {
+    @apply h-7 w-7 rounded-md;
+  }
   .sk-image {
     @apply h-[200px] w-[200px] rounded-md;
   }

@@ -54,7 +54,7 @@ export async function signinAction(
   }
 
   try {
-    await signIn("credentials", formData);
+    await signIn("credentials", result.data);
   } catch (err) {
     if (isRedirectError(err)) {
       throw err;

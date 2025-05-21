@@ -1,5 +1,6 @@
 import { NextAuthConfig } from "next-auth";
 import { Role } from "./config/constants";
+import { NextResponse } from "next/server";
 
 export const authConfig = {
   pages: { signIn: "/sign-in" },
@@ -29,25 +30,37 @@ export const authConfig = {
         }
         if (
           auth?.user.roles.includes(Role.WRITER) &&
-          request.nextUrl.pathname === "/dashboard/entries"
+          [
+            "/dashboard/stock",
+            "/dashboard/categories",
+            "/dashboard/products",
+          ].find((url) => request.nextUrl.pathname.startsWith(url))
         ) {
           return true;
         }
-        return Response.redirect(new URL("/unauthorized", request.url));
+        return NextResponse.redirect(new URL("/unauthorized", request.url));
       }
 
       if (request.nextUrl.pathname === "/sign-in" && auth?.user) {
+        const callBack = request.nextUrl.searchParams.get("callbackUrl");
+        if (callBack) {
+          return NextResponse.redirect(callBack);
+        }
         if (auth.user.roles.includes(Role.ADMIN)) {
-          return Response.redirect(new URL("/dashboard", request.url));
+          return NextResponse.redirect(new URL("/dashboard", request.url));
         }
         if (auth.user.roles.includes(Role.ORDER_REPORTER)) {
-          return Response.redirect(new URL("/dashboard/orders", request.url));
+          return NextResponse.redirect(
+            new URL("/dashboard/orders", request.url)
+          );
         }
         if (auth.user.roles.includes(Role.WRITER)) {
-          return Response.redirect(new URL("/dashboard/entries", request.url));
+          return NextResponse.redirect(
+            new URL("/dashboard/stock", request.url)
+          );
         }
         if (auth.user.roles.includes(Role.USER)) {
-          return Response.redirect(new URL("/shop-now", request.url));
+          return NextResponse.redirect(new URL("/shop-now", request.url));
         }
       }
       return true;

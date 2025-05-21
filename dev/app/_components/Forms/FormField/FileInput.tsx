@@ -64,7 +64,7 @@ export default forwardRef<HTMLInputElement, Omit<Props<FileInput>, "errors">>(
         <label
           htmlFor={input.id}
           className={cn(
-            " cursor-pointer block border-2 w-full h-48 border-gray-icons border-dashed sm:col-span-2 ",
+            " cursor-pointer block border-2 w-full h-48 border-gray-icons border-dashed sm:col-span-2 p-3 text-center",
             {
               "border-solid bg-gray-icons/40": dragging && !disabled,
               "border-black-tertiery-bg ": disabled,

@@ -1,5 +1,5 @@
 import Skeleton from "@/app/_components/skeletons/Skeleton";
-import { cn } from "@/lib/utils";
+import cn from "@/app/_utilities/cssConditional";
 
 type Props = { type: string; bgLight?: boolean; noError?: boolean };
 export default function FormFieldSkeleton({ type, bgLight, noError }: Props) {

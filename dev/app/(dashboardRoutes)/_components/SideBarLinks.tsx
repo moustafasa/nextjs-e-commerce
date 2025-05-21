@@ -3,14 +3,32 @@ import { dashSideBarLinks } from "@/config/dashSideBarLinks";
 import cn from "@/app/_utilities/cssConditional";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useSession } from "next-auth/react";
+import { useEffect, useState } from "react";
+import SideBarLinkSk from "./SideBarLinkSk";
 
 export default function SideBarLinks() {
   const pathname = usePathname();
   const [collapse] = useSideNavCollapse();
+  const { data, status } = useSession();
+
+  const [filteredSideLinks, setFilteredSideLinks] = useState<SideBarLink[]>([]);
+
+  useEffect(() => {
+    if (data) {
+      setFilteredSideLinks(
+        dashSideBarLinks.filter((link) =>
+          link.role.find((role) => !!data.user.roles.includes(role))
+        )
+      );
+    }
+  }, [data]);
 
   return (
     <nav className={cn("px-6 flex flex-col gap-4", { "px-0 pt-5": collapse })}>
-      {dashSideBarLinks.map((link) => (
+      {status === "loading" && <SideBarLinkSk />}
+
+      {filteredSideLinks.map((link) => (
         <Link
           key={link.href}
           className={cn(

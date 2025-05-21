@@ -1,5 +1,5 @@
 import formatPrice from "@/app/_utilities/formatPrice";
-import { cn } from "@/lib/utils";
+import cn from "@/app/_utilities/cssConditional";
 
 type Props = { price: number; discount?: number };
 export default function PriceWithDiscount({ price, discount }: Props) {

@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils";
+import cn from "@/app/_utilities/cssConditional";
 
 type Props = { title: string; className?: string };
 export default function PageHeader({ title, className }: Props) {

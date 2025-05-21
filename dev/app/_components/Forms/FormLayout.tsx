@@ -23,7 +23,7 @@ export default function FormLayout({
     <div className="px-3">
       <div
         className={cn(
-          `capitalize  dark:bg-black-secondary-bg mt-20 mx-auto bg-slate-100 py-10 px-14 rounded-lg shadow-lg`,
+          `capitalize  dark:bg-black-secondary-bg mt-20 mx-auto bg-slate-100 py-10 px-10 rounded-lg shadow-lg`,
           className
         )}
         style={{ maxWidth }}

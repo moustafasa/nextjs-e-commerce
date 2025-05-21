@@ -62,6 +62,7 @@ export default function MyProfileForm({
         if (!errors) setFields((prev) => ({ ...prev, img: false }));
         if (isModalOpen) setIsModalOpen(false);
       }}
+      className="block"
     >
       <FormField
         input={ProfileImgInput}
@@ -71,11 +72,11 @@ export default function MyProfileForm({
           if (e.target.files) setFields({ ...fields, img: true });
         }}
       />
-      <div className=" grid grid-cols-subgrid col-span-2 p-4 border-[1px] rounded-lg border-gray-input mb-9">
-        <h3 className="mb-9 capitalize col-span-2 text-lg font-bold ">
+      <div className="p-4 border-[1px] rounded-lg border-gray-input mb-9">
+        <h3 className="mb-9 capitalize  sm:col-span-2 text-lg font-bold ">
           personal info
         </h3>
-        <div className="grid grid-cols-subgrid  col-span-2 px-9">
+        <div className="grid grid-cols-[1fr] sm:gap-x-6 sm:grid-cols-[auto_1fr] items-center capitalize sm:px-9">
           {inputs.current.map((input) => (
             <FormField
               key={input.id}
@@ -110,6 +111,7 @@ export default function MyProfileForm({
           if (provider !== "google") setIsModalOpen(true);
         }}
         showLoading={provider === "google"}
+        className=" block"
       />
     </Form>
   );

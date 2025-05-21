@@ -6,11 +6,10 @@ import { del, put } from "@vercel/blob";
 import path from "path";
 import { cache } from "react";
 import { FilterQuery, HydratedDocument, isValidObjectId } from "mongoose";
-import checkAuth from "@/app/_utilities/checkAuth";
 import { notFound } from "next/navigation";
 import { EditCategorySchemaType } from "@/models/zodSchemas/Category/editCategorySchema";
 import { CATEGORIES_LIMIT, Role } from "@/config/constants";
-import { getSearchRgx } from "./utils";
+import checkAuth, { getSearchRgx } from "./utils";
 
 export const addCategory = async (category: AddCategorySchemaType) => {
   await dbConnect();
@@ -29,7 +28,7 @@ export const addCategory = async (category: AddCategorySchemaType) => {
 };
 
 export const getCategories = cache(async (page?: number, search?: string) => {
-  await checkAuth(Role.ADMIN);
+  await checkAuth([Role.ADMIN, Role.WRITER]);
   await dbConnect();
   const query = Categories.find({});
   if (page) {
@@ -49,7 +48,7 @@ export const getCategoriesForOptions = cache(async () => {
 });
 
 export const getCategoryById = cache(async (id: string) => {
-  await checkAuth(Role.ADMIN);
+  await checkAuth([Role.ADMIN, Role.WRITER]);
   if (!isValidObjectId(id)) {
     return null;
   }

@@ -11,9 +11,8 @@ import { UserExistingError } from "./customErrors";
 import { SignUpSchemaType } from "@/models/zodSchemas/User/signupSchema";
 import { put } from "@vercel/blob";
 import path from "path";
-import checkAuth from "@/app/_utilities/checkAuth";
 import { Role, USERS_LIMIT } from "@/config/constants";
-import { getSearchRgx } from "./utils";
+import checkAuth, { getSearchRgx } from "./utils";
 
 export const getUsers = async (page: number = 1, search?: string) => {
   const session = await auth();
@@ -79,7 +78,7 @@ export const getUsersIds = cache(async () => {
 });
 
 export const getUserById = cache(async (id: string) => {
-  await checkAuth(Role.ADMIN);
+  await checkAuth([Role.ADMIN]);
 
   if (!isValidObjectId(id)) {
     return null;
@@ -192,7 +191,7 @@ export const credentialsSignIn = async (email: string, password: string) => {
   await dbConnect();
 
   const userFound: HydratedDocument<IUser> = await Users.findOne({
-    email,
+    email: email,
   }).exec();
 
   if (!userFound) return null;

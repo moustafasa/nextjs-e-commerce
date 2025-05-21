@@ -5,7 +5,6 @@ import Products, { IProducts } from "@/models/database/Products";
 import { FilterQuery, HydratedDocument, isValidObjectId } from "mongoose";
 import path from "path";
 import { cache } from "react";
-import checkAuth from "@/app/_utilities/checkAuth";
 import { notFound } from "next/navigation";
 import {
   ProductExistingError,
@@ -14,7 +13,7 @@ import {
 import { EditProductSchemaType } from "@/models/zodSchemas/Product/editProductsSchema";
 import { AddToStockSchema } from "@/models/zodSchemas/Product/addToStockSchema";
 import { PRODUCTS_LIMIT, Role } from "@/config/constants";
-import { getSearchRgx } from "./utils";
+import checkAuth, { getSearchRgx } from "./utils";
 
 export const saveDraftedImages = async (id: string, images: string[]) => {
   const savedImagesPromises = images.map(async (img) => {
@@ -52,7 +51,7 @@ export const addProduct = async (result: AddProductSchemaType) => {
 };
 
 export const getProducts = cache(async (page?: number, search?: string) => {
-  await checkAuth(Role.ADMIN);
+  await checkAuth([Role.ADMIN, Role.WRITER]);
   await dbConnect();
 
   const query = Products.find({});
@@ -75,7 +74,7 @@ export const getProducts = cache(async (page?: number, search?: string) => {
 
 export const getProductsWithCategory = cache(
   async (category?: string | string[], page: number = 1, search?: string) => {
-    await checkAuth(Role.ADMIN);
+    await checkAuth([Role.ADMIN, Role.WRITER]);
     await dbConnect();
     const filter: FilterQuery<IProducts> = category ? { category } : {};
     if (search) {
@@ -93,7 +92,7 @@ export const getProductsWithCategory = cache(
 
 export const getProductsWithCategoryTotal = cache(
   async (category?: string | string[], search?: string) => {
-    await checkAuth(Role.ADMIN);
+    await checkAuth([Role.ADMIN, Role.WRITER]);
     await dbConnect();
     const filter: FilterQuery<IProducts> = category ? { category } : {};
     if (search) {
@@ -111,7 +110,7 @@ export const getProductsWithCategoryTotal = cache(
 );
 
 export const getProductsForOptions = cache(async (category?: string) => {
-  await checkAuth(Role.ADMIN);
+  await checkAuth([Role.ADMIN, Role.WRITER]);
   let products: IProducts[] = [];
   if (category) {
     await dbConnect();
@@ -126,7 +125,7 @@ export const getProductsForOptions = cache(async (category?: string) => {
 });
 
 export const getProductById = cache(async (id: string) => {
-  await checkAuth(Role.ADMIN);
+  await checkAuth([Role.ADMIN, Role.WRITER]);
   if (!isValidObjectId(id)) {
     return null;
   }
@@ -139,7 +138,7 @@ export const getProductById = cache(async (id: string) => {
   return product;
 });
 export const getProductByIdWithPopulation = cache(async (id: string) => {
-  await checkAuth(Role.ADMIN);
+  await checkAuth([Role.ADMIN, Role.WRITER]);
   if (!isValidObjectId(id)) {
     return null;
   }

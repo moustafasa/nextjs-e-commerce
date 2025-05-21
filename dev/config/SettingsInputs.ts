@@ -1,5 +1,5 @@
 export const PersonalInfoInputs = [
-  { type: "text", name: "fullName", id: "fullName", label: "fullname" },
+  { type: "text", name: "fullName", id: "fullName", label: "full Name" },
   { type: "text", name: "email", id: "email", label: "email" },
 ] satisfies AllInputs[];
 

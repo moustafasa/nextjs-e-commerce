@@ -5,11 +5,12 @@ import { FaAngleDown } from "react-icons/fa6";
 import ProfileMenu from "./ProfileMenu";
 import { useEffect, useState } from "react";
 import cn from "@/app/_utilities/cssConditional";
-import type { Session } from "next-auth";
+import { useSession } from "next-auth/react";
+import ProfileSk from "./ProfileSk";
 
-type Props = { data: Session };
-export default function Profile({ data }: Props) {
+export default function Profile() {
   const [isOpen, setIsOpen] = useState(false);
+  const { data, status } = useSession();
   useEffect(() => {
     const blurHandler = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
@@ -22,6 +23,9 @@ export default function Profile({ data }: Props) {
       document.removeEventListener("click", blurHandler);
     };
   }, []);
+  if (status === "loading") {
+    return <ProfileSk />;
+  }
   return (
     <div className="relative">
       <button
@@ -46,7 +50,7 @@ export default function Profile({ data }: Props) {
         </div>
         <FaAngleDown />
       </button>
-      <ProfileMenu isOpen={isOpen} data={data} />
+      <ProfileMenu isOpen={isOpen} />
     </div>
   );
 }

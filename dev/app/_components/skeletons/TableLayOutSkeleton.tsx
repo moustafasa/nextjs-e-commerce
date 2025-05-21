@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils";
+import cn from "@/app/_utilities/cssConditional";
 import { ReactNode } from "react";
 import Skeleton from "./Skeleton";
 

@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils";
+import cn from "@/app/_utilities/cssConditional";
 
 type Props = { discountPercent: number; dir?: "left" | "right" };
 export default function ProductRippon({

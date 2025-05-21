@@ -5,13 +5,13 @@ import { BiLogOut } from "react-icons/bi";
 import Image from "next/image";
 import profile from "@/images/profile.png";
 import cn from "@/app/_utilities/cssConditional";
-import { signOutAction } from "@/lib/usersActions";
-import type { Session } from "next-auth";
 import useThemeStorage from "@/app/_utilities/useThemeStorage";
+import { signOut, useSession } from "next-auth/react";
 
-type Props = { isOpen: boolean; data: Session };
-export default function ProfileMenu({ isOpen, data }: Props) {
+type Props = { isOpen: boolean };
+export default function ProfileMenu({ isOpen }: Props) {
   const [theme, setTheme] = useThemeStorage();
+  const { data } = useSession();
 
   return (
     <menu
@@ -44,7 +44,7 @@ export default function ProfileMenu({ isOpen, data }: Props) {
           }}
         >
           <ToggleButton />
-          <div>switch to {theme} mode</div>
+          <div>switch to {theme === "dark" ? "light" : "dark"} mode</div>
         </button>
       </li>
       <li className="p-3 border-b-[1px]">
@@ -57,16 +57,16 @@ export default function ProfileMenu({ isOpen, data }: Props) {
         </Link>
       </li>
       <li className="p-3">
-        <form action={signOutAction}>
-          <button
-            type="submit"
-            className="flex gap-3 items-center  capitalize hover:bg-slate-500 hover:text-white dark:hover:bg-menu-transparent-gray h-full w-full text-left p-2 rounded-lg"
-            onClick={() => {}}
-          >
-            <BiLogOut size={30} className="dark:text-gray-icons text-white  " />
-            <div>logout</div>
-          </button>
-        </form>
+        <button
+          type="submit"
+          className="flex gap-3 items-center  capitalize hover:bg-slate-500 hover:text-white dark:hover:bg-menu-transparent-gray h-full w-full text-left p-2 rounded-lg"
+          onClick={() => {
+            signOut({ redirectTo: "/" });
+          }}
+        >
+          <BiLogOut size={30} className="dark:text-gray-icons text-white  " />
+          <div>logout</div>
+        </button>
       </li>
     </menu>
   );

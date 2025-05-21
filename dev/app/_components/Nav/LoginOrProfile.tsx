@@ -10,7 +10,7 @@ export default async function LoginOrProfile() {
   const session = await auth();
 
   return (
-    <div className="ms-auto lg:ms-0 flex items-center gap-3 pe-4">
+    <>
       {session?.user && <CartIconShow />}
       {session?.user.roles.find(
         (role) =>
@@ -18,11 +18,20 @@ export default async function LoginOrProfile() {
           role === Role.ORDER_REPORTER ||
           role === Role.WRITER
       ) && (
-        <Link className="form-button" href={"/dashboard"}>
+        <Link
+          className="form-button"
+          href={
+            session.user.roles.includes(Role.ADMIN)
+              ? "/dashboard"
+              : session.user.roles.includes(Role.WRITER)
+              ? "/dashboard/stock"
+              : "/dashboard/orders"
+          }
+        >
           dashboard
         </Link>
       )}
-      {session?.user ? <Profile data={session} /> : <SignBtns />}
-    </div>
+      {session?.user ? <Profile /> : <SignBtns />}
+    </>
   );
 }

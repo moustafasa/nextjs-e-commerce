@@ -29,10 +29,9 @@ export default function Home() {
         </Link>
       </div>
       <div className="lg:w-[45%] flex justify-center items-center">
-        <LottieAnimeSk />
-        {/* <Suspense fallback={<LottieAnimeSk />}>
+        <Suspense fallback={<LottieAnimeSk />}>
           <LottieAnime />
-        </Suspense> */}
+        </Suspense>
       </div>
     </div>
   );

@@ -4,6 +4,16 @@ interface FormField {
   id: string;
   label?: string;
 }
+enum Role {
+  // eslint-disable-next-line no-unused-vars
+  ADMIN = 1000,
+  // eslint-disable-next-line no-unused-vars
+  USER = 2500,
+  // eslint-disable-next-line no-unused-vars
+  WRITER = 3000,
+  // eslint-disable-next-line no-unused-vars
+  ORDER_REPORTER = 4000,
+}
 
 interface Input extends FormField {
   type: "text" | "password" | "email" | "number";
@@ -48,6 +58,7 @@ interface SideBarLink {
   href: string;
   label: string;
   icon: React.JSX;
+  role?: Role[];
 }
 
 type TableSchema<data> = {

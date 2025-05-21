@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { Cairo } from "next/font/google";
 import "./globals.css";
 import AuthProvider from "./_components/AuthProvider";
-import HTMLComponent from "./_components/HTMLComponent";
+import { cookies } from "next/headers";
 
 const cairo = Cairo({ subsets: ["latin"] });
 
@@ -17,8 +17,10 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const cookie = await cookies();
+  const mode = cookie.get("mode")?.value || "light";
   return (
-    <HTMLComponent>
+    <html lang="en" data-theme={mode}>
       <body
         className={cn(
           cairo.className,
@@ -27,6 +29,6 @@ export default async function RootLayout({
       >
         <AuthProvider>{children}</AuthProvider>
       </body>
-    </HTMLComponent>
+    </html>
   );
 }

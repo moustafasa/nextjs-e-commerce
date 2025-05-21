@@ -6,7 +6,7 @@ export default function loading() {
   return (
     <FormSk
       bgLight
-      className="dark:bg-black-tertiery-bg bg-slate-200 p-14 rounded-lg"
+      className="dark:bg-black-tertiery-bg bg-slate-200 p-5 sm:p-14 rounded-lg"
     >
       {PasswordInputs.map((input) => (
         <FormFieldSkeleton type={input.type} key={input.id} bgLight />
