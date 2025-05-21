@@ -17,14 +17,19 @@ export default function useThemeStorage(): [
   useLayoutEffect(() => {
     // Only run on client side
     const getInitialTheme = async () => {
-      if (window !== undefined) {
-        const savedTheme = await window.cookieStore.get("mode");
-        const prefersDark = window.matchMedia(
-          "(prefers-color-scheme: dark)"
-        ).matches;
-        const initialTheme =
-          savedTheme?.value || (prefersDark ? "dark" : "light");
-        setTheme(initialTheme as "dark" | "light");
+      try {
+        if (typeof window !== "undefined" && "cookieStore" in window) {
+          const savedTheme = await window.cookieStore.get("mode");
+          const prefersDark = window.matchMedia(
+            "(prefers-color-scheme: dark)"
+          ).matches;
+          const initialTheme =
+            savedTheme?.value || (prefersDark ? "dark" : "light");
+          setTheme(initialTheme as "dark" | "light");
+        }
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      } catch (error) {
+        // nothing to do
       }
     };
     getInitialTheme();
