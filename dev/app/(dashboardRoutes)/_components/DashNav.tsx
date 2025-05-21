@@ -20,7 +20,7 @@ export default async function DashNav() {
           <Skeleton classNames={"h-[50px] w-[50px] rounded-full px-2 py-1"} />
         }
       >
-        <Profile data={user} />
+        <Profile />
       </Suspense>
     </header>
   );
