@@ -17,13 +17,15 @@ export default function useThemeStorage(): [
   useLayoutEffect(() => {
     // Only run on client side
     const getInitialTheme = async () => {
-      const savedTheme = await window.cookieStore.get("mode");
-      const prefersDark = window.matchMedia(
-        "(prefers-color-scheme: dark)"
-      ).matches;
-      const initialTheme =
-        savedTheme?.value || (prefersDark ? "dark" : "light");
-      setTheme(initialTheme as "dark" | "light");
+      if (window !== undefined) {
+        const savedTheme = await window.cookieStore.get("mode");
+        const prefersDark = window.matchMedia(
+          "(prefers-color-scheme: dark)"
+        ).matches;
+        const initialTheme =
+          savedTheme?.value || (prefersDark ? "dark" : "light");
+        setTheme(initialTheme as "dark" | "light");
+      }
     };
     getInitialTheme();
   }, []);
