@@ -19,7 +19,7 @@ export async function changeStatusAction(
 
   try {
     const newStatus = await changeOrderStatus(orderId, status as OrderStatus);
-    revalidatePath("/orders");
+    revalidatePath("/dashboard/orders");
     return { status: newStatus };
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (err) {

@@ -24,7 +24,6 @@ export const POST = async (req: Request) => {
         break;
       }
       await completeCartCheckout(event.data.object.metadata.userId);
-      revalidatePath("/dashboard/orders/[orderId]");
       break;
     }
   }

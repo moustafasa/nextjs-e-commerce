@@ -193,6 +193,7 @@ export const completeCartCheckout = async function (userId: string) {
 
   await cart.deleteOne().exec();
   revalidatePath("/cart");
+  revalidatePath("/dashboard/orders");
 };
 
 export async function deleteProductFromCart(productId: string) {
