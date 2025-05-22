@@ -38,5 +38,5 @@ export default async function page({ params }: Props) {
 
 export async function generateStaticParams() {
   const ordersIds = await getOrderIds();
-  return ordersIds.map((id) => ({ id: id.toString() }));
+  return ordersIds.map((id) => ({ orderId: id.toString() }));
 }
