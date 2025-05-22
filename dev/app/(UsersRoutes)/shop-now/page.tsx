@@ -12,7 +12,7 @@ import CategorySideNavSk from "@/app/_components/skeletons/CategorySideNavSk";
 export default async function page({ searchParams }: ShopNowSearchParams) {
   const params = await searchParams;
   return (
-    <div className="md:ps-shop-now-side-nav-w">
+    <div className="md:ps-shop-now-side-nav-w min-h-full">
       <Suspense fallback={<CategorySideNavSk />}>
         <CategorySideNav />
       </Suspense>
@@ -28,17 +28,15 @@ export default async function page({ searchParams }: ShopNowSearchParams) {
             <ProductsList searchParams={searchParams} />
           </Suspense>
         </ul>
+
+        <CustomPagination
+          searchParams={searchParams}
+          getMetaData={getProductsWithCategoryTotal(
+            params?.category,
+            params?.search
+          )}
+        />
       </div>
-      {/* <Suspense fallback={<PaginationSk />}>
-        <Pagination searchParams={searchParams} />
-      </Suspense> */}
-      <CustomPagination
-        searchParams={searchParams}
-        getMetaData={getProductsWithCategoryTotal(
-          params?.category,
-          params?.search
-        )}
-      />
     </div>
   );
 }
