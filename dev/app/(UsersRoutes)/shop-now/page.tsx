@@ -16,7 +16,7 @@ export default async function page({ searchParams }: ShopNowSearchParams) {
       <Suspense fallback={<CategorySideNavSk />}>
         <CategorySideNav />
       </Suspense>
-      <div className="md:p-10 p-3">
+      <div className="md:p-10 p-3 min-h-full">
         <Suspense fallback={<PaginationHeaderSk />}>
           <PaginationHeader searchParams={searchParams} />
         </Suspense>
