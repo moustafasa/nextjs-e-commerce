@@ -11,18 +11,11 @@ export default async function Page({ params }: Props) {
   if (!category) {
     notFound();
   }
-  const convertedCategory = category.toObject();
-  return (
-    <EditCategoryForm
-      category={{
-        ...convertedCategory,
-        _id: convertedCategory._id.toString() as string,
-      }}
-    />
-  );
+  const convertedCategory = category.toObject({ flattenObjectIds: true });
+  return <EditCategoryForm category={convertedCategory} />;
 }
 
 export const generateStaticParams = async () => {
   const categoriesIds = await getCategoriesIds();
-  return categoriesIds.map((id) => ({ id: id.toString() }));
+  return categoriesIds.map((category) => ({ id: category._id.toString() }));
 };

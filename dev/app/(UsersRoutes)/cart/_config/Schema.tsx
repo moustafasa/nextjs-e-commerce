@@ -37,7 +37,11 @@ const schema = [
     getData(data, row) {
       return (
         <span className="text-xl font-bold px-3">
-          {formatPrice((data as IProductsWithCategory).price * row.qty)}
+          {formatPrice(
+            ((data as IProductsWithCategory).price -
+              ((data as IProductsWithCategory).discount || 0)) *
+              row.qty
+          )}
         </span>
       );
     },

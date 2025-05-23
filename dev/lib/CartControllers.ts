@@ -152,7 +152,9 @@ export const getCartTotal = cache(async function () {
 
   const totalPrice =
     products?.reduce((curr, prev) => {
-      return curr + prev.qty * prev.product.price;
+      return (
+        curr + prev.qty * (prev.product.price - (prev.product?.discount || 0))
+      );
     }, 0) || 0;
 
   const totalDiscount =

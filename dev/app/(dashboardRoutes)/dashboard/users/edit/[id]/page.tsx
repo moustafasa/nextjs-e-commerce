@@ -11,15 +11,11 @@ export default async function Page({ params }: Props) {
   if (!user) {
     notFound();
   }
-  const convertedUser = user.toObject();
-  return (
-    <EditUserForm
-      user={{ ...convertedUser, _id: convertedUser._id.toString() }}
-    />
-  );
+  const convertedUser = user.toObject({ flattenObjectIds: true });
+  return <EditUserForm user={convertedUser} />;
 }
 
 export const generateStaticParams = async () => {
   const usersIds = await getUsersIds();
-  return usersIds.map((id) => ({ id: id.toString() }));
+  return usersIds.map((user) => ({ id: user._id.toString() }));
 };

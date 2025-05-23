@@ -14,7 +14,7 @@ export default async function Page({ params }: Props) {
     notFound();
   }
   const categories = await getCategoriesForOptions();
-  const convertedProduct = product.toObject();
+  const convertedProduct = product.toObject({ flattenObjectIds: true });
   return (
     <AddProductContext>
       <EditProductsForm categories={categories} product={convertedProduct} />
@@ -24,5 +24,5 @@ export default async function Page({ params }: Props) {
 
 export const generateStaticParams = async () => {
   const productsIds = await getProductsIds();
-  return productsIds.map((id) => ({ id: id.toString() }));
+  return productsIds.map((product) => ({ id: product._id.toString() }));
 };
