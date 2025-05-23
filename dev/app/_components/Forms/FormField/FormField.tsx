@@ -18,14 +18,16 @@ export default function FormField<T extends AllInputs>({
         <FileInput input={input} {...(others as FileInputOther)} />
       ) : (
         <>
-          <label
-            className={cn("mb-1 sm:mb-0", {
-              "self-start": input.type === "textarea",
-            })}
-            htmlFor={input.id}
-          >
-            {input.label}
-          </label>
+          {input.label && (
+            <label
+              className={cn("mb-1 sm:mb-0", {
+                "self-start": input.type === "textarea",
+              })}
+              htmlFor={input.id}
+            >
+              {input.label}
+            </label>
+          )}
           {input.type === "select" ? (
             <SelectInput
               input={input}

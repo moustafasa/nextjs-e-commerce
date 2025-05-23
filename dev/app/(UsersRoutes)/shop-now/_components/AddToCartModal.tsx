@@ -37,7 +37,7 @@ export default function AddToCartModal({ productId, title, img }: Props) {
         />
         <form
           action={formAction}
-          className="flex flex-col items-center justify-center"
+          className="flex flex-col items-center justify-center w-full"
         >
           <FormNumberInput error={state?.error} />
           <div className="text-sm capitalize text-red-error font-bold mb-3 mt-1 px-2 ">

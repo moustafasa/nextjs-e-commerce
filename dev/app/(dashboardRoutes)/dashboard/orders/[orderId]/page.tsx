@@ -16,13 +16,12 @@ type Props = {
 
 export default async function page({ params }: Props) {
   const pageParams = await params;
-
   return (
-    <div className="mt-10 capitalize px-10">
+    <div className="pt-10 capitalize sm:px-10 px-2 pb-10">
       <Suspense fallback={<ViewOrderHeaderSkeleton />}>
         <ViewOrderHeader orderId={pageParams.orderId} />
       </Suspense>
-      <TableLayout tableName="order products">
+      <TableLayout noSearch tableName="order products">
         <TableHeader schema={schema} />
         <Suspense fallback={<TableBodySkeleton schema={schema} />}>
           <TableBody
@@ -38,5 +37,5 @@ export default async function page({ params }: Props) {
 
 export async function generateStaticParams() {
   const ordersIds = await getOrderIds();
-  return ordersIds.map((id) => ({ orderId: id.toString() }));
+  return ordersIds.map((order) => ({ orderId: order._id.toString() }));
 }

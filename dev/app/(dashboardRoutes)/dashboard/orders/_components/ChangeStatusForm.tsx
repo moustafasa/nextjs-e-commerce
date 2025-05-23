@@ -33,17 +33,20 @@ function ChangeStatusForm({ orderId, initialStatus }: Props) {
   }, [state.status]);
 
   return (
-    <form action={formAction} className="p-10 flex gap-2 justify-center">
-      <FormField
-        errors={undefined}
-        input={input}
-        defaultValue={state.status}
-        noErrors
-        ref={selectRef}
-      />
-      <button className="capitalize form-button justify-self-end">
-        change
-      </button>
+    <form
+      action={formAction}
+      className=" flex gap-2 justify-start  items-center sm:justify-center"
+    >
+      <div className="sm:w-[40%] w-full">
+        <FormField
+          errors={undefined}
+          input={input}
+          defaultValue={state.status}
+          noErrors
+          ref={selectRef}
+        />
+      </div>
+      <button className="capitalize form-button ">change</button>
     </form>
   );
 }

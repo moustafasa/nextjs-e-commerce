@@ -12,7 +12,7 @@ import {
 } from "./customErrors";
 import { EditProductSchemaType } from "@/models/zodSchemas/Product/editProductsSchema";
 import { AddToStockSchema } from "@/models/zodSchemas/Product/addToStockSchema";
-import { PRODUCTS_LIMIT, Role } from "@/config/constants";
+import { SHOP_NOW_LIMIT, Role, PRODUCTS_LIMIT } from "@/config/constants";
 import checkAuth, { getSearchRgx } from "./utils";
 
 export const saveDraftedImages = async (id: string, images: string[]) => {
@@ -82,8 +82,8 @@ export const getProductsWithCategory = cache(
       filter.$or = [{ title: regex }, { descriptions: regex }];
     }
     const products = await Products.find(filter)
-      .skip(PRODUCTS_LIMIT * (page - 1))
-      .limit(PRODUCTS_LIMIT)
+      .skip(SHOP_NOW_LIMIT * (page - 1))
+      .limit(SHOP_NOW_LIMIT)
       .lean<IProducts[]>()
       .exec();
     return products;
@@ -103,8 +103,12 @@ export const getProductsWithCategoryTotal = cache(
     const totalProducts = await Products.countDocuments(filter).exec();
     return {
       totalProducts,
-      totalPages: Math.ceil(totalProducts / PRODUCTS_LIMIT),
-      limit: PRODUCTS_LIMIT,
+      totalPages: Math.ceil(
+        category
+          ? totalProducts / SHOP_NOW_LIMIT
+          : totalProducts / PRODUCTS_LIMIT
+      ),
+      limit: SHOP_NOW_LIMIT,
     };
   }
 );

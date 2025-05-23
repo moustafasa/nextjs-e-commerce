@@ -9,12 +9,27 @@ import TableBody from "@/app/_components/Table/TableBody";
 import schema from "./_config/Schema";
 import { CartSchema } from "./_types/types";
 import CartTotalSk from "./_components/CartTotalSk";
+import Link from "next/link";
 
 export default async function page() {
   const numberOfCarts = await getCartQuantity();
+  if (!numberOfCarts) {
+    return (
+      <TableLayout noSearch tableName="your shoping cart">
+        <tbody className="">
+          <tr>
+            <td className="p-3 text-3xl leading-relaxed">
+              no products added to your cart yet <br />
+              <Link href={"/shop-now"}>go to shoping 👉</Link>
+            </td>
+          </tr>
+        </tbody>
+      </TableLayout>
+    );
+  }
   return (
     <>
-      <TableLayout tableName="your shoping cart">
+      <TableLayout noSearch tableName="your shoping cart">
         <TableHeader<CartSchema> noId schema={schema} />
         <Suspense
           fallback={

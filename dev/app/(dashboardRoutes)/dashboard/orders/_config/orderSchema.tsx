@@ -14,6 +14,13 @@ type IOrdersSchema = Omit<IOrders, "userId" | "products"> & {
 };
 export const schema = [
   {
+    label: "order id",
+    id: "_id",
+    getData(data) {
+      return data.toString();
+    },
+  },
+  {
     label: "user name",
     id: "userId",
     getData(data) {

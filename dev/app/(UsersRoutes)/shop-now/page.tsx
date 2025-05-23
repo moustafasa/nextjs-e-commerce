@@ -12,15 +12,15 @@ import CategorySideNavSk from "@/app/_components/skeletons/CategorySideNavSk";
 export default async function page({ searchParams }: ShopNowSearchParams) {
   const params = await searchParams;
   return (
-    <div className="md:ps-shop-now-side-nav-w min-h-full">
+    <div className="md:ps-shop-now-side-nav-w min-h-full ">
       <Suspense fallback={<CategorySideNavSk />}>
         <CategorySideNav />
       </Suspense>
-      <div className="md:p-10 p-3 min-h-full">
+      <div className="md:p-7 p-3 min-h-full flex flex-col gap-4">
         <Suspense fallback={<PaginationHeaderSk />}>
           <PaginationHeader searchParams={searchParams} />
         </Suspense>
-        <ul className="grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-8">
+        <ul className="grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-8  ">
           <Suspense
             key={JSON.stringify(await searchParams)}
             fallback={<ProductListSk />}
