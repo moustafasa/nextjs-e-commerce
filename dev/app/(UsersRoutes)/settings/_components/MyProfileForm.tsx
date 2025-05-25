@@ -1,7 +1,7 @@
 "use client";
 import Form from "@/app/_components/Forms/Form";
 import FormField from "@/app/_components/Forms/FormField/FormField";
-import useSettingsLayoutErrors from "@/app/_utilities/SettingsLayoutErrorsContext/useSettingsLayoutErrors";
+import useSettingsLayoutErrors from "@/app/context/SettingsLayoutErrorsContext/useSettingsLayoutErrors";
 import { PersonalInfoInputs, ProfileImgInput } from "@/config/SettingsInputs";
 import { changeMyProfileAction } from "@/lib/SettingsActions";
 import { useEffect, useMemo, useRef, useState, useActionState } from "react";
@@ -59,6 +59,7 @@ export default function MyProfileForm({
     <Form
       formAction={(formData) => {
         formAction(formData);
+        window.location.reload();
         if (!errors) setFields((prev) => ({ ...prev, img: false }));
         if (isModalOpen) setIsModalOpen(false);
       }}

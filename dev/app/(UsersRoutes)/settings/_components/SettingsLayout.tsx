@@ -1,5 +1,5 @@
 "use client";
-import useSettingsLayoutErrors from "@/app/_utilities/SettingsLayoutErrorsContext/useSettingsLayoutErrors";
+import useSettingsLayoutErrors from "@/app/context/SettingsLayoutErrorsContext/useSettingsLayoutErrors";
 import FormLayout from "../../../_components/Forms/FormLayout";
 
 type Props = { children: React.ReactNode };

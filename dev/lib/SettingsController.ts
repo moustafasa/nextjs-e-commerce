@@ -54,13 +54,21 @@ export const changeMyProfile = async (result: MyProfileSchemaType) => {
           access: "public",
         }
       );
-      await del(user.image);
+      try {
+        await del(user.image);
+      } catch (err) {
+        console.log(err);
+      }
       user.image = newImage.url;
     }
     updatedSession.email = result.email;
   }
   if (result.image.size > 0) {
-    await del(`${user.image}`);
+    try {
+      await del(`${user.image}`);
+    } catch (err) {
+      console.log(err);
+    }
     const ext = path.extname(result.image.name);
     const { url: imageURl } = await put(
       `/profiles/${user.email}.${ext}`,

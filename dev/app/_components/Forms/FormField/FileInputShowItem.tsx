@@ -1,4 +1,4 @@
-import useImagesUrls from "@/app/_utilities/addProductContext/useImagesUrls";
+import useImagesUrls from "@/app/context/addProductContext/useImagesUrls";
 import { deleteProductImageAction } from "@/lib/productsActions";
 import { upload } from "@vercel/blob/client";
 import Image from "next/image";

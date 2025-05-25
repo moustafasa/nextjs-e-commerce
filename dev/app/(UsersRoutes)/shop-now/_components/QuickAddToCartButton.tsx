@@ -1,6 +1,6 @@
 "use client";
 
-import useAddToCartModalContext from "@/app/_utilities/useAddToCartModalContext";
+import useAddToCartModalContext from "@/app/context/AddToCartModalContext/useAddToCartModalContext";
 
 export default function QuickAddToCartButton() {
   const [, setIsOpen] = useAddToCartModalContext();

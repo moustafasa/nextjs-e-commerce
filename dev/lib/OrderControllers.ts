@@ -5,7 +5,7 @@ import { IProducts } from "@/models/database/Products";
 import { HydratedDocument } from "mongoose";
 import { notFound } from "next/navigation";
 import { cache } from "react";
-import { getSearchRgx } from "./utils";
+import { getSearchRgx } from "./getSearchRgx";
 
 export const getPopulatedOrders = cache(
   async (page?: number, search?: string) => {
@@ -116,7 +116,6 @@ export const getOrdersMeta = cache(async (search?: string) => {
 
 export const getPopulatedOrderById = cache(async (id: string) => {
   await dbConnect();
-  console.log(id, " id");
   const order = await Orders.findById<HydratedDocument<IOrders>>(id)
     .populate<{
       userId: { fullName: string };

@@ -2,7 +2,7 @@
 import Form from "@/app/_components/Forms/Form";
 import FormButton from "@/app/_components/Forms/FormButton";
 import FormField from "@/app/_components/Forms/FormField/FormField";
-import useSettingsLayoutErrors from "@/app/_utilities/SettingsLayoutErrorsContext/useSettingsLayoutErrors";
+import useSettingsLayoutErrors from "@/app/context/SettingsLayoutErrorsContext/useSettingsLayoutErrors";
 import { PasswordInputs } from "@/config/SettingsInputs";
 import { changePasswordAction } from "@/lib/SettingsActions";
 import { useEffect, useActionState } from "react";

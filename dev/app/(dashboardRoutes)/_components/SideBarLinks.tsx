@@ -1,4 +1,5 @@
-import useSideNavCollapse from "@/app/_utilities/useSideNavCollapseContext";
+import useSideNavCollapse from "@/app/context/SideNavCollapseContext/useSideNavCollapseContext";
+
 import { dashSideBarLinks } from "@/config/dashSideBarLinks";
 import cn from "@/app/_utilities/cssConditional";
 import Link from "next/link";

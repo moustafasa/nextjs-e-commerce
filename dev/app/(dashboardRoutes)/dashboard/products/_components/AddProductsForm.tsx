@@ -7,7 +7,7 @@ import { addProductsInputs } from "@/config/addProductInputs";
 import { addProductsAction } from "@/lib/productsActions";
 import { AddProductFlattenedError } from "@/models/zodSchemas/Product/addProductsSchema";
 import AddProductImage from "./AddProductImage";
-import useIsImageLoading from "@/app/_utilities/addProductContext/useIsImageLoading";
+import useIsImageLoading from "@/app/context/addProductContext/useIsImageLoading";
 import Form from "@/app/_components/Forms/Form";
 
 type Props = {

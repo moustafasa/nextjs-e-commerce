@@ -60,7 +60,6 @@ export async function addToCart(productId: string, amount: number) {
   }
 
   let foundCart = await getCart();
-  console.log(foundCart);
   if (!foundCart) {
     foundCart = await Carts.create<HydratedDocument<ICarts>>({
       userId: session.user.userId,

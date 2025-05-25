@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import useAddToCartModalContext from "@/app/_utilities/useAddToCartModalContext";
+import useAddToCartModalContext from "@/app/context/AddToCartModalContext/useAddToCartModalContext";
 import useAddToCartAction from "@/app/_utilities/useAddToCartAction";
 import { useEffect } from "react";
 import Modal from "@/app/_components/Modal/Modal";

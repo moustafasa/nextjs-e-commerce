@@ -12,8 +12,8 @@ import {
 } from "./customErrors";
 import { EditProductSchemaType } from "@/models/zodSchemas/Product/editProductsSchema";
 import { AddToStockSchema } from "@/models/zodSchemas/Product/addToStockSchema";
-import { SHOP_NOW_LIMIT, Role, PRODUCTS_LIMIT } from "@/config/constants";
-import checkAuth, { getSearchRgx } from "./utils";
+import { SHOP_NOW_LIMIT, PRODUCTS_LIMIT } from "@/config/constants";
+import { getSearchRgx } from "./getSearchRgx";
 
 export const saveDraftedImages = async (id: string, images: string[]) => {
   const savedImagesPromises = images.map(async (img) => {
@@ -24,7 +24,11 @@ export const saveDraftedImages = async (id: string, images: string[]) => {
     return newImg.url;
   });
   const savedImages = await Promise.all(savedImagesPromises);
-  await del(images);
+  try {
+    await del(images);
+  } catch (err) {
+    console.log(err);
+  }
 
   return savedImages;
 };
@@ -51,7 +55,6 @@ export const addProduct = async (result: AddProductSchemaType) => {
 };
 
 export const getProducts = cache(async (page?: number, search?: string) => {
-  await checkAuth([Role.ADMIN, Role.WRITER]);
   await dbConnect();
 
   const query = Products.find({});
@@ -74,7 +77,6 @@ export const getProducts = cache(async (page?: number, search?: string) => {
 
 export const getProductsWithCategory = cache(
   async (category?: string | string[], page: number = 1, search?: string) => {
-    await checkAuth([Role.ADMIN, Role.WRITER]);
     await dbConnect();
     const filter: FilterQuery<IProducts> = category ? { category } : {};
     if (search) {
@@ -92,7 +94,6 @@ export const getProductsWithCategory = cache(
 
 export const getProductsWithCategoryTotal = cache(
   async (category?: string | string[], search?: string) => {
-    await checkAuth([Role.ADMIN, Role.WRITER]);
     await dbConnect();
     const filter: FilterQuery<IProducts> = category ? { category } : {};
     if (search) {
@@ -114,7 +115,6 @@ export const getProductsWithCategoryTotal = cache(
 );
 
 export const getProductsForOptions = cache(async (category?: string) => {
-  await checkAuth([Role.ADMIN, Role.WRITER]);
   let products: IProducts[] = [];
   if (category) {
     await dbConnect();
@@ -129,7 +129,6 @@ export const getProductsForOptions = cache(async (category?: string) => {
 });
 
 export const getProductById = cache(async (id: string) => {
-  await checkAuth([Role.ADMIN, Role.WRITER]);
   if (!isValidObjectId(id)) {
     return null;
   }
@@ -142,7 +141,6 @@ export const getProductById = cache(async (id: string) => {
   return product;
 });
 export const getProductByIdWithPopulation = cache(async (id: string) => {
-  await checkAuth([Role.ADMIN, Role.WRITER]);
   if (!isValidObjectId(id)) {
     return null;
   }
@@ -190,7 +188,11 @@ export const editProduct = async (
   }
 
   if (result.deletedImages.length > 0) {
-    await del(result.deletedImages);
+    try {
+      await del(result.deletedImages);
+    } catch (err) {
+      console.log(err);
+    }
     product.images = product.images.filter(
       (img) => !result.deletedImages.includes(img)
     );
@@ -231,13 +233,19 @@ export const deleteProduct = async (id: string) => {
   const product = await getProductById(id);
   if (!product) notFound();
   if (product.images.length > 0) {
-    await del(product.images);
+    try {
+      await del(product.images);
+    } catch (err) {
+      console.log(err);
+    }
   }
   await product.deleteOne().exec();
 };
 
 export const deleteProductImage = async (url: string) => {
-  await del(url);
+  console.log(url);
+  const test = await del(url);
+  console.log("deleted image :", test);
 };
 
 export const getProductsIds = async () => {

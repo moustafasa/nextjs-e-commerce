@@ -1,5 +1,6 @@
 "use client";
-import useSideNavCollapse from "@/app/_utilities/useSideNavCollapseContext";
+
+import useSideNavCollapse from "@/app/context/SideNavCollapseContext/useSideNavCollapseContext";
 import { FaBars } from "react-icons/fa";
 
 export default function DashCollapseButton() {

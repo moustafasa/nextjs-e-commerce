@@ -12,9 +12,9 @@ export const baseProductSchema = z.object({
     .refine(
       (images) =>
         images.every((img) =>
-          [".jpg", ".png", ".jpeg"].includes(path.extname(img))
+          [".jpg", ".png", ".jpeg", ".wepb"].includes(path.extname(img))
         ),
-      "only .jpg and .png files is allowed"
+      "only .jpg and .png and .wepb files is allowed"
     ),
   descriptions: z
     .string()

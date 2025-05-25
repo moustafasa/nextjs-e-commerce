@@ -1,4 +1,4 @@
-import AddProductContext from "@/app/_utilities/addProductContext/addProductContext";
+import AddProductContext from "@/app/context/addProductContext/addProductContext";
 import { getCategoriesForOptions } from "@/lib/categoriesControllers";
 import AddProductsForm from "../_components/AddProductsForm";
 

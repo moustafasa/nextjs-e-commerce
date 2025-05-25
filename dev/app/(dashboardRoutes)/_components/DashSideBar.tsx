@@ -1,5 +1,6 @@
 "use client";
-import useSideNavCollapse from "@/app/_utilities/useSideNavCollapseContext";
+import useSideNavCollapse from "@/app/context/SideNavCollapseContext/useSideNavCollapseContext";
+
 import SideBarLinks from "./SideBarLinks";
 import cn from "@/app/_utilities/cssConditional";
 import { useLayoutEffect } from "react";

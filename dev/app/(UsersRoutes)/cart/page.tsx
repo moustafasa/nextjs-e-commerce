@@ -10,6 +10,7 @@ import schema from "./_config/Schema";
 import { CartSchema } from "./_types/types";
 import CartTotalSk from "./_components/CartTotalSk";
 import Link from "next/link";
+import CheckOutErrorsProvider from "@/app/context/checkOutErrorsContext.tsx/checkOutErrorsContext";
 
 export default async function page() {
   const numberOfCarts = await getCartQuantity();
@@ -28,7 +29,7 @@ export default async function page() {
     );
   }
   return (
-    <>
+    <CheckOutErrorsProvider>
       <TableLayout noSearch tableName="your shoping cart">
         <TableHeader<CartSchema> noId schema={schema} />
         <Suspense
@@ -54,6 +55,6 @@ export default async function page() {
         <CartTotal />
       </Suspense>
       <CheckoutForm />
-    </>
+    </CheckOutErrorsProvider>
   );
 }

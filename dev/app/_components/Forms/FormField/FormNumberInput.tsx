@@ -23,7 +23,7 @@ export default function FormNumberInput({
   useEffect(() => {
     if (submitOnChange) {
       const handler = setTimeout(() => {
-        if (amount !== value && amount !== "") {
+        if (amount !== "") {
           inputRef.current?.form?.requestSubmit();
         }
       }, 300); // 300ms debounce time
@@ -52,18 +52,16 @@ export default function FormNumberInput({
         input={{ type: "number", name: "amount", id: "amount" }}
         className="[&::-webkit-inner-spin-button]:m-0 [&::-webkit-outer-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none !px-[30px] block text-center font-bold dark:!text-white "
         pattern="[0-1]"
-        value={amount}
+        value={amount === "" ? value : amount}
         onChange={(e) => {
           setAmount(e.target.value !== "" ? +e.target.value : "");
         }}
-        max={max}
-        min={0}
         ref={inputRef}
       />
       <button
         type="button"
         onClick={() => {
-          setAmount(Math.max(0, (amount || 0) - 1));
+          setAmount(Math.max(1, (amount || 0) - 1));
         }}
         className="absolute flex items-center justify-center w-[30px]  right-0 top-0 h-full text-sm px-[5px]"
       >

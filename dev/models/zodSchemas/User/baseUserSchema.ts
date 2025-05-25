@@ -30,7 +30,7 @@ export const baseUserSchema = z.object({
     .string({ required_error: "the fullname is required" })
     .min(1, { message: "the full name is required" })
     .regex(
-      /^[a-zA-Z]+\s[a-zA-z]+$/g,
+      /^[a-zA-Z]+\s[a-zA-z0-9]+$/g,
       "the full name should contain the firstname and lastname seperated by space"
     )
     .toLowerCase(),

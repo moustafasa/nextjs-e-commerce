@@ -8,8 +8,8 @@ import { cache } from "react";
 import { FilterQuery, HydratedDocument, isValidObjectId } from "mongoose";
 import { notFound } from "next/navigation";
 import { EditCategorySchemaType } from "@/models/zodSchemas/Category/editCategorySchema";
-import { CATEGORIES_LIMIT, Role } from "@/config/constants";
-import checkAuth, { getSearchRgx } from "./utils";
+import { CATEGORIES_LIMIT } from "@/config/constants";
+import { getSearchRgx } from "./getSearchRgx";
 
 export const addCategory = async (category: AddCategorySchemaType) => {
   await dbConnect();
@@ -28,7 +28,6 @@ export const addCategory = async (category: AddCategorySchemaType) => {
 };
 
 export const getCategories = cache(async (page?: number, search?: string) => {
-  await checkAuth([Role.ADMIN, Role.WRITER]);
   await dbConnect();
   const query = Categories.find({});
   if (page) {
@@ -48,7 +47,6 @@ export const getCategoriesForOptions = cache(async () => {
 });
 
 export const getCategoryById = cache(async (id: string) => {
-  await checkAuth([Role.ADMIN, Role.WRITER]);
   if (!isValidObjectId(id)) {
     return null;
   }
@@ -80,7 +78,11 @@ export const editCategory = async (
   }
 
   if (result.image.size > 0) {
-    await del(category.image);
+    try {
+      await del(category.image);
+    } catch (err) {
+      console.log(err);
+    }
     const { url: image } = await put(
       `categories/${result.image.name}${path.extname(result.image.name)}`,
       result.image,
@@ -114,7 +116,11 @@ export const deleteCategory = async (_id: string) => {
     category.image.search("dssgraxhulubwyc1.public.blob.vercel-storage.com") >=
     0
   ) {
-    await del(category.image);
+    try {
+      await del(category.image);
+    } catch (err) {
+      console.log(err);
+    }
     await category.deleteOne().exec();
   }
 };

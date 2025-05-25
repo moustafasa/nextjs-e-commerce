@@ -1,7 +1,7 @@
 import SettingsHeading from "@/app/(UsersRoutes)/settings/_components/SettingsHeading";
 import SettingsLayout from "@/app/(UsersRoutes)/settings/_components/SettingsLayout";
 import SettingsNav from "@/app/(UsersRoutes)/settings/_components/SettingsNav";
-import SettingsLayoutErrorsContext from "@/app/_utilities/SettingsLayoutErrorsContext/settingsLayoutErrorContext";
+import SettingsLayoutErrorsContext from "@/app/context/SettingsLayoutErrorsContext/settingsLayoutErrorContext";
 import { type ReactNode } from "react";
 
 type Props = { children: ReactNode };

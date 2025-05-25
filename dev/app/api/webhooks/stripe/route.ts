@@ -1,5 +1,4 @@
 import { completeCartCheckout } from "@/lib/CartControllers";
-import { revalidatePath } from "next/cache";
 import Stripe from "stripe";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string);
@@ -13,7 +12,6 @@ export const POST = async (req: Request) => {
   try {
     event = stripe.webhooks.constructEvent(buf, sig, secret);
   } catch (err) {
-    console.log(err);
     return Response.json("webhook error: " + (err as Error).message, {
       status: 400,
     });

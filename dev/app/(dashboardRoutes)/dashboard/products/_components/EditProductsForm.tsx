@@ -5,11 +5,11 @@ import FormButton from "@/app/_components/Forms/FormButton";
 import { addProductsInputs } from "@/config/addProductInputs";
 import { editProductAction } from "@/lib/productsActions";
 import { AddProductFlattenedError } from "@/models/zodSchemas/Product/addProductsSchema";
-import useIsImageLoading from "@/app/_utilities/addProductContext/useIsImageLoading";
+import useIsImageLoading from "@/app/context/addProductContext/useIsImageLoading";
 import { IProducts } from "@/models/database/Products";
 import EditProductImage from "./EditProductImage";
-import useDeletedImagesUrls from "@/app/_utilities/addProductContext/useDeletedImagesUrls";
-import useImagesUrls from "@/app/_utilities/addProductContext/useImagesUrls";
+import useDeletedImagesUrls from "@/app/context/addProductContext/useDeletedImagesUrls";
+import useImagesUrls from "@/app/context/addProductContext/useImagesUrls";
 import { ChangeEvent, useMemo, useState, useActionState } from "react";
 import Form from "@/app/_components/Forms/Form";
 

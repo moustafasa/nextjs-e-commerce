@@ -25,8 +25,7 @@ export const changeMyProfileAction = async (
   }
   try {
     await changeMyProfile(result.data);
-    revalidatePath("/dashboard/settings");
-    redirect("/dashboard/settings");
+
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (err) {
     if (isRedirectError(err)) {

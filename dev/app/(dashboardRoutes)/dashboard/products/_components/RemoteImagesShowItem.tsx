@@ -1,4 +1,4 @@
-import useDeletedImagesUrls from "@/app/_utilities/addProductContext/useDeletedImagesUrls";
+import useDeletedImagesUrls from "@/app/context/addProductContext/useDeletedImagesUrls";
 import Image from "next/image";
 import { useCallback } from "react";
 

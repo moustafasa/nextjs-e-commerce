@@ -12,7 +12,7 @@ import { SignUpSchemaType } from "@/models/zodSchemas/User/signupSchema";
 import { put } from "@vercel/blob";
 import path from "path";
 import { Role, USERS_LIMIT } from "@/config/constants";
-import checkAuth, { getSearchRgx } from "./utils";
+import { getSearchRgx } from "./getSearchRgx";
 
 export const getUsers = async (page: number = 1, search?: string) => {
   const session = await auth();
@@ -33,6 +33,7 @@ export const getUsers = async (page: number = 1, search?: string) => {
   }
 
   const users = await Users.find(filter)
+    .sort({ fullName: 1 })
     .skip((page - 1) * USERS_LIMIT)
     .limit(USERS_LIMIT)
     .lean<IUser[]>()
@@ -78,8 +79,6 @@ export const getUsersIds = cache(async () => {
 });
 
 export const getUserById = cache(async (id: string) => {
-  await checkAuth([Role.ADMIN]);
-
   if (!isValidObjectId(id)) {
     return null;
   }

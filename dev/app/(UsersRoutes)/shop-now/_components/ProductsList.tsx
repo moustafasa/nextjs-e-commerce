@@ -3,7 +3,7 @@ import Image from "next/image";
 import ProductRippon from "./ProductRippon";
 import ProductOverLay from "./ProductOverLay";
 import AddToCartModal from "./AddToCartModal";
-import AddToCartModalContextProvider from "@/app/_utilities/AddToCartModalContext";
+import AddToCartModalContextProvider from "@/app/context/AddToCartModalContext/AddToCartModalContext";
 
 type Props = {
   searchParams: Promise<{

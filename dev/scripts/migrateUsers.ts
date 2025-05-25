@@ -11,37 +11,29 @@ export async function migrateUsers() {
   const staticUsers = [
     {
       fullName: "admin user",
-      email: "admin@admin.com",
+      email: "admin",
       roles: [Role.ADMIN],
       password: await hashPassword("123456"),
       image: "https://placehold.co/100x100.webp?text=admin",
     },
     {
       fullName: "Writer user",
-      email: "writer@writer.com",
+      email: "writer",
       roles: [Role.WRITER],
       password: await hashPassword("123456"),
       image: "https://placehold.co/100x100.webp?text=writer",
     },
     {
-      fullName: "moustafa saad",
-      email: "moustafasaad954@gmail.com",
-      roles: [Role.ADMIN, Role.USER],
-      image:
-        "https://dssgraxhulubwyc1.public.blob.vercel-storage.com/profiles/moustafasaad954@gmail.com.-Swc2PPivF3ttJ2SB7ofYaQUSyD2pmj.jpg",
-    },
-    {
-      fullName: "moustafa saad",
-      email: "moustafasaad954",
-      roles: [Role.USER, Role.ADMIN],
+      fullName: "orderReporter user",
+      email: "orderReporter",
+      roles: [Role.WRITER],
       password: await hashPassword("123456"),
-      image:
-        "https://dssgraxhulubwyc1.public.blob.vercel-storage.com/profiles/moustafasaad954.-jdQO5V1Kt9YqEDxJ5YUYiDOtsX5kyM.jpg",
+      image: "https://placehold.co/100x100.webp?text=writer",
     },
   ];
 
   const dynamicUsers = await Promise.all(
-    Array.from({ length: 50 }, async (_, ind) => ({
+    Array.from({ length: 20 }, async (_, ind) => ({
       fullName: `user num${ind + 1}`,
       email: `user${ind + 1}@user.com`,
       roles: [Role.USER],

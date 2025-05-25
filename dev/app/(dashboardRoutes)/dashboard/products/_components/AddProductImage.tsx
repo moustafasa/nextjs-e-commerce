@@ -8,8 +8,8 @@ import {
   useState,
 } from "react";
 import addProductImageSchema from "@/models/zodSchemas/Product/addProductsImageSchema";
-import useImagesUrls from "@/app/_utilities/addProductContext/useImagesUrls";
-import useIsImageLoading from "@/app/_utilities/addProductContext/useIsImageLoading";
+import useImagesUrls from "@/app/context/addProductContext/useImagesUrls";
+import useIsImageLoading from "@/app/context/addProductContext/useIsImageLoading";
 import FormField from "@/app/_components/Forms/FormField/FormField";
 import FileInputShowItem from "@/app/_components/Forms/FormField/FileInputShowItem";
 
