@@ -2,7 +2,22 @@
 
 A modern, full-featured e-commerce website built with Next.js.
 
+## how to use demo
+
 🚀 **Live Demo:** [View Demo](https://nextjs-e-commerce-umber.vercel.app/)
+there is predefined users for different roles
+-admin role
+user: admin
+pass:123456
+-orderReporter role
+user:orderReporter
+pass:123456
+-writerUser role
+user:writer
+pass:123456
+-user role
+user:user1@user.com
+pass:123456
 
 ## Features
 
@@ -32,7 +47,3 @@ A modern, full-featured e-commerce website built with Next.js.
 2. Install dependencies: `npm install`
 3. Set up environment variables
 4. Run development server: `npm run dev`
-
-## Contributing
-
-Feel free to submit issues and pull requests to improve the template.
