@@ -20,7 +20,7 @@ You can use the following demo accounts for different roles:
 
 ## Features
 
-- **Modern UI/UX** - Clean and responsive design for all devices
+- **Modern UI/UX** - Clean and responsive design for all devices with dark and light mode
 - **Product Management** - Easy product browsing, searching, and filtering
 - **Shopping Cart** - Add/remove items, update quantities, persistent cart
 - **User Authentication** - Secure login and registration system
