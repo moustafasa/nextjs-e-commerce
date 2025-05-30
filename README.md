@@ -5,19 +5,18 @@ A modern, full-featured e-commerce website built with Next.js.
 ## how to use demo
 
 🚀 **Live Demo:** [View Demo](https://nextjs-e-commerce-umber.vercel.app/)
-there is predefined users for different roles
--admin role
-user: admin
-pass:123456
--orderReporter role
-user:orderReporter
-pass:123456
--writerUser role
-user:writer
-pass:123456
--user role
-user:user1@user.com
-pass:123456
+🚀 **FIGMA FILE:** [View Demo](https://www.figma.com/community/file/1510266144726509771)
+
+### Predefined Users
+
+You can use the following demo accounts for different roles:
+
+| Role               | Username         | Password |
+| ------------------ | ---------------- | -------- |
+| **Admin**          | `admin`          | 123456   |
+| **Order Reporter** | `orderReporter`  | 123456   |
+| **Writer User**    | `writer`         | 123456   |
+| **User**           | `user1@user.com` | 123456   |
 
 ## Features
 
@@ -44,6 +43,7 @@ pass:123456
 ## Getting Started
 
 1. Clone the repository
-2. Install dependencies: `npm install`
-3. Set up environment variables
-4. Run development server: `npm run dev`
+2. go to dev directory `cd ./dev`
+3. Install dependencies: `npm install`
+4. Set up environment variables
+5. Run development server: `npm run dev`
