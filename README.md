@@ -47,3 +47,11 @@ You can use the following demo accounts for different roles:
 3. Install dependencies: `npm install`
 4. Set up environment variables
 5. Run development server: `npm run dev`
+
+> ⚠️ **Warning:**  
+> Do **not** use real credit card or Visa data for testing.  
+> Use the following virtual Visa card details for demo purposes only:
+>
+> - **Card Number:** `4242 4242 4242 4242`
+> - **Expiration Date:** `02/29`
+> - **CVC:** Any three digits (e.g., `123`)
