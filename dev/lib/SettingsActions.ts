@@ -11,7 +11,6 @@ import {
 import { changeMyProfile, changePassword } from "./SettingsController";
 import { isRedirectError } from "next/dist/client/components/redirect-error";
 import { SettingsPasswordInCorrect, UserExistingError } from "./customErrors";
-import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
 export const changeMyProfileAction = async (
