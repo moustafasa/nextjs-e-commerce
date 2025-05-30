@@ -7,7 +7,6 @@ type Props = {
   errors?: string[];
   children: ReactNode;
   heading?: string;
-  siblingForm?: ReactNode;
   maxWidth?: string;
   className?: string;
 };

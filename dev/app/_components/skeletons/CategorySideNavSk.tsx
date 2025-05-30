@@ -7,7 +7,7 @@ export default function CategorySideNavSk() {
         categories
       </h2>
       <ul className="ps-5 flex md:flex-col md:gap-2 max-md:flex-wrap max-md:gap-4">
-        {Array(3)
+        {Array(20)
           .fill(0)
           .map((_, category) => (
             <li className="capitalize" key={category}>
