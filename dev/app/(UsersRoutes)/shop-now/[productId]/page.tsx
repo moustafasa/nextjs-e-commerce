@@ -8,10 +8,13 @@ import ProductRippon from "../_components/ProductRippon";
 import PriceWithDiscount from "../_components/PriceWithDiscount";
 import AddToCartCounterForm from "../_components/AddToCartCounterForm";
 
+export const dynamicParams = false;
+
 type Props = {
   params: Promise<{ productId: string }>;
   searchParams: Promise<{ img?: string }>;
 };
+
 export default async function page({ params, searchParams }: Props) {
   const { productId } = await params;
   const queryParams = await searchParams;
