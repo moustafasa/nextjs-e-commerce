@@ -102,13 +102,10 @@ export const getProductsWithCategoryTotal = cache(
       filter.$or = [{ title: regex }, { descriptions: regex }];
     }
     const totalProducts = await Products.countDocuments(filter).exec();
+
     return {
       totalProducts,
-      totalPages: Math.ceil(
-        category
-          ? totalProducts / SHOP_NOW_LIMIT
-          : totalProducts / PRODUCTS_LIMIT
-      ),
+      totalPages: Math.ceil(totalProducts / SHOP_NOW_LIMIT),
       limit: SHOP_NOW_LIMIT,
     };
   }
