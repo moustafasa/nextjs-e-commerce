@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Fragment } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
 import cn from "../_utilities/cssConditional";
+import { notFound } from "next/navigation";
 
 type Props = {
   searchParams: Promise<
@@ -17,6 +18,9 @@ export default async function CustomPagination({
   const currentPage = params.page ? +params.page : 1;
   const meta = await getMetaData;
   const totalPages = meta?.totalPages || 0;
+  if (currentPage > totalPages && currentPage != 1) {
+    return notFound();
+  }
   const windowSize = 3;
   const halfWindow = Math.floor(windowSize / 2);
   const items = Array.from({ length: totalPages }, (_, index) => index + 1);
