@@ -85,5 +85,5 @@ export default async function page({ params, searchParams }: Props) {
 
 export async function generateStaticParams() {
   const productsIds = await getProductsIds();
-  return productsIds.map((product) => ({ id: product._id.toString() }));
+  return productsIds.map((product) => ({ productId: product._id.toString() }));
 }
