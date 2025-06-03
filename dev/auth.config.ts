@@ -41,7 +41,11 @@ export const authConfig = {
         return NextResponse.redirect(new URL("/unauthorized", request.url));
       }
 
-      if (request.nextUrl.pathname === "/sign-in" && auth?.user) {
+      if (
+        (request.nextUrl.pathname === "/sign-in" ||
+          request.nextUrl.pathname === "/sign-up") &&
+        auth?.user
+      ) {
         const callBack = request.nextUrl.searchParams.get("callbackUrl");
         if (callBack) {
           return NextResponse.redirect(callBack);
